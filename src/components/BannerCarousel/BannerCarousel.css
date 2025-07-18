@@ -1,0 +1,9 @@
+.banner-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.carousel .slide img {
+  max-height: 700px;
+  object-fit: cover;
+}
