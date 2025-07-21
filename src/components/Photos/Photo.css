@@ -1,45 +1,65 @@
-.photo-container {
+.photo-section {
+  padding: 80px 20px;
+  background-color: #f8f8f8;
+  text-align: center;
+}
+
+.photo-header h2 {
+  color: #30401e;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.photo-header p {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.photo-carousel-wrapper {
   position: relative;
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 40px 20px;
 }
 
 .photo-card {
-  padding: 20px;
+  padding: 10px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 600px;
 }
 
 .photo-card img {
-  max-height: 100%;
-  max-width: 100%;
+  width: 100%;
+  max-height: 480px;
   object-fit: cover;
   border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
 .custom-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.863);
+  background-color: #1E3640;
   color: #fff;
   border: none;
-  width: 40px;
-  height: 40px;
-  font-size: 25px;
+  width: 42px;
+  height: 42px;
+  font-size: 24px;
   border-radius: 50%;
   cursor: pointer;
-  z-index: 5;
+  z-index: 10;
   transition: background 0.3s;
 }
 
 .custom-arrow:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #45BF4D;
 }
 
 .custom-arrow.left {
@@ -48,4 +68,19 @@
 
 .custom-arrow.right {
   right: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .photo-card img {
+    max-height: 300px;
+  }
+
+  .photo-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .photo-header p {
+    font-size: 0.9rem;
+  }
 }

@@ -10,13 +10,13 @@ a {
   color: inherit;
 }
 
-/* CONTAINER PRINCIPAL */
 .navbar {
   background-color: #ffffff;
   position: sticky;
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  font-family: 'Open', sans-serif;
 }
 
 .navbar-container {
@@ -29,12 +29,10 @@ a {
   position: relative;
 }
 
-/* LOGO */
 .navbar-logo img {
   height: 80px;
 }
 
-/* MENU DESKTOP */
 .navbar-menu {
   display: flex;
   gap: 30px;
@@ -53,7 +51,6 @@ a {
   color: #45BF4D;
 }
 
-/* DROPDOWN (DESKTOP) */
 .dropdown {
   position: relative;
 }
@@ -86,7 +83,6 @@ a {
   border-radius: 6px;
 }
 
-/* ÍCONE MENU MOBILE */
 .menu-icon {
   font-size: 24px;
   color: #1E3640;
@@ -94,7 +90,6 @@ a {
   display: none;
 }
 
-/* MENU LATERAL MOBILE */
 .side-menu {
   position: fixed;
   top: 0;
@@ -134,7 +129,6 @@ a {
   font-size: 18px;
 }
 
-/* DROPDOWN NO MENU MOBILE */
 .mobile-dropdown {
   display: flex;
   flex-direction: column;
@@ -162,7 +156,6 @@ a {
   color: #45BF4D;
 }
 
-/* SOBREPOSIÇÃO FUNDO MOBILE */
 .overlay {
   position: fixed;
   top: 0;
@@ -173,7 +166,6 @@ a {
   z-index: 1050;
 }
 
-/* RESPONSIVO */
 @media (max-width: 768px) {
   .navbar-container {
     justify-content: center;

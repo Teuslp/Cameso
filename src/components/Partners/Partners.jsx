@@ -12,14 +12,14 @@ function Partners() {
     const scrollContainer = scrollRef.current;
     let scrollAmount = 0;
     const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-    let direction = 1; // 1 para direita, -1 para esquerda
+    let direction = 1; 
 
     const interval = setInterval(() => {
-      scrollAmount += direction * 1; // ajuste a velocidade aqui (1px por intervalo)
+      scrollAmount += direction * 1; 
       if (scrollAmount >= maxScrollLeft) direction = -1;
       if (scrollAmount <= 0) direction = 1;
       scrollContainer.scrollLeft = scrollAmount;
-    }, 20); // intervalo em ms, ajuste para suavidade
+    }, 20); 
 
     return () => clearInterval(interval);
   }, []);
