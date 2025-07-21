@@ -1,77 +1,202 @@
+/* RESET */
 ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* CONTAINER PRINCIPAL */
 .navbar {
-    display: flex;
-    flex-direction: column;
-    /* muda o eixo principal para vertical */
-    align-items: center;
-    /* centraliza horizontalmente */
-    background-color: #FAFAFA;
-    padding: 10px 20px;
-    color: white;
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* LOGO */
 .navbar-logo img {
-    height: 108px;
+  height: 80px;
 }
 
-ul>li {
-    position: relative;
-    /* importante para dropdown */
-    display: inline-block;
-    margin-right: 20px;
+/* MENU DESKTOP */
+.navbar-menu {
+  display: flex;
+  gap: 30px;
+  align-items: center;
 }
 
-ul>li>a {
-    color: black;
-    text-decoration: none;
-    font-family: "Open Sans", sans-serif;
-    font-weight: regular;
-    font-size: 16px;
-    padding: 10px 10px;
-    display: block;
+.navbar-menu li a {
+  color: #1E3640;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px;
+  transition: color 0.3s;
+}
+
+.navbar-menu li a:hover {
+  color: #45BF4D;
+}
+
+/* DROPDOWN (DESKTOP) */
+.dropdown {
+  position: relative;
 }
 
 .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #FAFAFA;
-    min-width: 230px;
-    border-radius: 20px;
-    z-index: 999;
-}
-
-.dropdown-menu li {
-    margin: 0;
-}
-
-.dropdown-menu li a {
-    padding: 10px 20px;
-    color: black;
-    font-weight: normal;
-    display: block;
-}
-
-.dropdown-menu li a:hover {
-    background-color: #e6e6e6;
-    border-radius: 20px;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  min-width: 200px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 8px;
 }
 
 .dropdown:hover .dropdown-menu {
-    display: block;
-    transition: all 0.3s ease-in-out;
+  display: block;
 }
 
-.nav-divider {
-    border: none;
-    height: 2px;
-    background-color: #43C057;
-    margin: 0px 0;
-    width: 100%;
+.dropdown-menu li a {
+  padding: 10px 20px;
+  color: #1E3640;
+  font-size: 14px;
+  display: block;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f4f4f4;
+  color: #45BF4D;
+  border-radius: 6px;
+}
+
+/* ÍCONE MENU MOBILE */
+.menu-icon {
+  font-size: 24px;
+  color: #1E3640;
+  cursor: pointer;
+  display: none;
+}
+
+/* MENU LATERAL MOBILE */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 260px;
+  height: 100%;
+  background-color: #1E3640;
+  color: white;
+  padding: 30px 20px;
+  transition: left 0.3s ease;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-menu.open {
+  left: 0;
+}
+
+.side-menu-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
+
+.close-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.side-menu ul li {
+  margin-bottom: 20px;
+}
+
+.side-menu ul li a {
+  color: white;
+  font-size: 18px;
+}
+
+/* DROPDOWN NO MENU MOBILE */
+.mobile-dropdown {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-toggle {
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.mobile-dropdown-menu {
+  margin-top: 5px;
+  padding-left: 15px;
+}
+
+.mobile-dropdown-menu li a {
+  color: #ccc;
+  font-size: 16px;
+  padding: 8px 0;
+  display: block;
+}
+
+.mobile-dropdown-menu li a:hover {
+  color: #45BF4D;
+}
+
+/* SOBREPOSIÇÃO FUNDO MOBILE */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.4);
+  width: 100%;
+  height: 100%;
+  z-index: 1050;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .navbar-container {
+    justify-content: center;
+  }
+
+  .menu-icon {
+    display: block;
+    position: absolute;
+    left: 20px;
+  }
+
+  .navbar-logo {
+    margin: 0 auto;
+  }
+
+  .navbar-menu {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .side-menu,
+  .overlay {
+    display: none;
+  }
 }

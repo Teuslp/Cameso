@@ -22,17 +22,16 @@
   border-radius: 12px;
 }
 
-/* Estilização dos botões customizados */
 .custom-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.863);
   color: #fff;
   border: none;
   width: 40px;
   height: 40px;
-  font-size: 24px;
+  font-size: 25px;
   border-radius: 50%;
   cursor: pointer;
   z-index: 5;

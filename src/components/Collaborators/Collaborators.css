@@ -1,0 +1,32 @@
+.collaborators-section {
+  padding: 200px 20px;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+.collaborators-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.collaborators-content h2 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #1E3640;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.collaborators-content h2 span {
+  color: #45BF4D;
+  font-size: 4rem;
+  display: inline-block;
+}
+
+.collaborators-content p {
+  font-size: 1.3rem;
+  color: #0D0D0D;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
