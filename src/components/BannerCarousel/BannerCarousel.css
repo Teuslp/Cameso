@@ -5,5 +5,12 @@
 
 .carousel .slide img {
   max-height: 700px;
+  width: 100%;
   object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .carousel .slide img {
+    max-height: 700px;
+  }
 }

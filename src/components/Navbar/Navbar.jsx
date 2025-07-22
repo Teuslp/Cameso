@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import logo from "../../assets/cameso_logo.png";
 import "./Navbar.css";
 
@@ -19,8 +20,8 @@ function Navbar() {
         </div>
 
         <ul className="navbar-menu">
-          <li><a href="#inicio">INÍCIO</a></li>
-          <li><a href="#sobre">SOBRE</a></li>
+          <li><Link to="/">INÍCIO</Link></li>
+          <li><Link to="/About">SOBRE</Link></li>
           <li><a href="#esocial">ESOCIAL</a></li>
           <li className="dropdown">
             <a href="#servicos">SERVIÇOS ▾</a>
@@ -35,14 +36,14 @@ function Navbar() {
         </ul>
       </div>
 
-      {/* MENU MOBILE LATERAL */}
+      {/*MOBILE*/}
       <div className={`side-menu ${menuOpen ? "open" : ""}`}>
         <div className="side-menu-header">
           <FaTimes onClick={() => setMenuOpen(false)} className="close-icon" />
         </div>
         <ul>
-          <li><a href="#inicio" onClick={() => setMenuOpen(false)}>INÍCIO</a></li>
-          <li><a href="#sobre" onClick={() => setMenuOpen(false)}>SOBRE</a></li>
+          <li><Link to="/" onClick={() => setMenuOpen(false)}>INÍCIO</Link></li>
+          <li><Link to="/About" onClick={() => setMenuOpen(false)}>SOBRE</Link></li>
           <li><a href="#esocial" onClick={() => setMenuOpen(false)}>ESOCIAL</a></li>
           <li className="mobile-dropdown">
             <div onClick={() => setDropdownOpen(!dropdownOpen)} className="dropdown-toggle">

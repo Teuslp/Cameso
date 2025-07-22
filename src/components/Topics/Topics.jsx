@@ -34,8 +34,7 @@ function Topics() {
         </div>
         <h3>SAÚDE</h3>
         <hr className="topic-divider" />
-        <p>Com um corpo médico qualificado, são realizados exames clínicos e complementares, consultas médicas voltadas
-          à saúde do trabalhador e, também, assessoria para Gestão Ocupacional.</p>
+        <p>Exames, consultas e assessoria em saúde do trabalhador com equipe médica especializada.</p>
       </div>
       <div className={`card fade-in-up delay-1 ${isVisible ? "visible" : ""}`}>
         <div className="img">
@@ -43,8 +42,7 @@ function Topics() {
         </div>
         <h3>SEGURANÇA</h3>
         <hr className="topic-divider" />
-        <p>Nosso trabalho é feito com foco em evitar acidentes e doenças ocupacionais, através de ações que avaliam e
-          controlam situações de risco, assegurando um ambiente de trabalho saudável e mais seguro.</p>
+        <p>Atuamos na prevenção de acidentes e doenças ocupacionais, promovendo um ambiente de trabalho mais seguro e saudável.</p>
       </div>
       <div className={`card fade-in-up delay-2 ${isVisible ? "visible" : ""}`}>
         <div className="img">
@@ -52,8 +50,7 @@ function Topics() {
         </div>
         <h3>TREINAMENTO</h3>
         <hr className="topic-divider" />
-        <p>Nossa empresa visa promover o aperfeiçoamento e um melhor desempenho dos nossos clientes, preparando todos os participantes
-          para o exercício de suas funções de forma prevencionista</p>
+        <p>Nossa empresa promove o aperfeiçoamento e prepara os clientes para desempenhar suas funções com foco na prevenção.</p>
       </div>
     </div>
   );

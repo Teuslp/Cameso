@@ -7,7 +7,7 @@ function Photos() {
   return (
     <section className="photo-section">
       <div className="photo-header">
-        <h2>Momentos em Ação</h2>
+        <h2>EQUIPE CAMESO</h2>
         <p>Veja como nossa equipe atua no dia a dia promovendo saúde, segurança e treinamentos de qualidade.</p>
       </div>
 
