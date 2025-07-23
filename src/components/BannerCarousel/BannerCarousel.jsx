@@ -4,14 +4,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./BannerCarousel.css";
 
 function BannerCarousel() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    checkMobile(); // Executa ao montar
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
@@ -23,7 +22,7 @@ function BannerCarousel() {
   return (
     <div className="banner-container">
       <Carousel
-        key={isMobile ? "mobile" : "desktop"} // força re-render ao trocar tamanho
+        key={isMobile ? "mobile" : "desktop"}
         autoPlay
         infiniteLoop
         interval={5000}

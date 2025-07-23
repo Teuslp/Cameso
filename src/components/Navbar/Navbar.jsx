@@ -32,7 +32,7 @@ function Navbar() {
               <li><a href="#">Perícias Judiciais</a></li>
             </ul>
           </li>
-          <li><a href="#contato">CONTATO</a></li>
+          <li><Link to="/Contact">CONTATO</Link></li>
         </ul>
       </div>
 

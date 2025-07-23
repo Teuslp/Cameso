@@ -1,0 +1,127 @@
+.contato {
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.contato-banner {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.contato-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+
+.contato-banner h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  z-index: 2;
+}
+
+/* Formulário + Logo */
+.contato-wrapper {
+  max-width: 1100px;
+  margin: 60px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 50px;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+.contato-logo img {
+  max-width: 150px;
+  height: auto;
+  margin-top: 100px;
+}
+
+.contato-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 280px;
+}
+
+.contato-form h2 {
+  margin-bottom: 10px;
+  color: #1e3640;
+}
+
+.contato-form input,
+.contato-form textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.contato-form textarea {
+  resize: vertical;
+  height: 120px;
+}
+
+.contato-form button {
+  padding: 12px;
+  border: none;
+  background-color: #45BF4D;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.contato-form button:hover {
+  background-color: #3fa743;
+}
+
+/* Redes sociais */
+.contato-social {
+  text-align: center;
+  margin: 60px 0;
+}
+
+.contato-social h3 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: #1e3640;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icons a {
+  color: #45BF4D;
+  font-size: 1.6rem;
+  transition: transform 0.2s;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .contato-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .contato-logo img {
+    max-width: 200px;
+  }
+}
