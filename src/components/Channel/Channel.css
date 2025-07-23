@@ -66,4 +66,37 @@
     width: 100%;
     margin-top: 30px;
   }
+
+  .youtube-divider {
+    width: 330px;
+  }
+}
+
+@media (max-width: 400px) {
+  .youtube-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .youtube-text p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .youtube-section {
+    padding: 0 16px;
+    gap: 10px;
+    overflow-x: hidden; 
+  }
+
+  .youtube-divider {
+    width: 100%;
+    max-width: 280px; 
+    height: 3px;
+    margin-bottom: 15px;
+  }
+
+  .youtube-iframe {
+    width: 100%;
+    min-width: auto;
+  }
 }

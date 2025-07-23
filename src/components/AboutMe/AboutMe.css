@@ -66,6 +66,11 @@
     left: 50%;
     transform: translateX(-50%);
   }
+
+  p.pr{
+    text-align: left;
+    font-size: 14px;
+  }
 }
 
 @keyframes fadeIn {
