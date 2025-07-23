@@ -22,7 +22,7 @@ function Navbar() {
         <ul className="navbar-menu">
           <li><Link to="/">INÍCIO</Link></li>
           <li><Link to="/About">SOBRE</Link></li>
-          <li><a href="#esocial">ESOCIAL</a></li>
+          <li><Link to="/Esocial">ESOCIAL</Link></li>
           <li className="dropdown">
             <a href="#servicos">SERVIÇOS ▾</a>
             <ul className="dropdown-menu">
@@ -44,7 +44,7 @@ function Navbar() {
         <ul>
           <li><Link to="/" onClick={() => setMenuOpen(false)}>INÍCIO</Link></li>
           <li><Link to="/About" onClick={() => setMenuOpen(false)}>SOBRE</Link></li>
-          <li><a href="#esocial" onClick={() => setMenuOpen(false)}>ESOCIAL</a></li>
+          <li><Link to="/Esocial" onClick={() => setMenuOpen(false)}>ESOCIAL</Link></li>
           <li className="mobile-dropdown">
             <div onClick={() => setDropdownOpen(!dropdownOpen)} className="dropdown-toggle">
               SERVIÇOS ▾

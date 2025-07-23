@@ -1,6 +1,7 @@
 import React from "react";
 import "./AboutMe.css";
 import aboutImage from "../../assets/collaborators-image.jpg";
+
 function AboutMe() {
   return (
     <section className="about-section" id="sobre">
@@ -14,8 +15,8 @@ function AboutMe() {
           <p>
             Ao longo de mais de uma década, investimos em conhecimento, tecnologia e, principalmente, em pessoas — profissionais dedicados que fazem da CAMESO uma referência em atendimento humanizado.
             Hoje, oferecemos mais do que consultas. Entregamos acolhimento, confiança e cuidado personalizado, em um ambiente que valoriza o bem-estar em cada detalhe.
-            <br /> <br />
-            CAMESO. Cuidar bem é a nossa essência.
+            <br /><br />
+            <strong>CAMESO. Cuidar bem é a nossa essência.</strong>
           </p>
         </div>
 
