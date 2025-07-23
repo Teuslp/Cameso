@@ -58,7 +58,7 @@ function Navbar() {
               </ul>
             )}
           </li>
-          <li><a href="#contato" onClick={() => setMenuOpen(false)}>CONTATO</a></li>
+          <li><Link to="/Contact" onClick={() => setMenuOpen(false)}>CONTATO</Link></li>
         </ul>
       </div>
 
