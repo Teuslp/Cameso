@@ -3,17 +3,17 @@ import logo from "../../assets/cameso_logo.png";
 import {
   FaHardHat,
   FaHeartbeat,
-  FaTooth,
   FaChalkboardTeacher,
   FaBalanceScale,
-  FaSearch
+  FaSearch,
+  FaHandsWash
 } from "react-icons/fa";
 import "./AreasActivity.css";
 
 const areas = [
   { id: 1, name: "Segurança do Trabalho", icon: <FaHardHat /> },
   { id: 2, name: "Saúde Ocupacional", icon: <FaHeartbeat /> },
-  { id: 3, name: "Higiene Ocupacional", icon: <FaTooth /> },
+  { id: 3, name: "Higiene Ocupacional", icon: <FaHandsWash /> },
   { id: 4, name: "Treinamentos", icon: <FaChalkboardTeacher /> },
   { id: 5, name: "Consultoria Jurídica", icon: <FaBalanceScale /> },
   { id: 6, name: "Assistência em Perícias", icon: <FaSearch /> }

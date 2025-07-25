@@ -36,7 +36,7 @@ function Contact() {
             <FaClock className="icon" />
             <div>
               <h4>Horário Comercial</h4>
-              <p>Seg - Sex: 08h - 18h<br />Sáb: 08h - 12h<br />Dom: Fechado</p>
+              <p>Seg - Sex: 07h - 17h<br />Sáb: Fechado<br />Dom: Fechado</p>
             </div>
           </div>
 
