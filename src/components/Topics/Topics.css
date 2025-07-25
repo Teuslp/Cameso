@@ -50,3 +50,35 @@ h3 {
     background-color: #33333338;
     border: none;
 }
+
+@media (max-width: 480px) {
+  .container {
+    margin: 40px 20px; /* Reduz margens */
+    flex-direction: column; /* Alinha cards em coluna */
+    align-items: center;
+    gap: 20px; /* Menor espaçamento entre os cards */
+  }
+
+  .card {
+    max-width: 100%; /* Ocupa quase toda a largura da tela */
+    padding: 16px;
+  }
+
+  .container img {
+    max-width: 130px; /* Imagem menor no mobile */
+  }
+
+  .card p {
+    font-size: 12px; /* Aumenta levemente para melhor leitura */
+  }
+
+  h3 {
+    font-size: 18px; /* Reduz tamanho do título */
+    letter-spacing: 2px;
+  }
+
+  .topic-divider {
+    max-width: 150px;
+    height: 1.5px;
+  }
+}

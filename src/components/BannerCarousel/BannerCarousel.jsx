@@ -31,6 +31,7 @@ function BannerCarousel() {
         showStatus={false}
         showArrows={false}
         showIndicators={false}
+        swipeable={!isMobile}
       >
         {banners.map((src, index) => (
           <div key={index}>

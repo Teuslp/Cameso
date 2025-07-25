@@ -8,11 +8,17 @@ import About from "./pages/About";
 import Esocial from "./pages/Esocial/Esocial";
 import Contact from "./pages/Contact/Contact";
 
+import ScrollToTop from "./components/ScrollToTop";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
+
     <Router>
+
+      <ScrollToTop />
+
       <Navbar />
 
       <Routes>
@@ -23,6 +29,7 @@ function App() {
       </Routes>
 
       <Footer />
+      
     </Router>
   );
 }

@@ -1,4 +1,3 @@
-/* RESET */
 ul {
   list-style: none;
   margin: 0;
@@ -22,7 +21,7 @@ a {
 .navbar-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 12px 20px;
+  padding: 20px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,11 +43,29 @@ a {
   font-size: 15px;
   font-weight: 500;
   padding: 10px;
-  transition: color 0.3s;
+  position: relative;
+  transition: color 0.3s, border-bottom 0.3s;
 }
 
-.navbar-menu li a:hover {
+.navbar-menu li a:hover,
+.navbar-menu li a.active {
   color: #45BF4D;
+}
+
+.navbar-menu li a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #45BF4D;
+  transition: width 0.3s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.navbar-menu li a:hover::after {
+  width: 100%;
 }
 
 .dropdown {
@@ -64,6 +81,8 @@ a {
   min-width: 200px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   border-radius: 8px;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -75,12 +94,13 @@ a {
   color: #1E3640;
   font-size: 14px;
   display: block;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .dropdown-menu li a:hover {
   background-color: #f4f4f4;
   color: #45BF4D;
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 .menu-icon {
@@ -166,6 +186,19 @@ a {
   z-index: 1050;
 }
 
+.navbar-menu > li:last-child > a {
+  background-color: #45BF4D;
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.navbar-menu > li:last-child > a:hover {
+  background-color: #3aa745;
+  color: white;
+}
+
 @media (max-width: 768px) {
   .navbar-container {
     justify-content: center;
@@ -191,4 +224,9 @@ a {
   .overlay {
     display: none;
   }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
