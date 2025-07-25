@@ -1,6 +1,5 @@
 .about-section {
   padding: 80px 20px;
-  animation: fadeIn 1s ease forwards;
 }
 
 .about-content {
@@ -47,7 +46,6 @@
   flex: 1;
   min-width: 280px;
   max-width: 500px;
-  animation: slideIn 1s ease forwards;
 }
 
 .about-image img {
@@ -67,29 +65,7 @@
     transform: translateX(-50%);
   }
 
-  p.pr{
+  p.pr {
     font-size: 14px;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
   }
 }

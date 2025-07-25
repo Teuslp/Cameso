@@ -5,10 +5,17 @@ import Photos from "../components/Photos/Photos";
 import Collaborators from "../components/Collaborators/Collaborators";
 import Partners from "../components/Partners/Partners";
 import Channel from "../components/Channel/Channel";
+import { color } from "framer-motion";
 
 function HomePage() {
   return (
-    <main>
+    <main 
+    style={{
+        background: "#f4f4f4",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}>
       <BannerCarousel />
       <Topics />
       <Photos />

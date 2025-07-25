@@ -50,7 +50,6 @@
   display: block;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
   .youtube-section {
     flex-direction: column;

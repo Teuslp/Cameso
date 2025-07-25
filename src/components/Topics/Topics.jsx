@@ -1,34 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "./Topics.css";
 import icon1 from '../../assets/t1.png';
 import icon2 from '../../assets/t2.png';
 import icon3 from '../../assets/t3.png';
 
 function Topics() {
-  const containerRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect(); // desliga o observer após a primeira vez
-        }
-      },
-      { threshold: 0.3 } // 30% visível para ativar
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
   }, []);
 
   return (
-    <div className="container" ref={containerRef}>
-      <div className={`card fade-in-up ${isVisible ? "visible" : ""}`}>
+    <div className="container">
+      <div className="card" data-aos="fade-up" data-aos-delay="0" data-aos-offset="200">
         <div className="img">
           <img src={icon1} alt="Saúde" />
         </div>
@@ -36,7 +24,8 @@ function Topics() {
         <hr className="topic-divider" />
         <p>Exames, consultas e assessoria em saúde do trabalhador com equipe médica especializada.</p>
       </div>
-      <div className={`card fade-in-up delay-1 ${isVisible ? "visible" : ""}`}>
+
+      <div className="card" data-aos="fade-up" data-aos-delay="0" data-aos-offset="200">
         <div className="img">
           <img src={icon2} alt="Segurança" />
         </div>
@@ -44,7 +33,8 @@ function Topics() {
         <hr className="topic-divider" />
         <p>Atuamos na prevenção de acidentes e doenças ocupacionais, promovendo um ambiente de trabalho mais seguro e saudável.</p>
       </div>
-      <div className={`card fade-in-up delay-2 ${isVisible ? "visible" : ""}`}>
+
+      <div className="card" data-aos="fade-up" data-aos-delay="0" data-aos-offset="200">
         <div className="img">
           <img src={icon3} alt="Treinamento" />
         </div>

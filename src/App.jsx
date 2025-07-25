@@ -7,6 +7,7 @@ import HomePage from "./pages/Homepage";
 import About from "./pages/About";
 import Esocial from "./pages/Esocial/Esocial";
 import Contact from "./pages/Contact/Contact";
+import Security from "./pages/Security/Security";
 
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/About" element={<About />} />
         <Route path="/Esocial" element={<Esocial />} />
         <Route path="/Contact" element={<Contact />} />
+        <Route path="/Security" element={<Security />} />
       </Routes>
 
       <Footer />

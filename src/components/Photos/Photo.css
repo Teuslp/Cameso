@@ -1,6 +1,7 @@
 .photo-section {
   padding: 80px 20px;
   text-align: center;
+  touch-action: pan-y;
 }
 
 .photo-header h2 {

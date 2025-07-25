@@ -1,127 +1,168 @@
-.contato {
-  width: 100%;
-  font-family: Arial, sans-serif;
-}
-
-.contato-banner {
-  position: relative;
-  height: 300px;
-  overflow: hidden;
-}
-
-.contato-banner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.6);
-}
-
-.contato-banner h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 3rem;
-  font-weight: bold;
-  z-index: 2;
-}
-
-/* Formulário + Logo */
-.contato-wrapper {
-  max-width: 1100px;
-  margin: 60px auto;
+.contact-wrapper {
+  background-color: #f4f4f4;
+  padding: 80px 20px;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 50px;
-  padding: 0 20px;
-  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.contato-logo img {
-  max-width: 150px;
-  height: auto;
-  margin-top: 100px;
-}
-
-.contato-form {
-  flex: 1;
+.contact-box {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  min-width: 280px;
+  max-width: 1200px;
+  width: 100%;
+  background-color: transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.contato-form h2 {
-  margin-bottom: 10px;
-  color: #1e3640;
-}
-
-.contato-form input,
-.contato-form textarea {
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-
-.contato-form textarea {
-  resize: vertical;
-  height: 120px;
-}
-
-.contato-form button {
-  padding: 12px;
-  border: none;
+.contact-left {
   background-color: #45BF4D;
   color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
+  padding: 40px 30px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.contato-form button:hover {
-  background-color: #3fa743;
-}
-
-/* Redes sociais */
-.contato-social {
-  text-align: center;
-  margin: 60px 0;
-}
-
-.contato-social h3 {
-  font-size: 1.4rem;
+.info-item {
+  display: flex;
+  gap: 16px;
   margin-bottom: 20px;
-  color: #1e3640;
+}
+
+.info-item .icon {
+  width: 30px;
+  font-size: 10px;
+  margin-top: 4px;
+  color: white;
+}
+
+.info-item h4 {
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.info-item p {
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 .social-icons {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  gap: 16px;
+  margin-top: auto;
 }
 
 .social-icons a {
-  color: #45BF4D;
-  font-size: 1.6rem;
-  transition: transform 0.2s;
+  font-size: 30px;
+  color: white;
+  transition: transform 0.3s ease;
 }
 
 .social-icons a:hover {
   transform: scale(1.2);
 }
 
+.contact-right {
+  background-color: white;
+  padding: 40px 30px;
+  width: 60%;
+}
+
+.contact-right h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #1E3640;
+}
+
+.contact-right form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-right input,
+.contact-right textarea {
+  padding: 12px 14px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background: transparent;
+  font-size: 15px;
+  outline: none;
+}
+
+.contact-right input:focus,
+.contact-right textarea:focus {
+  border-color: #45BF4D;
+}
+
+.contact-right textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-right button {
+  padding: 14px;
+  background-color: transparent;
+  border: 2px solid #1E3640;
+  color: #1E3640;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  text-transform: uppercase;
+}
+
+.contact-right button:hover {
+  background-color: #45BF4D;
+  color: white;
+  border-color: #45BF4D;
+}
+
 @media (max-width: 768px) {
-  .contato-wrapper {
+  .contact-wrapper {
+    padding: 0px 0;
+  }
+
+  .contact-box {
+    flex-direction: column;
+    box-shadow: none;
+  }
+
+  .contact-left,
+  .contact-right {
+    width: 89%;
+    padding: 30px 20px;
+  }
+
+  .contact-left {
+    align-items: center;
+    text-align: center;
+  }
+
+  .info-item {
+    gap: 0%;
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
-  .contato-logo img {
-    max-width: 100px;
+  .social-icons {
+    justify-content: space-around;
+  }
+
+  .contact-right {
+    margin-left: 0;
+    box-shadow: none;
+  }
+
+  .contact-form form input,
+  .contact-form form textarea {
+    font-size: 14px;
+  }
+
+  .contact-form button {
+    font-size: 14px;
+    padding: 12px;
   }
 }

@@ -6,7 +6,13 @@ import CTASection from "../components/CTASection/CTASection";
 
 function About() {
   return (
-    <div>
+    <div
+    style={{
+        background: "#f4f4f4",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}>
       <AboutMe />
       <AreasActivity />
       <Mission />

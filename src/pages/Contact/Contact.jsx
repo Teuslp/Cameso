@@ -1,45 +1,65 @@
 import React from "react";
+import {
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+  FaClock,
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaYoutube,
+} from "react-icons/fa";
 import "./Contact.css";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
-import logo from "../../assets/logoc.png";
-import banner from "../../assets/contact-banner.jpg"; 
 
-function Contato() {
+function Contact() {
   return (
-    <section className="contato">
-      {/* Banner topo */}
-      <div className="contato-banner">
-        <img src={banner} alt="Banner Contato" />
-        <h1>Contato</h1>
-      </div>
+    <section className="contact-wrapper">
+      <div className="contact-box">
+        
+        <div className="contact-left">
+          <div className="info-item">
+            <FaPhoneAlt className="icon" />
+            <div>
+              <h4>Ligue para nós</h4>
+              <p>1 (234) 567-891<br />1 (234) 987-654</p>
+            </div>
+          </div>
 
-      {/* Formulário e logo */}
-      <div className="contato-wrapper">
-        <div className="contato-logo">
-          <img src={logo} alt="Logo CAMESO" />
+          <div className="info-item">
+            <FaMapMarkerAlt className="icon" />
+            <div>
+              <h4>Localização</h4>
+              <p>Rua Exemplo, 123<br />Cidade, UF</p>
+            </div>
+          </div>
+
+          <div className="info-item">
+            <FaClock className="icon" />
+            <div>
+              <h4>Horário Comercial</h4>
+              <p>Seg - Sex: 08h - 18h<br />Sáb: 08h - 12h<br />Dom: Fechado</p>
+            </div>
+          </div>
+
+          <div className="social-icons">
+            <a href="#"><FaFacebookF /></a>
+            <a href="#"><FaInstagram /></a>
+            <a href="#"><FaLinkedinIn /></a>
+            <a href="#"><FaYoutube /></a>
+          </div>
         </div>
 
-        <form className="contato-form">
-          <h2>Fale Conosco</h2>
-          <input type="text" placeholder="Nome" required />
-          <input type="email" placeholder="E-mail" required />
-          <textarea placeholder="Mensagem" required></textarea>
-          <button type="submit">Enviar</button>
-        </form>
-      </div>
-
-      {/* Redes sociais */}
-      <div className="contato-social">
-        <h3>Nos acompanhe:</h3>
-        <div className="social-icons">
-          <a href="#"><FaFacebookF /></a>
-          <a href="#"><FaInstagram /></a>
-          <a href="#"><FaLinkedinIn /></a>
-          <a href="#"><FaYoutube /></a>
+        <div className="contact-right">
+          <h2>Contate-nos</h2>
+          <form>
+            <input type="text" placeholder="Seu nome" required />
+            <input type="email" placeholder="Seu e-mail" required />
+            <textarea placeholder="Sua mensagem" required />
+            <button type="submit">ENVIAR</button>
+          </form>
         </div>
       </div>
     </section>
   );
 }
 
-export default Contato;
+export default Contact;
