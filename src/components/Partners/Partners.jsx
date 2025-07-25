@@ -12,14 +12,14 @@ function Partners() {
     const scrollContainer = scrollRef.current;
     let scrollAmount = 0;
     const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-    let direction = 1; 
+    let direction = 1;
 
     const interval = setInterval(() => {
-      scrollAmount += direction * 1; 
+      scrollAmount += direction * 1;
       if (scrollAmount >= maxScrollLeft) direction = -1;
       if (scrollAmount <= 0) direction = 1;
       scrollContainer.scrollLeft = scrollAmount;
-    }, 20); 
+    }, 20);
 
     return () => clearInterval(interval);
   }, []);
@@ -27,7 +27,7 @@ function Partners() {
   return (
     <section className="partners-section">
       <h2 className="partners-title"><span className="nosso">Nossos</span> <br />Parceiros</h2>
-      <div className="partners-cards" ref={scrollRef}>
+      <div className="partners-carousel" ref={scrollRef}>
         {partners.map((partner, index) => (
           <div className="partner-card" key={index}>
             <img src={partner} alt={`Parceiro ${index + 1}`} />
@@ -35,6 +35,7 @@ function Partners() {
         ))}
       </div>
     </section>
+
   );
 }
 
