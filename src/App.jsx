@@ -9,6 +9,7 @@ import Esocial from "./pages/Esocial/Esocial";
 import Contact from "./pages/Contact/Contact";
 import Security from "./pages/Security/Security";
 import Health from "./pages/Health/Health";
+import Trainings from "./pages/Trainings/Trainings";
 
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/Contact" element={<Contact />} />
         <Route path="/Security" element={<Security />} />
         <Route path="/Health" element={<Health />} />
+        <Route path="/Trainings" element={<Trainings />}/>
       </Routes>
 
       <Footer />

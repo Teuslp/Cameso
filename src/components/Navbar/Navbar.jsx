@@ -28,7 +28,7 @@ function Navbar() {
             <ul className="dropdown-menu">
               <li><Link to="/Security" onClick={() => setMenuOpen(false)}>SEG DO TRABALHO</Link></li>
               <li><Link to="/Health" onClick={() => setMenuOpen(false)}>SAÚDE OCUPACIONAL</Link></li>
-              <li><a href="#">Treinamentos</a></li>
+              <li><Link to="/Trainings" onClick={() => setMenuOpen(false)}>TREINAMENTOS</Link></li>
               <li><a href="#">Perícias Judiciais</a></li>
             </ul>
           </li>
@@ -53,7 +53,7 @@ function Navbar() {
               <ul className="mobile-dropdown-menu">
                 <li><Link to="/Security" onClick={() => setMenuOpen(false)}>SEG DO TRABALHO</Link></li>
                 <li><Link to="/Health" onClick={() => setMenuOpen(false)}>SAúDE OCUPACIONAL</Link></li>
-                <li><a href="#" onClick={() => setMenuOpen(false)}>Treinamentos</a></li>
+                <li><Link to="/Trainings" onClick={() => setMenuOpen(false)}>TREINAMENTOS</Link></li>
                 <li><a href="#" onClick={() => setMenuOpen(false)}>Perícias Judiciais</a></li>
               </ul>
             )}
