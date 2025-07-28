@@ -118,7 +118,7 @@
 }
 
 .security-card .icon {
-    background: transparent;
+  background: transparent;
   font-size: 2.5rem;
   color: var(--green-primary);
   margin-bottom: 10px;
@@ -129,7 +129,7 @@
 }
 
 .security-cta {
-  background-color: var(--green-primary);
+  background-color: #1E3640;
   color: white;
   text-align: center;
   padding: 60px 20px;

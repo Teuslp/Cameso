@@ -1,7 +1,7 @@
 import React from "react";
 import "./Footer.css";
 import logo from "../../assets/cameso_logo - Editado.png";
-import { FaPhoneAlt, FaEnvelope, FaClock, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { FaPhoneAlt, FaEnvelope, FaClock, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaWhatsapp  } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -27,9 +27,10 @@ function Footer() {
 
           <div className="footer-socials">
             <a href="https://facebook.com" target="_blank" rel="noreferrer"><FaFacebookF /></a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer"><FaInstagram /></a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer"><FaLinkedinIn /></a>
-            <a href="https://youtube.com" target="_blank" rel="noreferrer"><FaYoutube /></a>
+            <a href="https://www.instagram.com/cameso_clinica_sst/?next=%2F" target="_blank" rel="noreferrer"><FaInstagram /></a>
+            <a href="https://br.linkedin.com/company/cameso-assessoria" target="_blank" rel="noreferrer"><FaLinkedinIn /></a>
+            <a href="https://www.youtube.com/@camesomedicinaesegurancadotrab/videos" target="_blank" rel="noreferrer"><FaYoutube /></a>
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer"><FaWhatsapp /></a>
           </div>
         </div>
       </div>

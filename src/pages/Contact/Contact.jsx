@@ -7,6 +7,7 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaYoutube,
+  FaWhatsapp
 } from "react-icons/fa";
 import "./Contact.css";
 
@@ -14,7 +15,7 @@ function Contact() {
   return (
     <section className="contact-wrapper">
       <div className="contact-box">
-        
+
         <div className="contact-left">
           <div className="info-item">
             <FaPhoneAlt className="icon" />
@@ -28,7 +29,8 @@ function Contact() {
             <FaMapMarkerAlt className="icon" />
             <div>
               <h4>Localização</h4>
-              <p>Rua Exemplo, 123<br />Cidade, UF</p>
+              <p>R. Eurico Valois, 128, Centro<br />VITÓRIA, PE</p>
+              <p>Av. Caxangá, 279, Madalena , Recife<br />RECIFE, PE</p>
             </div>
           </div>
 
@@ -45,6 +47,7 @@ function Contact() {
             <a href="#"><FaInstagram /></a>
             <a href="#"><FaLinkedinIn /></a>
             <a href="#"><FaYoutube /></a>
+            <a href="https://linkedin.com"><FaWhatsapp /></a>
           </div>
         </div>
 
