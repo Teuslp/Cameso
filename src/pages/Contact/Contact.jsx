@@ -13,7 +13,9 @@ import "./Contact.css";
 
 function Contact() {
   return (
-    <section className="contact-wrapper">
+    <section className="contact-wrapper" style={{
+        background: "#f8f8f8"
+      }}>
       <div className="contact-box">
 
         <div className="contact-left">

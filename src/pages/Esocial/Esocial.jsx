@@ -8,7 +8,9 @@ import bannerImage from "../../assets/esocial-banner.png";
 
 function Esocial() {
   return (
-    <main className="esocial-page">
+    <main className="esocial-page" style={{
+        background: "#f8f8f8"
+      }}>
 
       {/* Banner topo */}
       <section className="esocial-banner"

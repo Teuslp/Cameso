@@ -5,13 +5,14 @@ import Photos from "../components/Photos/Photos";
 import Collaborators from "../components/Collaborators/Collaborators";
 import Partners from "../components/Partners/Partners";
 import Channel from "../components/Channel/Channel";
+import Feedback from "../components/Feedback/Feedback";
 import { color } from "framer-motion";
 
 function HomePage() {
   return (
     <main 
     style={{
-        background: "#f4f4f4",
+        background: "#f8f8f8",
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
@@ -20,6 +21,7 @@ function HomePage() {
       <Topics />
       <Photos />
       <Collaborators />
+      <Feedback />
       <Partners />
       <Channel />
     </main>

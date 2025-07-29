@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import "./Partners.css";
 
-import partner1 from "../../assets/partner1.jpg";
-import partner2 from "../../assets/partner2.jpg";
-
 function Partners() {
-  const partners = [partner1, partner2, partner1, partner2, partner1, partner2, partner1, partner2];
+  const partners = React.useMemo(() => {
+    const importAll = (r) => r.keys().map(r);
+    return importAll(require.context("../../assets/partnes", false, /\.jpg$/));
+  }, []);
+
+
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -26,7 +28,10 @@ function Partners() {
 
   return (
     <section className="partners-section">
-      <h2 className="partners-title"><span className="nosso">Nossos</span> <br />Parceiros</h2>
+      <h2 className="partners-title">
+        <span className="nosso">Nossos</span> <br />
+        Parceiros
+      </h2>
       <div className="partners-carousel" ref={scrollRef}>
         {partners.map((partner, index) => (
           <div className="partner-card" key={index}>
@@ -35,7 +40,6 @@ function Partners() {
         ))}
       </div>
     </section>
-
   );
 }
 

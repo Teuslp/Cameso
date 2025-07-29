@@ -8,7 +8,7 @@ function About() {
   return (
     <div
     style={{
-        background: "#f4f4f4",
+        background: "#f8f8f8",
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",

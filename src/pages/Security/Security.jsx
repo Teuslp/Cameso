@@ -11,7 +11,9 @@ function SecurityPage() {
   }, []);
 
   return (
-    <section className="security-page">
+    <section className="security-page" style={{
+        background: "#f8f8f8"
+      }}>
       {/* Banner */}
       <div className="security-banner">
         <img src={banner} alt="Segurança do Trabalho" />

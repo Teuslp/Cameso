@@ -17,7 +17,9 @@ function Trainings() {
   }, []);
 
   return (
-    <section className="trainings-page">
+    <section className="trainings-page" style={{
+        background: "#f8f8f8"
+      }}>
       {/* Banner */}
       <div className="trainings-banner">
         <img src={banner} alt="Treinamentos Profissionais" />

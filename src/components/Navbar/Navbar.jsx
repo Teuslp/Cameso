@@ -28,8 +28,10 @@ function Navbar() {
             <ul className="dropdown-menu">
               <li><Link to="/Security" onClick={() => setMenuOpen(false)}>SEG DO TRABALHO</Link></li>
               <li><Link to="/Health" onClick={() => setMenuOpen(false)}>SAÚDE OCUPACIONAL</Link></li>
-              <li><Link to="/Trainings" onClick={() => setMenuOpen(false)}>TREINAMENTOS</Link></li>
-              <li><a href="#">Perícias Judiciais</a></li>
+              <li><Link to="/" onClick={() => setMenuOpen(false)}>PERÍCIAS JUDICIAIS</Link></li>
+              <li><Link to="/" onClick={() => setMenuOpen(false)}>HIGIENE OCUPACIONAL</Link></li>
+              <li><Link to="/" onClick={() => setMenuOpen(false)}>ASSESSORIA E CONSULTORIA JURÍDICA</Link></li>
+              <li><Link to="/" onClick={() => setMenuOpen(false)}>ASSESSORIA MENSAL</Link></li>
             </ul>
           </li>
           <li><Link to="/Contact">CONTATO</Link></li>
@@ -54,7 +56,10 @@ function Navbar() {
                 <li><Link to="/Security" onClick={() => setMenuOpen(false)}>SEG DO TRABALHO</Link></li>
                 <li><Link to="/Health" onClick={() => setMenuOpen(false)}>SAúDE OCUPACIONAL</Link></li>
                 <li><Link to="/Trainings" onClick={() => setMenuOpen(false)}>TREINAMENTOS</Link></li>
-                <li><a href="#" onClick={() => setMenuOpen(false)}>Perícias Judiciais</a></li>
+                <li><Link to="/" onClick={() => setMenuOpen(false)}>PERÍCIAS JUDICIAIS</Link></li>
+                <li><Link to="/" onClick={() => setMenuOpen(false)}>HIGIENE OCUPACIONAL</Link></li>
+                <li><Link to="/" onClick={() => setMenuOpen(false)}>ASSESSORIA E CONSULTORIA JURÍDICA</Link></li>
+                <li><Link to="/" onClick={() => setMenuOpen(false)}>ASSESSORIA MENSAL</Link></li>
               </ul>
             )}
           </li>

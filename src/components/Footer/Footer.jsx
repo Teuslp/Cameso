@@ -14,11 +14,11 @@ function Footer() {
         <div className="footer-right">
           <div className="footer-item">
             <FaPhoneAlt className="footer-icon" />
-            <span>(11) 99999-9999</span>
+            <span>(81) 7121-5297</span>
           </div>
           <div className="footer-item">
             <FaEnvelope className="footer-icon" />
-            <span>contato@cameso.com.br</span>
+            <span>comercial@cameso.com.br</span>
           </div>
           <div className="footer-item">
             <FaClock className="footer-icon" />

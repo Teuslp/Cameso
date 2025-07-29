@@ -17,7 +17,9 @@ function Health() {
   }, []);
 
   return (
-    <section className="health-page">
+    <section className="health-page" style={{
+        background: "#f8f8f8"
+      }}>
       {/* Banner */}
       <div className="health-banner">
         <img src={banner} alt="Saúde Ocupacional" />
