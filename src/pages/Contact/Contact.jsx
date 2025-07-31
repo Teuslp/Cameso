@@ -46,10 +46,10 @@ function Contact() {
 
           <div className="social-icons">
             <a href="#"><FaFacebookF /></a>
-            <a href="#"><FaInstagram /></a>
-            <a href="#"><FaLinkedinIn /></a>
-            <a href="#"><FaYoutube /></a>
-            <a href="https://linkedin.com"><FaWhatsapp /></a>
+            <a href="https://www.instagram.com/cameso_clinica_sst/?next=%2F"><FaInstagram /></a>
+            <a href="https://br.linkedin.com/company/cameso-assessoria"><FaLinkedinIn /></a>
+            <a href="https://www.youtube.com/@camesomedicinaesegurancadotrab/videos"><FaYoutube /></a>
+            <a href="https://api.whatsapp.com/send?phone=5581988213512&text=Ol%C3%A1,%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20e%20or%C3%A7amento%20quanto%20a%20parte%20de%20gest%C3%A3o%20em%20SST%20de%20voc%C3%AAs.%20"><FaWhatsapp /></a>
           </div>
         </div>
 

@@ -5,12 +5,10 @@ import banner from "../../assets/assessoria-banner.jpg"; // substitua com a imag
 function MonthlyConsulting() {
   return (
     <main className="monthly-page">
-      {/* Banner */}
       <section className="monthly-banner">
         <img src={banner} alt="Assessoria Mensal" />
       </section>
 
-      {/* Introdução */}
       <section className="monthly-section">
         <h2>O que é a Assessoria Mensal?</h2>
         <p>
@@ -19,7 +17,6 @@ function MonthlyConsulting() {
         </p>
       </section>
 
-      {/* Serviços Inclusos */}
       <section className="monthly-section">
         <h2>Serviços Inclusos</h2>
         <div className="monthly-cards">
@@ -42,7 +39,6 @@ function MonthlyConsulting() {
         </div>
       </section>
 
-      {/* Benefícios */}
       <section className="monthly-section">
         <h2>Vantagens da Assessoria Mensal</h2>
         <ul className="monthly-benefits">
@@ -53,7 +49,6 @@ function MonthlyConsulting() {
         </ul>
       </section>
 
-      {/* CTA */}
       <section className="monthly-cta">
         <h2>Garanta regularidade e tranquilidade para sua empresa</h2>
         <p>Fale com nossos especialistas e solicite sua assessoria mensal personalizada.</p>

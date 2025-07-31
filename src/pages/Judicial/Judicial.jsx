@@ -5,14 +5,12 @@ import banner from "../../assets/pericias-banner.jpg";
 function Judicial() {
   return (
     <main className="judicial-page">
-      {/* Banner topo */}
       <section className="judicial-banner" style={{ backgroundImage: `url(${banner})` }}>
         <div className="overlay">
           <h1>Perícias Judiciais Trabalhistas</h1>
         </div>
       </section>
 
-      {/* O que são */}
       <section className="judicial-section">
         <h2>O que são Perícias Judiciais?</h2>
         <p>
@@ -20,7 +18,6 @@ function Judicial() {
         </p>
       </section>
 
-      {/* Quem pode solicitar */}
       <section className="judicial-section alt-bg">
         <h2>Quem pode solicitar?</h2>
         <ul>
@@ -30,7 +27,6 @@ function Judicial() {
         </ul>
       </section>
 
-      {/* Tipos de perícias */}
       <section className="judicial-section">
         <h2>Tipos de Perícias Realizadas</h2>
         <div className="expertise-grid">
@@ -43,7 +39,6 @@ function Judicial() {
         </div>
       </section>
 
-      {/* Benefícios */}
       <section className="judicial-section alt-bg">
         <h2>Por que escolher a CAMESO?</h2>
         <ul className="benefits-list">
@@ -54,7 +49,6 @@ function Judicial() {
         </ul>
       </section>
 
-      {/* CTA */}
       <section className="judicial-cta">
         <h2>Precisa de uma Perícia Judicial Técnica e Confiável?</h2>
         <p>Entre em contato conosco e solicite um orçamento personalizado.</p>

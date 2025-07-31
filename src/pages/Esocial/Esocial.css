@@ -14,12 +14,6 @@
   text-align: center;
 }
 
-.banner-overlay {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(30, 54, 64, 0.75);
-}
-
 .banner-title {
   position: relative;
   font-size: 3.5rem;

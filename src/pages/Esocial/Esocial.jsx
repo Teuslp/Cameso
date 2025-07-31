@@ -134,7 +134,7 @@ function Esocial() {
           className="cta-button"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => window.location.href = "#contato"}
+          onClick={() => window.location.href = "/Contact"}
         >
           <FaPhoneAlt className="cta-icon" />Entre em contato
         </motion.button>

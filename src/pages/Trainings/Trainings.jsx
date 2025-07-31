@@ -66,7 +66,7 @@ function Trainings() {
       <div className="trainings-cta" data-aos="zoom-in">
         <h2>Capacite sua equipe com a CAMESO</h2>
         <p>Entre em contato e monte um cronograma ideal para sua empresa.</p>
-        <a href="/contato" className="cta-button">Solicitar Treinamento</a>
+        <a href="/Contact" className="cta-button">Solicitar Treinamento</a>
       </div>
     </section>
   );

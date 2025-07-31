@@ -67,7 +67,7 @@ function Health() {
       <div className="health-cta" data-aos="zoom-in">
         <h2>Fale com a CAMESO</h2>
         <p>Estamos prontos para cuidar da saúde da sua equipe com excelência.</p>
-        <a href="/contato" className="cta-button">Agende uma avaliação</a>
+        <a href="/Contact" className="cta-button">Agende uma avaliação</a>
       </div>
     </section>
   );

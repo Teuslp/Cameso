@@ -1,16 +1,14 @@
 import React from "react";
 import "./Consulting.css";
-import banner from "../../assets/consultoria-banner.jpg"; // substitua pela imagem real
+import banner from "../../assets/consultoria-banner.jpg"; 
 
 function Consulting() {
   return (
     <main className="legal-page">
-      {/* Banner */}
       <section className="legal-banner">
         <img src={banner} alt="Assessoria Jurídica" />
       </section>
 
-      {/* Introdução */}
       <section className="legal-section">
         <h2>O que é Assessoria e Consultoria Jurídica?</h2>
         <p>
@@ -20,7 +18,6 @@ function Consulting() {
         </p>
       </section>
 
-      {/* Áreas de atuação */}
       <section className="legal-section">
         <h2>Áreas de Atuação</h2>
         <div className="legal-cards">
@@ -43,7 +40,6 @@ function Consulting() {
         </div>
       </section>
 
-      {/* Benefícios */}
       <section className="legal-section">
         <h2>Benefícios para sua empresa</h2>
         <ul className="legal-benefits">
@@ -54,7 +50,6 @@ function Consulting() {
         </ul>
       </section>
 
-      {/* CTA */}
       <section className="legal-cta">
         <h2>Proteja juridicamente sua empresa com especialistas</h2>
         <p>Solicite uma consultoria personalizada com nossa equipe jurídica.</p>

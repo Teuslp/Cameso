@@ -8,7 +8,7 @@ function CTASection() {
       <div className="cta-content">
         <h2>Pronto para cuidar da saúde e segurança da sua empresa?</h2>
         <p>Fale com a nossa equipe e descubra como podemos te ajudar.</p>
-        <a href="#contato" className="cta-button">
+        <a href="/Contact" className="cta-button">
           <FaPhoneAlt className="cta-icon" /> Entrar em Contato
         </a>
       </div>
