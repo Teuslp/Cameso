@@ -16,7 +16,7 @@ function Navbar() {
         </div>
 
         <div className="navbar-logo">
-          <img src={logo} alt="Logo CAMESO" />
+          <img src={logo} alt="Logo CAMESO" onContextMenu={(e) => e.preventDefault()}/>
         </div>
 
         <ul className="navbar-menu">
@@ -28,10 +28,11 @@ function Navbar() {
             <ul className="dropdown-menu">
               <li><Link to="/Security" onClick={() => setMenuOpen(false)}>SEG DO TRABALHO</Link></li>
               <li><Link to="/Health" onClick={() => setMenuOpen(false)}>SAÚDE OCUPACIONAL</Link></li>
-              <li><Link to="/" onClick={() => setMenuOpen(false)}>PERÍCIAS JUDICIAIS</Link></li>
-              <li><Link to="/" onClick={() => setMenuOpen(false)}>HIGIENE OCUPACIONAL</Link></li>
-              <li><Link to="/" onClick={() => setMenuOpen(false)}>ASSESSORIA E CONSULTORIA JURÍDICA</Link></li>
-              <li><Link to="/" onClick={() => setMenuOpen(false)}>ASSESSORIA MENSAL</Link></li>
+              <li><Link to="/Trainings" onClick={() => setMenuOpen(false)}>TREINAMENTOS</Link></li>
+              <li><Link to="Judicial/" onClick={() => setMenuOpen(false)}>PERÍCIAS JUDICIAIS</Link></li>
+              <li><Link to="/Hygiene" onClick={() => setMenuOpen(false)}>HIGIENE OCUPACIONAL</Link></li>
+              <li><Link to="/Consulting" onClick={() => setMenuOpen(false)}>ASSESSORIA E CONSULTORIA JURÍDICA</Link></li>
+              <li><Link to="/MonthlyConsulting" onClick={() => setMenuOpen(false)}>ASSESSORIA MENSAL</Link></li>
             </ul>
           </li>
           <li><Link to="/Contact">CONTATO</Link></li>
@@ -56,10 +57,10 @@ function Navbar() {
                 <li><Link to="/Security" onClick={() => setMenuOpen(false)}>SEG DO TRABALHO</Link></li>
                 <li><Link to="/Health" onClick={() => setMenuOpen(false)}>SAúDE OCUPACIONAL</Link></li>
                 <li><Link to="/Trainings" onClick={() => setMenuOpen(false)}>TREINAMENTOS</Link></li>
-                <li><Link to="/" onClick={() => setMenuOpen(false)}>PERÍCIAS JUDICIAIS</Link></li>
-                <li><Link to="/" onClick={() => setMenuOpen(false)}>HIGIENE OCUPACIONAL</Link></li>
-                <li><Link to="/" onClick={() => setMenuOpen(false)}>ASSESSORIA E CONSULTORIA JURÍDICA</Link></li>
-                <li><Link to="/" onClick={() => setMenuOpen(false)}>ASSESSORIA MENSAL</Link></li>
+                <li><Link to="/Judicial" onClick={() => setMenuOpen(false)}>PERÍCIAS JUDICIAIS</Link></li>
+                <li><Link to="/Hygiene" onClick={() => setMenuOpen(false)}>HIGIENE OCUPACIONAL</Link></li>
+                <li><Link to="/Consulting" onClick={() => setMenuOpen(false)}>ASSESSORIA E CONSULTORIA JURÍDICA</Link></li>
+                <li><Link to="/MonthlyConsulting" onClick={() => setMenuOpen(false)}>ASSESSORIA MENSAL</Link></li>
               </ul>
             )}
           </li>

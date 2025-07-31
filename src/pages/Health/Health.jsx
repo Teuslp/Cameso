@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 
 import "./Health.css";
-import banner from "../../assets/saude-banner.jpg"; // troque pela sua imagem real
+import banner from "../../assets/saude-banner.jpg"; 
 
 function Health() {
   useEffect(() => {
@@ -23,10 +23,8 @@ function Health() {
       {/* Banner */}
       <div className="health-banner">
         <img src={banner} alt="Saúde Ocupacional" />
-        <h1>Saúde Ocupacional</h1>
       </div>
 
-      {/* Explicação */}
       <div className="health-section" data-aos="fade-up">
         <h2>O que é?</h2>
         <p>
@@ -34,7 +32,6 @@ function Health() {
         </p>
       </div>
 
-      {/* Benefícios */}
       <div className="health-section" data-aos="fade-up">
         <h2>Benefícios</h2>
         <ul className="health-benefits">
@@ -45,7 +42,6 @@ function Health() {
         </ul>
       </div>
 
-      {/* Serviços */}
       <div className="health-section" data-aos="fade-up">
         <h2>Serviços Oferecidos</h2>
         <div className="health-cards">
@@ -68,7 +64,6 @@ function Health() {
         </div>
       </div>
 
-      {/* CTA */}
       <div className="health-cta" data-aos="zoom-in">
         <h2>Fale com a CAMESO</h2>
         <p>Estamos prontos para cuidar da saúde da sua equipe com excelência.</p>

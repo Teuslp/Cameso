@@ -23,7 +23,7 @@ function Contact() {
             <FaPhoneAlt className="icon" />
             <div>
               <h4>Ligue para nós</h4>
-              <p>1 (234) 567-891<br />1 (234) 987-654</p>
+              <p>(81) 7121-5297</p>
             </div>
           </div>
 

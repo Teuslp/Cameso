@@ -12,7 +12,6 @@ function Esocial() {
         background: "#f8f8f8"
       }}>
 
-      {/* Banner topo */}
       <section className="esocial-banner"
         style={{ backgroundImage: `url(${bannerImage})` }}>
         <div className="banner-overlay" />
@@ -22,11 +21,9 @@ function Esocial() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          eSocial
         </motion.h1>
       </section>
 
-      {/* O que é o eSocial */}
       <section className="esocial-section">
         <motion.h2
           className="section-title"
@@ -50,7 +47,6 @@ function Esocial() {
         </motion.p>
       </section>
 
-      {/* Obrigatoriedade e impactos */}
       <section className="esocial-section bg-light">
         <motion.h2
           className="section-title"
@@ -74,7 +70,6 @@ function Esocial() {
         </motion.p>
       </section>
 
-      {/* Como a CAMESO pode ajudar */}
       <section className="esocial-section">
         <motion.h2
           className="section-title"
@@ -126,7 +121,6 @@ function Esocial() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="esocial-cta">
         <motion.h2
           initial={{ opacity: 0, scale: 0.9 }}

@@ -35,7 +35,7 @@ function BannerCarousel() {
       >
         {banners.map((src, index) => (
           <div key={index}>
-            <img src={process.env.PUBLIC_URL + src} alt={`Banner ${index + 1}`} />
+            <img src={process.env.PUBLIC_URL + src} alt={`Banner ${index + 1}`} onContextMenu={(e) => e.preventDefault()}/>
           </div>
         ))}
       </Carousel>

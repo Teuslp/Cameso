@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 
 import "./Trainings.css";
-import banner from "../../assets/treinamentos-banner.jpg"; // insira sua imagem de banner
+import banner from "../../assets/treinamentos-banner.jpg"; 
 
 function Trainings() {
   useEffect(() => {
@@ -20,13 +20,10 @@ function Trainings() {
     <section className="trainings-page" style={{
         background: "#f8f8f8"
       }}>
-      {/* Banner */}
       <div className="trainings-banner">
         <img src={banner} alt="Treinamentos Profissionais" />
-        <h1>Treinamentos</h1>
       </div>
 
-      {/* Explicação */}
       <div className="trainings-section" data-aos="fade-up">
         <h2>O que são?</h2>
         <p>
@@ -34,7 +31,6 @@ function Trainings() {
         </p>
       </div>
 
-      {/* Benefícios */}
       <div className="trainings-section" data-aos="fade-up">
         <h2>Benefícios</h2>
         <ul className="trainings-benefits">
@@ -45,7 +41,6 @@ function Trainings() {
         </ul>
       </div>
 
-      {/* Serviços */}
       <div className="trainings-section" data-aos="fade-up">
         <h2>Treinamentos Oferecidos</h2>
         <div className="trainings-cards">
@@ -68,7 +63,6 @@ function Trainings() {
         </div>
       </div>
 
-      {/* CTA */}
       <div className="trainings-cta" data-aos="zoom-in">
         <h2>Capacite sua equipe com a CAMESO</h2>
         <p>Entre em contato e monte um cronograma ideal para sua empresa.</p>

@@ -31,7 +31,7 @@ function Photos() {
             )
           }
         >
-          <div className="photo-card">
+          <div className="photo-card" onContextMenu={(e) => e.preventDefault()}>
             <img src="/photos/trab1.jpeg" alt="Trabalho 1" />
           </div>
           <div className="photo-card">

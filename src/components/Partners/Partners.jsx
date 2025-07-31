@@ -35,7 +35,7 @@ function Partners() {
       <div className="partners-carousel" ref={scrollRef}>
         {partners.map((partner, index) => (
           <div className="partner-card" key={index}>
-            <img src={partner} alt={`Parceiro ${index + 1}`} />
+            <img src={partner} alt={`Parceiro ${index + 1}`} onContextMenu={(e) => e.preventDefault()}/>
           </div>
         ))}
       </div>

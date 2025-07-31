@@ -10,6 +10,10 @@ import Contact from "./pages/Contact/Contact";
 import Security from "./pages/Security/Security";
 import Health from "./pages/Health/Health";
 import Trainings from "./pages/Trainings/Trainings";
+import Judicial from "./pages/Judicial/Judicial";
+import Hygiene from "./pages/Hygiene/Hygiene";
+import Consulting from "./pages/Consulting/Consulting";
+import MonthlyConsulting from "./pages/MonthlyConsulting/MonthlyConsulting";
 
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -32,6 +36,10 @@ function App() {
         <Route path="/Security" element={<Security />} />
         <Route path="/Health" element={<Health />} />
         <Route path="/Trainings" element={<Trainings />}/>
+        <Route path="/Judicial" element={<Judicial />} />
+        <Route path="/Hygiene" element={<Hygiene />} />
+        <Route path="/Consulting" element={<Consulting />} />
+        <Route path="/MonthlyConsulting" element={<MonthlyConsulting />} />
       </Routes>
 
       <Footer />
