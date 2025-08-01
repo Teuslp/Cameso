@@ -1,0 +1,55 @@
+.cta-section {
+  background-color: #1E3640;
+  color: #fff;
+  padding: 100px 40px;
+  text-align: center;
+}
+
+.cta-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cta-content h2 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+}
+
+.cta-content p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: #d0d0d0;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: #45BF4D;
+  color: #fff;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #3da844;
+}
+
+.cta-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .cta-content h2 {
+    font-size: 2rem;
+  }
+
+  .cta-button {
+    font-size: 1rem;
+    padding: 12px 24px;
+  }
+}

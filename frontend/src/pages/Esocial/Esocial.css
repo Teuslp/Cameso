@@ -1,0 +1,163 @@
+.esocial-page {
+  font-family: 'Arial', sans-serif;
+  color: #1E3640;
+  background-color: #f4f4f4;
+}
+
+.esocial-banner {
+  position: relative;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.banner-title {
+  position: relative;
+  font-size: 3.5rem;
+  font-weight: 700;
+  z-index: 1;
+  letter-spacing: 3px;
+}
+
+.esocial-section {
+  padding: 60px 20px 40px;
+  max-width: 1100px;
+  margin: 0 auto 60px auto;
+  text-align: center;
+}
+
+.bg-light {
+  background-color: #f9f9f9;
+  border-radius: 28px;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #1E3640;
+}
+
+.section-icon {
+  color: #45BF4D;
+  font-size: 2.4rem;
+}
+
+.title-underline {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 4px;
+  background-color: #45BF4D;
+  border-radius: 4px;
+}
+
+.section-text {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.esocial-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+  max-width: 320px;
+  padding: 25px 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  cursor: default;
+}
+
+.esocial-card:hover {
+  transform: translateY(-8px);
+}
+
+.esocial-card h3 {
+  color: #1E3640;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.esocial-card p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+.esocial-cta {
+  background-color: #1E3640;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.esocial-cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.cta-button {
+  background-color: white;
+  color: #45BF4D;
+  border: none;
+  padding: 14px 38px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #3a9c3a;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .esocial-banner {
+    height: 220px;
+  }
+  .banner-title {
+    font-size: 2.2rem;
+    padding: 0 10px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .cards-container {
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+  }
+
+  .esocial-card {
+    max-width: 90vw;
+  }
+
+  .esocial-cta h2 {
+    font-size: 1.8rem;
+  }
+}

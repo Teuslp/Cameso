@@ -1,0 +1,45 @@
+import React from "react";
+import "./Footer.css";
+import logo from "../../assets/cameso_logo - Editado.png";
+import { FaPhoneAlt, FaEnvelope, FaClock, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaWhatsapp } from "react-icons/fa";
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="footer-content">
+        <div className="footer-left">
+          <img src={logo} alt="Logo CAMESO" />
+        </div>
+
+        <div className="footer-right">
+          <div className="footer-item">
+            <FaPhoneAlt className="footer-icon" />
+            <span>(81) 7121-5297</span>
+          </div>
+          <div className="footer-item">
+            <FaEnvelope className="footer-icon" />
+            <span>comercial@cameso.com.br</span>
+          </div>
+          <div className="footer-item">
+            <FaClock className="footer-icon" />
+            <span>Seg a Sex - 07h às 17h</span>
+          </div>
+
+          <div className="footer-socials">
+            <a href="https://facebook.com" target="_blank" rel="noreferrer"><FaFacebookF /></a>
+            <a href="https://www.instagram.com/cameso_clinica_sst/?next=%2F" target="_blank" rel="noreferrer"><FaInstagram /></a>
+            <a href="https://br.linkedin.com/company/cameso-assessoria" target="_blank" rel="noreferrer"><FaLinkedinIn /></a>
+            <a href="https://www.youtube.com/@camesomedicinaesegurancadotrab/videos" target="_blank" rel="noreferrer"><FaYoutube /></a>
+            <a href="https://api.whatsapp.com/send?phone=5581988213512&text=Ol%C3%A1,%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20e%20or%C3%A7amento%20quanto%20a%20parte%20de%20gest%C3%A3o%20em%20SST%20de%20voc%C3%AAs.%20" target="_blank" rel="noreferrer"><FaWhatsapp /></a>
+          </div>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        © 2025 CAMESO – Todos os direitos reservados.
+      </div>
+    </footer>
+  );
+}
+
+export default Footer;

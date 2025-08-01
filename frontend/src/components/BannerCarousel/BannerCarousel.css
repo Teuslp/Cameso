@@ -1,0 +1,23 @@
+img {
+  user-drag: none;
+  -webkit-user-drag: none;
+}
+
+.banner-container {
+  width: 100%;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.carousel .slide img {
+  width: 100%;
+  height: auto;
+  max-height: 700px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .carousel .slide img {
+    max-height: 600px;
+  }
+}
