@@ -1,124 +1,73 @@
-// src/pages/Esocial.jsx
 import React from "react";
-import "./Esocial.css";
-
-import { FaInfoCircle, FaExclamationTriangle, FaHandsHelping, FaPhoneAlt } from "react-icons/fa";
+import {
+  FaInfoCircle,
+  FaBullseye,
+  FaExclamationTriangle,
+  FaHandsHelping,
+  FaPhoneAlt,
+} from "react-icons/fa";
 import { motion } from "framer-motion";
 import bannerImage from "../../assets/esocial-banner.png";
+import "./Esocial.css";
 
 function Esocial() {
+  const topics = [
+    {
+      icon: <FaInfoCircle className="topic-icon" />,
+      title: "O que é o eSocial?",
+      text:
+        "O eSocial é um sistema do Governo Federal que centraliza todas as informações trabalhistas, fiscais e previdenciárias da sua empresa. Ele foi criado para reduzir burocracias, mas também exige muita atenção, pois qualquer erro pode gerar multas e complicações legais. Em outras palavras, sua empresa precisa estar preparada para atender às exigências do eSocial e evitar riscos desnecessários.",
+      direction: "left",
+    },
+    {
+      icon: <FaBullseye className="topic-icon" />,
+      title: "Por que o eSocial existe?",
+      text:
+        "O eSocial tem como objetivo organizar e padronizar o envio dos dados legais das empresas, permitindo que o governo acompanhe em tempo real o cumprimento das obrigações trabalhistas. Para você, empresário, isso significa que é fundamental manter tudo em dia para evitar penalidades e garantir a segurança jurídica do seu negócio.",
+      direction: "right",
+    },
+    {
+      icon: <FaExclamationTriangle className="topic-icon" />,
+      title: "E se minha empresa não enviar os dados corretamente?",
+      text:
+        "O envio incorreto, atrasado ou incompleto das informações ao eSocial pode resultar em multas elevadas, fiscalizações inesperadas e prejuízos à reputação da sua empresa. Esses riscos comprometem a estabilidade do seu negócio e podem gerar consequências financeiras e legais significativas. Você não precisa enfrentar essa situação sozinho.",
+      direction: "left",
+    },
+    {
+      icon: <FaHandsHelping className="topic-icon" />,
+      title: "De que forma a CAMESO vai ajudar sua empresa?",
+      text:
+        "Na CAMESO, você conta com uma equipe especializada em eSocial que cuida de todo o processo para garantir que sua empresa esteja 100% em conformidade. Oferecemos gestão completa dos seus dados, consultoria personalizada e treinamentos práticos para sua equipe, além de acompanhamento contínuo para que nada seja deixado de lado. Com a CAMESO, você evita problemas, cumpre a legislação e ainda otimiza seus processos internos.",
+      direction: "right",
+    },
+  ];
+
   return (
-    <main className="esocial-page" style={{
-        background: "#f8f8f8"
-      }}>
-
-      <section className="esocial-banner"
-        style={{ backgroundImage: `url(${bannerImage})` }}>
+    <main className="esocial-page">
+      <section
+        className="esocial-banner"
+        style={{ backgroundImage: `url(${bannerImage})` }}
+      >
         <div className="banner-overlay" />
-        <motion.h1
-          className="banner-title"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-        </motion.h1>
       </section>
 
-      <section className="esocial-section">
-        <motion.h2
-          className="section-title"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <FaInfoCircle className="section-icon" />
-          O que é o eSocial
-          <div className="title-underline" />
-        </motion.h2>
-        <motion.p
-          className="section-text"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.2 }}
-        >
-          O eSocial é um sistema do governo federal que unifica o envio de informações trabalhistas, fiscais e previdenciárias das empresas, simplificando a burocracia e aumentando a transparência.
-        </motion.p>
-      </section>
-
-      <section className="esocial-section bg-light">
-        <motion.h2
-          className="section-title"
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <FaExclamationTriangle className="section-icon" />
-          Obrigatoriedade e Impactos
-          <div className="title-underline" />
-        </motion.h2>
-        <motion.p
-          className="section-text"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.2 }}
-        >
-          Todas as empresas devem enviar informações ao eSocial, sob pena de multas e penalidades. Isso impacta diretamente a gestão de saúde e segurança do trabalho, exigindo controle rigoroso e conformidade.
-        </motion.p>
-      </section>
-
-      <section className="esocial-section">
-        <motion.h2
-          className="section-title"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <FaHandsHelping className="section-icon" />
-          Como a CAMESO pode ajudar
-          <div className="title-underline" />
-        </motion.h2>
-
-        <div className="cards-container">
-
+      <section className="esocial-full">
+        {topics.map((topic, index) => (
           <motion.div
-            className="esocial-card"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className={`topic ${topic.direction}`}
+            key={index}
+            initial={{ opacity: 0, x: topic.direction === "left" ? -80 : 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.8, delay: index * 0.2 }}
           >
-            <h3>Gestão Completa</h3>
-            <p>Monitoramos e gerenciamos todos os dados relacionados ao eSocial para garantir conformidade e segurança jurídica.</p>
+            <div className="icon-box">{topic.icon}</div>
+            <div className="text-box">
+              <h2>{topic.title}</h2>
+              <p>{topic.text}</p>
+            </div>
           </motion.div>
-
-          <motion.div
-            className="esocial-card"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <h3>Consultoria Especializada</h3>
-            <p>Equipe especializada orienta sobre obrigações e melhores práticas para evitar multas e sanções.</p>
-          </motion.div>
-
-          <motion.div
-            className="esocial-card"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <h3>Treinamentos e Capacitação</h3>
-            <p>Oferecemos treinamentos para sua equipe se adequar às novas exigências do eSocial com eficiência.</p>
-          </motion.div>
-
-        </div>
+        ))}
       </section>
 
       <section className="esocial-cta">
@@ -134,12 +83,12 @@ function Esocial() {
           className="cta-button"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => window.location.href = "/Contact"}
+          onClick={() => (window.location.href = "/Contact")}
         >
-          <FaPhoneAlt className="cta-icon" />Entre em contato
+          <FaPhoneAlt className="cta-icon" />
+          Entre em contato
         </motion.button>
       </section>
-
     </main>
   );
 }
