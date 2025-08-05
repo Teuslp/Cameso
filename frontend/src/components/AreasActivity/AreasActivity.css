@@ -6,6 +6,8 @@
 .areas-logo {
     max-width: 180px;
     margin-bottom: 40px;
+    max-height: 180px; 
+    object-fit: contain; 
 }
 
 .areas-container {
@@ -13,16 +15,19 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .area-card {
-    width: 120px;
+    width: 140px; 
     border-radius: 12px;
     padding: 20px;
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer; 
 }
 
 .area-card:hover {
@@ -32,7 +37,7 @@
 .icon {
     background-color: #45BF4D;
     color: #fff;
-    font-size: 32px;
+    font-size: 36px;
     border-radius: 50%;
     width: 90px;
     height: 90px;
@@ -47,31 +52,31 @@
     transform: scale(1.2);
 }
 
-
 .area-card p {
     font-weight: 600;
     font-size: 1rem;
     color: #1E3640;
+    margin: 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .area-card {
-        width: 140px;
+        width: 120px;
         padding: 16px;
     }
 
     .icon {
-        width: 60px;
-        height: 60px;
-        font-size: 26px;
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
     }
 
     .area-card p {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
     .areas-section {
         padding: 40px 16px;
     }
@@ -86,14 +91,31 @@
     }
 
     .area-card {
-        width: 120px;
+        width: 110px;
         padding: 14px;
+    }
+
+    .icon {
+        width: 55px;
+        height: 55px;
+        font-size: 22px;
+    }
+
+    .area-card p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .area-card {
+        width: 100px;
+        padding: 12px;
     }
 
     .icon {
         width: 50px;
         height: 50px;
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .area-card p {

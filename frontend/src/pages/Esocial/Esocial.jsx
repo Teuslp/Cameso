@@ -16,28 +16,28 @@ function Esocial() {
       icon: <FaInfoCircle className="topic-icon" />,
       title: "O que é o eSocial?",
       text:
-        "O eSocial é um sistema do Governo Federal que centraliza todas as informações trabalhistas, fiscais e previdenciárias da sua empresa. Ele foi criado para reduzir burocracias, mas também exige muita atenção, pois qualquer erro pode gerar multas e complicações legais. Em outras palavras, sua empresa precisa estar preparada para atender às exigências do eSocial e evitar riscos desnecessários.",
+        "O eSocial é a plataforma oficial do Governo Federal que revolucionou a forma como as empresas prestam informações trabalhistas, fiscais e previdenciárias. Ele centraliza tudo em um único sistema digital, tornando os processos mais seguros, ágeis e organizados. No módulo de Saúde e Segurança do Trabalho (SST), exige o envio de dados como riscos ocupacionais, condições do ambiente de trabalho, saúde dos colaboradores e ocorrências de acidentes. Estar em conformidade com o eSocial é um passo estratégico para proteger sua empresa e seus trabalhadores.",
       direction: "left",
     },
     {
       icon: <FaBullseye className="topic-icon" />,
       title: "Por que o eSocial existe?",
       text:
-        "O eSocial tem como objetivo organizar e padronizar o envio dos dados legais das empresas, permitindo que o governo acompanhe em tempo real o cumprimento das obrigações trabalhistas. Para você, empresário, isso significa que é fundamental manter tudo em dia para evitar penalidades e garantir a segurança jurídica do seu negócio.",
+        "O eSocial foi criado para substituir processos manuais e desorganizados por um sistema digital inteligente e integrado. Seu objetivo é garantir mais transparência, reduzir a burocracia e fortalecer a fiscalização do cumprimento das obrigações legais. Ao adotar o eSocial, sua empresa demonstra responsabilidade, transmite confiança e fortalece sua reputação no mercado.",
       direction: "right",
     },
     {
       icon: <FaExclamationTriangle className="topic-icon" />,
       title: "E se minha empresa não enviar os dados corretamente?",
       text:
-        "O envio incorreto, atrasado ou incompleto das informações ao eSocial pode resultar em multas elevadas, fiscalizações inesperadas e prejuízos à reputação da sua empresa. Esses riscos comprometem a estabilidade do seu negócio e podem gerar consequências financeiras e legais significativas. Você não precisa enfrentar essa situação sozinho.",
+        "A Portaria MTP nº 38/2024 permite que o Governo aplique multas retroativas às empresas que não transmitirem corretamente os eventos de SST. Isso significa que omissões e erros anteriores podem gerar autuações e prejuízos financeiros sérios. Não estar adequado ao eSocial coloca seu negócio em risco jurídico e operacional. Agir agora é a melhor forma de evitar consequências futuras.",
       direction: "left",
     },
     {
       icon: <FaHandsHelping className="topic-icon" />,
       title: "De que forma a CAMESO vai ajudar sua empresa?",
       text:
-        "Na CAMESO, você conta com uma equipe especializada em eSocial que cuida de todo o processo para garantir que sua empresa esteja 100% em conformidade. Oferecemos gestão completa dos seus dados, consultoria personalizada e treinamentos práticos para sua equipe, além de acompanhamento contínuo para que nada seja deixado de lado. Com a CAMESO, você evita problemas, cumpre a legislação e ainda otimiza seus processos internos.",
+        "A CAMESO oferece assessoria completa e personalizada na gestão dos eventos de SST no eSocial. Nossa equipe especializada cuida de todo o processo com precisão e agilidade, garantindo que sua empresa esteja sempre em conformidade com a legislação. Com a CAMESO, você evita multas, protege sua equipe e ganha tranquilidade para focar no que realmente importa: o crescimento do seu negócio.",
       direction: "right",
     },
   ];
@@ -77,13 +77,13 @@ function Esocial() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          Pronto para garantir a conformidade com o eSocial?
+          Fale com um de nossos especialistas
         </motion.h2>
         <motion.button
           className="cta-button"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => (window.location.href = "/Contact")}
+          onClick={() => window.open("https://api.whatsapp.com/send?phone=5581988213512&text=Ol%C3%A1,%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20e%20or%C3%A7amento%20quanto%20a%20parte%20de%20gest%C3%A3o%20em%20SST%20de%20voc%C3%AAs.%20", "_blank")}
         >
           <FaPhoneAlt className="cta-icon" />
           Entre em contato

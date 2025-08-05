@@ -20,22 +20,22 @@ function Navbar() {
         </div>
 
         <ul className="navbar-menu">
-          <li><Link to="/">INÍCIO</Link></li>
-          <li><Link to="/About">SOBRE</Link></li>
-          <li><Link to="/Esocial">ESOCIAL</Link></li>
+          <li><Link to="/">Início</Link></li>
+          <li><Link to="/About">Sobre</Link></li>
+          <li><Link to="/Esocial">eSocial</Link></li>
           <li className="dropdown">
-            <a href="#servicos">SERVIÇOS ▾</a>
+            <a href="#servicos">Serviços▾</a>
             <ul className="dropdown-menu">
-              <li><Link to="/Security" onClick={() => setMenuOpen(false)}>SEG DO TRABALHO</Link></li>
-              <li><Link to="/Health" onClick={() => setMenuOpen(false)}>SAÚDE OCUPACIONAL</Link></li>
-              <li><Link to="/Trainings" onClick={() => setMenuOpen(false)}>TREINAMENTOS</Link></li>
-              <li><Link to="Judicial/" onClick={() => setMenuOpen(false)}>PERÍCIAS JUDICIAIS</Link></li>
-              <li><Link to="/Hygiene" onClick={() => setMenuOpen(false)}>HIGIENE OCUPACIONAL</Link></li>
-              <li><Link to="/Consulting" onClick={() => setMenuOpen(false)}>ASSESSORIA E CONSULTORIA JURÍDICA</Link></li>
-              <li><Link to="/MonthlyConsulting" onClick={() => setMenuOpen(false)}>ASSESSORIA MENSAL</Link></li>
+              <li><Link to="/Security" onClick={() => setMenuOpen(false)}>Seg do trabalho</Link></li>
+              <li><Link to="/Health" onClick={() => setMenuOpen(false)}>Saúde ocupacional</Link></li>
+              <li><Link to="/Trainings" onClick={() => setMenuOpen(false)}>Treinamentos</Link></li>
+              <li><Link to="Judicial/" onClick={() => setMenuOpen(false)}>Perícias judiciais</Link></li>
+              <li><Link to="/Hygiene" onClick={() => setMenuOpen(false)}>Higiene ocupacional</Link></li>
+              <li><Link to="/Consulting" onClick={() => setMenuOpen(false)}>Assessoria e consultoria jurídica</Link></li>
+              <li><Link to="/MonthlyConsulting" onClick={() => setMenuOpen(false)}>Assessoria mensal</Link></li>
             </ul>
           </li>
-          <li><Link to="/Contact">CONTATO</Link></li>
+          <li><Link to="/Contact">Contato</Link></li>
         </ul>
       </div>
 
@@ -45,26 +45,26 @@ function Navbar() {
           <FaTimes onClick={() => setMenuOpen(false)} className="close-icon" />
         </div>
         <ul>
-          <li><Link to="/" onClick={() => setMenuOpen(false)}>INÍCIO</Link></li>
-          <li><Link to="/About" onClick={() => setMenuOpen(false)}>SOBRE</Link></li>
-          <li><Link to="/Esocial" onClick={() => setMenuOpen(false)}>ESOCIAL</Link></li>
+          <li><Link to="/" onClick={() => setMenuOpen(false)}>Início</Link></li>
+          <li><Link to="/About" onClick={() => setMenuOpen(false)}>Sobre</Link></li>
+          <li><Link to="/Esocial" onClick={() => setMenuOpen(false)}>eSocial</Link></li>
           <li className="mobile-dropdown">
             <div onClick={() => setDropdownOpen(!dropdownOpen)} className="dropdown-toggle">
-              SERVIÇOS ▾
+              Serviços▾
             </div>
             {dropdownOpen && (
               <ul className="mobile-dropdown-menu">
-                <li><Link to="/Security" onClick={() => setMenuOpen(false)}>SEG DO TRABALHO</Link></li>
-                <li><Link to="/Health" onClick={() => setMenuOpen(false)}>SAúDE OCUPACIONAL</Link></li>
-                <li><Link to="/Trainings" onClick={() => setMenuOpen(false)}>TREINAMENTOS</Link></li>
-                <li><Link to="/Judicial" onClick={() => setMenuOpen(false)}>PERÍCIAS JUDICIAIS</Link></li>
-                <li><Link to="/Hygiene" onClick={() => setMenuOpen(false)}>HIGIENE OCUPACIONAL</Link></li>
-                <li><Link to="/Consulting" onClick={() => setMenuOpen(false)}>ASSESSORIA E CONSULTORIA JURÍDICA</Link></li>
-                <li><Link to="/MonthlyConsulting" onClick={() => setMenuOpen(false)}>ASSESSORIA MENSAL</Link></li>
+                <li><Link to="/Security" onClick={() => setMenuOpen(false)}>Seg do trabalho</Link></li>
+                <li><Link to="/Health" onClick={() => setMenuOpen(false)}>Saúde ocupacional</Link></li>
+                <li><Link to="/Trainings" onClick={() => setMenuOpen(false)}>Treinamentos</Link></li>
+                <li><Link to="/Judicial" onClick={() => setMenuOpen(false)}>Perícias judiciais</Link></li>
+                <li><Link to="/Hygiene" onClick={() => setMenuOpen(false)}>Higiene ocupacional</Link></li>
+                <li><Link to="/Consulting" onClick={() => setMenuOpen(false)}>Assessoria e consultoria jurídica</Link></li>
+                <li><Link to="/MonthlyConsulting" onClick={() => setMenuOpen(false)}>Assessoria mensal</Link></li>
               </ul>
             )}
           </li>
-          <li><Link to="/Contact" onClick={() => setMenuOpen(false)}>CONTATO</Link></li>
+          <li><Link to="/Contact" onClick={() => setMenuOpen(false)}>Contato</Link></li>
         </ul>
       </div>
 

@@ -9,6 +9,8 @@
   color: #1e3640;
   margin-bottom: 60px;
   position: relative;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .feedback-title::after {
@@ -36,11 +38,18 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
   padding: 30px 25px;
   max-width: 320px;
-  flex: 1;
+  flex: 1 1 320px; /* melhor controle de flex-grow e shrink */
   text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.feedback-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 .comment {
@@ -54,6 +63,8 @@
   display: flex;
   gap: 4px;
   margin-bottom: 16px;
+  color: #45BF4D; /* estrelas verdes */
+  font-size: 1.2rem;
 }
 
 .author {
@@ -78,7 +89,6 @@
   margin-top: 4px;
 }
 
-
 @media (max-width: 768px) {
   .feedback-title {
     font-size: 2rem;
@@ -86,6 +96,7 @@
 
   .feedback-card {
     max-width: 90%;
+    flex: 1 1 90%;
   }
 
   .comment {

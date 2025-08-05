@@ -7,6 +7,7 @@ img {
   padding: 80px 20px;
   text-align: center;
   touch-action: pan-y;
+  background-color: #f9f9f9; 
 }
 
 .photo-header h2 {
@@ -14,6 +15,7 @@ img {
   color: #1E3640;
   font-size: 2.2rem;
   margin-bottom: 10px;
+  font-weight: 700;
 }
 
 .photo-header p {
@@ -23,6 +25,7 @@ img {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.5;
 }
 
 .photo-carousel-wrapper {
@@ -38,6 +41,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: default;
 }
 
 .photo-card img {
@@ -61,11 +65,10 @@ img {
   border-radius: 50%;
   cursor: pointer;
   z-index: 10;
-  transition: background 0.3s;
-}
-
-.custom-arrow:hover {
-  background-color: #45BF4D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .custom-arrow.left {
@@ -87,5 +90,33 @@ img {
 
   .photo-header p {
     font-size: 0.9rem;
+  }
+
+  .custom-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  .custom-arrow.left {
+    left: 5px;
+  }
+
+  .custom-arrow.right {
+    right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .photo-section {
+    padding: 40px 10px;
+  }
+
+  .photo-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .photo-header p {
+    font-size: 0.85rem;
   }
 }

@@ -1,35 +1,50 @@
 .container {
-  margin: 100px;
+  margin: 100px auto; 
   display: flex;
   gap: 40px;
   justify-content: center;
   flex-wrap: wrap;
+  max-width: 1200px; 
+  padding: 0 20px; 
 }
 
 .card {
   max-width: 300px;
+  width: 100%; 
   text-align: center;
   padding: 20px;
   border-radius: 12px;
-  transition: transform 0.3s ease;
+  background-color: #fff; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
 }
 
 .card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .container img {
   max-width: 150px;
+  height: auto;
+  margin-bottom: 16px;
+  user-select: none; 
 }
 
 .card p {
-  font-size: 12px;
+  font-size: 14px; 
   color: #555;
+  line-height: 1.5;
+  margin: 0;
 }
 
 h3 {
   color: #292929ad;
   letter-spacing: 3px;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .topic-divider {
@@ -38,27 +53,37 @@ h3 {
   height: 2px;
   background-color: #45BF4D;
   border: none;
+  border-radius: 1px;
 }
 
 @media (max-width: 480px) {
   .container {
-    margin: 40px 20px;
+    margin: 20px 10px; /* margens menores para caber na tela */
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    padding: 0 10px; /* evita overflow lateral */
   }
 
   .card {
-    max-width: 100%;
+    width: 100%;           /* usa toda a largura disponível dentro do container */
+    max-width: 100%;       /* sem limite maior */
     padding: 16px;
+    box-sizing: border-box; /* inclui padding na largura total */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .container img {
     max-width: 130px;
+    margin: 0 auto;
+    display: block;
   }
 
   .card p {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   h3 {
@@ -69,5 +94,7 @@ h3 {
   .topic-divider {
     max-width: 150px;
     height: 1.5px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

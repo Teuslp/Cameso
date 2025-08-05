@@ -52,7 +52,7 @@ function MonthlyConsulting() {
       <section className="monthly-cta">
         <h2>Garanta regularidade e tranquilidade para sua empresa</h2>
         <p>Fale com nossos especialistas e solicite sua assessoria mensal personalizada.</p>
-        <a href="/Contact" className="cta-button">Solicitar agora</a>
+        <a href="https://api.whatsapp.com/send?phone=5581988213512&text=Ol%C3%A1,%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20e%20or%C3%A7amento%20quanto%20a%20parte%20de%20gest%C3%A3o%20em%20SST%20de%20voc%C3%AAs.%20" className="cta-button">Solicitar agora</a>
       </section>
     </main>
   );

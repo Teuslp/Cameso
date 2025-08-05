@@ -14,23 +14,34 @@ function Mission() {
   }, []);
 
   return (
-    <section className="mission-section" data-aos="fade-up">
-      <h2 className="mission-title">Nossa Essência</h2>
-      <div className="mission-cards">
-        <div className="mission-card" data-aos="fade-up" data-aos-delay="100">
+    <section className="mission-section">
+      <h2 className="mission-title" data-aos="fade-up">Nossa Essência</h2>
+
+      <div className="mission-block left" data-aos="fade-right">
+        <div className="icon-container">
           <FaBullseye className="mission-icon" />
+        </div>
+        <div className="text-container">
           <h3>Missão</h3>
           <p>Proteger a saúde e o bem-estar dos trabalhadores com responsabilidade e excelência.</p>
         </div>
+      </div>
 
-        <div className="mission-card" data-aos="fade-up" data-aos-delay="200">
-          <FaEye className="mission-icon" />
+      <div className="mission-block right" data-aos="fade-left">
+        <div className="text-container">
           <h3>Visão</h3>
           <p>Ser referência nacional em saúde ocupacional e segurança do trabalho.</p>
         </div>
+        <div className="icon-container">
+          <FaEye className="mission-icon" />
+        </div>
+      </div>
 
-        <div className="mission-card" data-aos="fade-up" data-aos-delay="300">
+      <div className="mission-block left" data-aos="fade-right">
+        <div className="icon-container">
           <FaHandsHelping className="mission-icon" />
+        </div>
+        <div className="text-container">
           <h3>Valores</h3>
           <p>Ética, comprometimento, respeito e foco na prevenção.</p>
         </div>

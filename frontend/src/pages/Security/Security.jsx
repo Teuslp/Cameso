@@ -60,7 +60,7 @@ function SecurityPage() {
       <div className="security-cta" data-aos="zoom-in">
         <h2>Fale com a CAMESO</h2>
         <p>Vamos juntos garantir mais segurança para sua empresa.</p>
-        <a href="/Contact" className="cta-button">Entrar em Contato</a>
+        <a href="https://api.whatsapp.com/send?phone=5581988213512&text=Ol%C3%A1,%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20e%20or%C3%A7amento%20quanto%20a%20parte%20de%20gest%C3%A3o%20em%20SST%20de%20voc%C3%AAs.%20" className="cta-button">Entrar em Contato</a>
       </div>
     </section>
   );

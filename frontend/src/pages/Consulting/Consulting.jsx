@@ -53,7 +53,7 @@ function Consulting() {
       <section className="legal-cta">
         <h2>Proteja juridicamente sua empresa com especialistas</h2>
         <p>Solicite uma consultoria personalizada com nossa equipe jurídica.</p>
-        <a href="/Contact" className="cta-button">Fale com um especialista</a>
+        <a href="https://api.whatsapp.com/send?phone=5581988213512&text=Ol%C3%A1,%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20e%20or%C3%A7amento%20quanto%20a%20parte%20de%20gest%C3%A3o%20em%20SST%20de%20voc%C3%AAs.%20" className="cta-button">Fale com um especialista</a>
       </section>
     </main>
   );

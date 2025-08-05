@@ -52,7 +52,7 @@ function Judicial() {
       <section className="judicial-cta">
         <h2>Precisa de uma Perícia Judicial Técnica e Confiável?</h2>
         <p>Entre em contato conosco e solicite um orçamento personalizado.</p>
-        <a href="/Contact" className="cta-button">Solicitar Perícia</a>
+        <a href="https://api.whatsapp.com/send?phone=5581988213512&text=Ol%C3%A1,%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20e%20or%C3%A7amento%20quanto%20a%20parte%20de%20gest%C3%A3o%20em%20SST%20de%20voc%C3%AAs.%20" className="cta-button">Solicitar Perícia</a>
       </section>
     </main>
   );

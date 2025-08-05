@@ -60,7 +60,7 @@ function Hygiene() {
       <section className="hygiene-cta">
         <h2>Quer garantir um ambiente de trabalho seguro e saudável?</h2>
         <p>Entre em contato conosco e solicite uma avaliação de higiene ocupacional.</p>
-        <a href="/Contact" className="cta-button">Fale Conosco</a>
+        <a href="https://api.whatsapp.com/send?phone=5581988213512&text=Ol%C3%A1,%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20e%20or%C3%A7amento%20quanto%20a%20parte%20de%20gest%C3%A3o%20em%20SST%20de%20voc%C3%AAs.%20" className="cta-button">Fale Conosco</a>
       </section>
     </main>
   );
