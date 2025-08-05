@@ -2,7 +2,7 @@
   max-width: 1100px;
   margin: 80px auto;
   padding: 0 20px;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   color: #1E3640;
 }
 
@@ -14,26 +14,32 @@
   position: relative;
 }
 
-.mission-block {
+.mission-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #45BF4D;
+  margin: 16px auto 0;
+  border-radius: 2px;
+}
+
+.mission-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
+  gap: 30px;
   margin-bottom: 60px;
 }
 
-.mission-block.left {
-  flex-direction: row;
-}
-
-.mission-block.right {
+.mission-item.right {
   flex-direction: row-reverse;
 }
 
-.icon-container {
+.mission-icon-wrapper {
   flex-shrink: 0;
-  width: 130px;
-  height: 130px;
+  width: 120px;
+  height: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,17 +50,17 @@
   color: #45BF4D;
 }
 
-.text-container {
+.mission-text {
   flex: 1;
 }
 
-.text-container h3 {
+.mission-text h3 {
   font-size: 1.8rem;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-weight: 700;
 }
 
-.text-container p {
+.mission-text p {
   font-size: 1.05rem;
   line-height: 1.6;
   color: #333;
@@ -62,22 +68,26 @@
 
 /* RESPONSIVO */
 @media (max-width: 768px) {
-  .mission-block {
+  .mission-item {
     flex-direction: column !important;
     text-align: center;
   }
 
-  .icon-container {
+  .mission-icon-wrapper {
     width: 100%;
     height: auto;
     margin-bottom: 20px;
   }
 
-  .text-container h3 {
-    font-size: 1.6rem;
-  }
-
   .mission-title {
     font-size: 2rem;
+  }
+
+  .mission-text h3 {
+    font-size: 1.5rem;
+  }
+
+  .mission-text p {
+    font-size: 1rem;
   }
 }

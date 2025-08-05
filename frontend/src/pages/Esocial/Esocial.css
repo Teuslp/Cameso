@@ -91,7 +91,7 @@
   line-height: 1.6;
 }
 
-/* CTA */
+
 .esocial-cta {
   background-color: #1E3640;
   color: white;
@@ -108,28 +108,35 @@
 .cta-button {
   background-color: white;
   color: #45BF4D;
-  border: none;
-  padding: 14px 38px;
-  font-size: 1.1rem;
-  font-weight: 700;
+  padding: 12px 30px;
   border-radius: 30px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
+
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .cta-button:hover {
-  background-color: #3a9c3a;
+  background-color: #2e8b3c;
   color: white;
 }
 
 .cta-icon {
   font-size: 1.2rem;
+  margin-top: 1px; 
 }
 
-/* Responsivo */
+
 @media (max-width: 768px) {
   .topic {
     flex-direction: column;

@@ -1,49 +1,45 @@
-import React, { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import React from "react";
 import { FaBullseye, FaEye, FaHandsHelping } from "react-icons/fa";
 import "./Mission.css";
 
 function Mission() {
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-      easing: "ease-in-out",
-    });
-  }, []);
-
   return (
     <section className="mission-section">
-      <h2 className="mission-title" data-aos="fade-up">Nossa Essência</h2>
+      <h2 className="mission-title">Nossa Essência</h2>
 
-      <div className="mission-block left" data-aos="fade-right">
-        <div className="icon-container">
+      <div className="mission-item left">
+        <div className="mission-icon-wrapper">
           <FaBullseye className="mission-icon" />
         </div>
-        <div className="text-container">
+        <div className="mission-text">
           <h3>Missão</h3>
-          <p>Proteger a saúde e o bem-estar dos trabalhadores com responsabilidade e excelência.</p>
+          <p>
+            Proteger a saúde e o bem-estar dos trabalhadores com responsabilidade e excelência.
+          </p>
         </div>
       </div>
 
-      <div className="mission-block right" data-aos="fade-left">
-        <div className="text-container">
-          <h3>Visão</h3>
-          <p>Ser referência nacional em saúde ocupacional e segurança do trabalho.</p>
-        </div>
-        <div className="icon-container">
+      <div className="mission-item right">
+        <div className="mission-icon-wrapper">
           <FaEye className="mission-icon" />
         </div>
+        <div className="mission-text">
+          <h3>Visão</h3>
+          <p>
+            Ser referência nacional em saúde ocupacional e segurança do trabalho.
+          </p>
+        </div>
       </div>
 
-      <div className="mission-block left" data-aos="fade-right">
-        <div className="icon-container">
+      <div className="mission-item left">
+        <div className="mission-icon-wrapper">
           <FaHandsHelping className="mission-icon" />
         </div>
-        <div className="text-container">
+        <div className="mission-text">
           <h3>Valores</h3>
-          <p>Ética, comprometimento, respeito e foco na prevenção.</p>
+          <p>
+            Ética, comprometimento, respeito e foco na prevenção.
+          </p>
         </div>
       </div>
     </section>

@@ -24,13 +24,20 @@
 .cta-button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   background-color: #45BF4D;
   color: #fff;
   padding: 15px 30px;
   border-radius: 8px;
   font-size: 1.1rem;
+  font-weight: 600;
   text-decoration: none;
   transition: background 0.3s ease;
+  gap: 10px; /* substitui margin-right no ícone */
+  line-height: 1;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
 }
 
 .cta-button:hover {
@@ -38,18 +45,31 @@
 }
 
 .cta-icon {
-  margin-right: 10px;
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
+  .cta-content {
+    padding: 0 16px;
+    text-align: center;
+  }
+
   .cta-content h2 {
     font-size: 2rem;
   }
 
   .cta-button {
-    font-size: 1rem;
-    padding: 12px 24px;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    font-size: 0.95rem;
+    padding: 12px 16px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
 }

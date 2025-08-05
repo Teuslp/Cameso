@@ -9,6 +9,7 @@ img {
   margin: 0 auto;
   padding: 100px 20px;
   box-sizing: border-box;
+  margin-top: -100px;
 }
 
 .partners-title {
