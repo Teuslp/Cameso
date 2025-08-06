@@ -1,8 +1,19 @@
+:root {
+  --green-primary: #45BF4D;
+  --green-dark: #2e8b3c;
+  --text-dark: #1e3640;
+  --text-light: #fff;
+  --gray-bg: #f9f9f9;
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  --shadow-medium: rgba(0, 0, 0, 0.1);
+}
+
 .hygiene-page {
   font-family: "Montserrat", sans-serif;
   padding: 0;
   margin: 0;
-  color: #1e3640;
+  color: var(--text-dark);
+  background-color: var(--gray-bg);
 }
 
 .hygiene-banner {
@@ -26,10 +37,14 @@
   text-align: center;
 }
 
+.hygiene-section.alt-bg {
+  background-color: var(--gray-bg);
+}
+
 .hygiene-section h2 {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #1e3640;
+  color: var(--text-dark);
   position: relative;
 }
 
@@ -37,7 +52,7 @@
   content: '';
   width: 60px;
   height: 4px;
-  background-color: #45BF4D;
+  background-color: var(--green-primary);
   display: block;
   margin: 12px auto 0;
   border-radius: 2px;
@@ -49,6 +64,40 @@
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.7;
+}
+
+.hygiene-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.hygiene-card {
+  background-color: #f4f4f4;
+  padding: 24px;
+  border-radius: 16px;
+  width: 280px;
+  box-shadow: 0 6px 16px var(--shadow-light);
+  text-align: center;
+  transition: transform 0.3s ease;
+  cursor: default;
+}
+
+.hygiene-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px var(--shadow-medium);
+}
+
+.hygiene-card .icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.hygiene-card p {
+  font-size: 1rem;
+  color: #333;
 }
 
 .hygiene-benefits {
@@ -66,48 +115,15 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #1e3640;
+  color: var(--text-dark);
   background-color: #eaf8ed;
   padding: 16px 20px;
   border-radius: 12px;
 }
 
-.hygiene-cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 40px;
-}
-
-.hygiene-card {
-  background-color: #f4f4f4;
-  padding: 24px;
-  border-radius: 16px;
-  width: 280px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.hygiene-card:hover {
-  transform: translateY(-5px);
-}
-
-.hygiene-card .icon {
-  font-size: 2.5rem;
-  color: #45BF4D;
-  margin-bottom: 16px;
-}
-
-.hygiene-card p {
-  font-size: 1rem;
-  color: #333;
-}
-
 .hygiene-cta {
-  background-color: #1E3640;
-  color: white;
+  background-color: var(--text-dark);
+  color: var(--text-light);
   text-align: center;
   padding: 60px 20px;
   margin-top: 60px;
@@ -124,41 +140,44 @@
 }
 
 .cta-button {
-  background-color: white;
-  color: #45BF4D;
-  border: none;
-  padding: 14px 38px;
-  font-size: 1.1rem;
-  font-weight: 700;
+  background-color: var(--text-light);
+  color: var(--green-primary);
+  padding: 14px 36px;
   border-radius: 30px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .cta-button:hover {
-  background-color: #3a9c3a;
-  color: white;
+  background-color: var(--green-dark);
+  color: var(--text-light);
 }
 
 @media (max-width: 768px) {
-  .hygiene-banner h1 {
-    font-size: 2.2rem;
-    padding: 0 10px;
+  .hygiene-section {
+    padding: 60px 15px;
   }
 
   .hygiene-section h2 {
     font-size: 2rem;
   }
 
-  .hygiene-benefits li {
-    font-size: 0.95rem;
-    padding: 12px 16px;
+  .hygiene-cards {
+    gap: 20px;
   }
 
   .hygiene-card {
     width: 100%;
     max-width: 320px;
+  }
+
+  .hygiene-benefits li {
+    font-size: 0.95rem;
+    padding: 12px 16px;
   }
 
   .hygiene-cta h2 {
@@ -167,5 +186,7 @@
 
   .cta-button {
     padding: 12px 24px;
+    width: 100%;
+    max-width: 300px;
   }
 }

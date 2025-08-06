@@ -6,12 +6,14 @@
   color: #1E3640;
 }
 
+/* TÍTULO */
 .mission-title {
   text-align: center;
   font-size: 2.8rem;
   font-weight: bold;
   margin-bottom: 60px;
   position: relative;
+  color: #1E3640;
 }
 
 .mission-title::after {
@@ -22,34 +24,60 @@
   background-color: #45BF4D;
   margin: 16px auto 0;
   border-radius: 2px;
+  animation: expand-line 1.2s ease;
 }
 
+@keyframes expand-line {
+  from { width: 0; opacity: 0; }
+  to { width: 60px; opacity: 1; }
+}
+
+/* ITENS */
 .mission-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 30px;
+  gap: 40px;
   margin-bottom: 60px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #dce5dc;
+  transition: all 0.3s ease;
+}
+
+.mission-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .mission-item.right {
   flex-direction: row-reverse;
 }
 
+/* ÍCONES COM CÍRCULO E SOMBRA */
 .mission-icon-wrapper {
   flex-shrink: 0;
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
+  background-color: #e6f7ec;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.mission-icon-wrapper:hover {
+  transform: scale(1.05);
 }
 
 .mission-icon {
-  font-size: 5rem;
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
   color: #45BF4D;
 }
 
+/* TEXTOS */
 .mission-text {
   flex: 1;
 }
@@ -58,6 +86,18 @@
   font-size: 1.8rem;
   margin-bottom: 12px;
   font-weight: 700;
+  color: #1E3640;
+  position: relative;
+}
+
+.mission-text h3::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #45BF4D;
+  margin-top: 8px;
+  border-radius: 2px;
 }
 
 .mission-text p {
@@ -71,23 +111,29 @@
   .mission-item {
     flex-direction: column !important;
     text-align: center;
+    gap: 20px;
+    padding-bottom: 50px;
   }
 
   .mission-icon-wrapper {
-    width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-  }
-
-  .mission-title {
-    font-size: 2rem;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
   }
 
   .mission-text h3 {
     font-size: 1.5rem;
   }
 
+  .mission-text h3::after {
+    margin: 8px auto 0;
+  }
+
   .mission-text p {
-    font-size: 1rem;
+    font-size: 15px;
+  }
+
+  .mission-title {
+    font-size: 2rem;
   }
 }

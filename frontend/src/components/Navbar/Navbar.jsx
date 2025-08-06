@@ -56,7 +56,7 @@ function Navbar() {
               <ul className="mobile-dropdown-menu">
                 <li><Link to="/Security" onClick={() => setMenuOpen(false)}>Seg do trabalho</Link></li>
                 <li><Link to="/Health" onClick={() => setMenuOpen(false)}>Saúde ocupacional</Link></li>
-                <li><Link to="/Trainings" onClick={() => setMenuOpen(false)}>Treinamentos</Link></li>
+                <li><Link to="/Training" onClick={() => setMenuOpen(false)}>Treinamentos</Link></li>
                 <li><Link to="/Judicial" onClick={() => setMenuOpen(false)}>Perícias judiciais</Link></li>
                 <li><Link to="/Hygiene" onClick={() => setMenuOpen(false)}>Higiene ocupacional</Link></li>
                 <li><Link to="/Consulting" onClick={() => setMenuOpen(false)}>Assessoria e consultoria jurídica</Link></li>

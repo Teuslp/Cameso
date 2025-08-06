@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import {
+  FaFlask,
+  FaVolumeUp,
+  FaThermometerHalf,
+  FaChartBar
+} from "react-icons/fa";
+
 import "./Hygiene.css";
-import banner from "../../assets/higiene-banner.jpg"; 
+import banner from "../../assets/higiene-banner.jpg";
 
 function Hygiene() {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
     <main className="hygiene-page">
       <section className="hygiene-banner">
         <img src={banner} alt="Higiene Ocupacional" />
       </section>
 
-      <section className="hygiene-section">
+      <section className="hygiene-section" data-aos="fade-up">
         <h2>O que é Higiene Ocupacional?</h2>
         <p>
           A Higiene Ocupacional é responsável pela identificação, avaliação e controle de agentes ambientais
@@ -17,7 +30,7 @@ function Hygiene() {
         </p>
       </section>
 
-      <section className="hygiene-section">
+      <section className="hygiene-section alt-bg" data-aos="fade-up">
         <h2>Por que é importante?</h2>
         <p>
           Além de prevenir doenças ocupacionais, a Higiene Ocupacional garante o cumprimento das normas
@@ -25,29 +38,29 @@ function Hygiene() {
         </p>
       </section>
 
-      <section className="hygiene-section">
+      <section className="hygiene-section" data-aos="fade-up">
         <h2>Serviços Realizados</h2>
         <div className="hygiene-cards">
           <div className="hygiene-card">
-            <div className="icon">🧪</div>
+            <FaFlask className="icon" />
             <p>Coleta e análise de agentes químicos</p>
           </div>
           <div className="hygiene-card">
-            <div className="icon">🔊</div>
+            <FaVolumeUp className="icon" />
             <p>Avaliação de ruído ocupacional</p>
           </div>
           <div className="hygiene-card">
-            <div className="icon">🌡️</div>
+            <FaThermometerHalf className="icon" />
             <p>Medição de calor e conforto térmico</p>
           </div>
           <div className="hygiene-card">
-            <div className="icon">📊</div>
+            <FaChartBar className="icon" />
             <p>Elaboração de laudos e pareceres técnicos</p>
           </div>
         </div>
       </section>
 
-      <section className="hygiene-section">
+      <section className="hygiene-section alt-bg" data-aos="fade-up">
         <h2>Benefícios para sua empresa</h2>
         <ul className="hygiene-benefits">
           <li>Redução de riscos à saúde dos trabalhadores</li>
@@ -57,10 +70,15 @@ function Hygiene() {
         </ul>
       </section>
 
-      <section className="hygiene-cta">
+      <section className="hygiene-cta" data-aos="zoom-in">
         <h2>Quer garantir um ambiente de trabalho seguro e saudável?</h2>
         <p>Entre em contato conosco e solicite uma avaliação de higiene ocupacional.</p>
-        <a href="https://api.whatsapp.com/send?phone=5581988213512&text=Ol%C3%A1,%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20e%20or%C3%A7amento%20quanto%20a%20parte%20de%20gest%C3%A3o%20em%20SST%20de%20voc%C3%AAs.%20" className="cta-button">Fale Conosco</a>
+        <a
+          href="https://api.whatsapp.com/send?phone=5581988213512&text=Ol%C3%A1,%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20e%20or%C3%A7amento%20quanto%20a%20parte%20de%20gest%C3%A3o%20em%20SST%20de%20voc%C3%AAs.%20"
+          className="cta-button"
+        >
+          Fale Conosco
+        </a>
       </section>
     </main>
   );

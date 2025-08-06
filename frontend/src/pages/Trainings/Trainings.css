@@ -1,12 +1,25 @@
-.trainings-page {
-  font-family: "Montserrat", sans-serif;
-  color: #1e3640;
+:root {
+  --green-primary: #45BF4D;
+  --green-dark: #2e8b3c;
+  --green-light: #e6f4e8;
+  --text-dark: #1E3640;
+  --text-light: #fff;
+  --gray-bg: #f9f9f9;
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  --shadow-medium: rgba(0, 0, 0, 0.1);
 }
 
+.trainings-page {
+  font-family: "Segoe UI", sans-serif;
+  color: var(--text-dark);
+  background-color: var(--gray-bg);
+}
+
+/* ========== BANNER ========== */
 .trainings-banner {
   position: relative;
   width: 100%;
-  height: 300px;
+  max-height: 320px;
   overflow: hidden;
 }
 
@@ -14,95 +27,107 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.7);
+  filter: brightness(0.5);
 }
 
+/* ========== SEÇÕES GERAIS ========== */
 .trainings-section {
-  padding: 80px 20px;
+  padding: 60px 20px;
   max-width: 1100px;
   margin: 0 auto;
   text-align: center;
 }
 
 .trainings-section h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 20px;
   position: relative;
+  color: var(--green-dark);
 }
 
 .trainings-section h2::after {
   content: '';
   width: 60px;
   height: 4px;
-  background-color: #45BF4D;
+  background-color: var(--green-primary);
   display: block;
-  margin: 12px auto 0;
+  margin: 10px auto 0;
   border-radius: 2px;
 }
 
 .trainings-section p {
   font-size: 1.1rem;
-  color: #444;
-  max-width: 700px;
+  color: #333;
+  max-width: 720px;
   margin: 0 auto;
   line-height: 1.7;
 }
 
+/* ========== BENEFÍCIOS ========== */
 .trainings-benefits {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 36px;
   list-style: none;
   padding: 0;
 }
 
 .trainings-benefits li {
-  font-size: 1rem;
   display: flex;
   align-items: center;
-  gap: 12px;
-  background-color: #eaf8ed;
+  gap: 14px;
+  background-color: var(--green-light);
   padding: 16px 20px;
-  border-radius: 12px;
+  border-left: 4px solid var(--green-primary);
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px var(--shadow-light);
 }
 
+.trainings-benefits svg {
+  color: var(--green-primary);
+  font-size: 1.6rem;
+}
+
+/* ========== CARDS DE TREINAMENTO ========== */
 .trainings-cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 36px;
 }
 
 .trainings-card {
-  background-color: #f4f4f4;
-  padding: 24px;
-  border-radius: 16px;
-  width: 280px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  background-color: #fff;
+  padding: 24px 16px;
+  border-radius: 12px;
   text-align: center;
-  transition: transform 0.3s ease;
+  box-shadow: 0 4px 10px var(--shadow-light);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-bottom: 4px solid var(--green-primary);
 }
 
 .trainings-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px var(--shadow-medium);
 }
 
 .trainings-card .icon {
-  font-size: 2.5rem;
-  margin-bottom: 16px;
+  font-size: 2.6rem;
+  margin-bottom: 12px;
 }
 
 .trainings-card p {
   font-size: 1rem;
-  color: #333;
+  font-weight: 500;
+  color: var(--text-dark);
 }
 
+/* ========== CTA ========== */
 .trainings-cta {
-  background-color: #1E3640;
-  color: white;
+  background-color: var(--text-dark);
+  color: var(--text-light);
   text-align: center;
   padding: 60px 20px;
   margin-top: 60px;
@@ -110,49 +135,52 @@
 
 .trainings-cta h2 {
   font-size: 2.2rem;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
+  font-weight: 700;
 }
 
 .trainings-cta p {
-  font-size: 1.1rem;
-  margin-bottom: 30px;
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cta-button {
   background-color: white;
-  color: #45BF4D;
-  border: none;
-  padding: 14px 38px;
-  font-size: 1.1rem;
-  font-weight: 700;
+  color: var(--green-primary);
+  padding: 14px 36px;
   border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 3px 10px var(--shadow-light);
 }
 
 .cta-button:hover {
-  background-color: #3a9c3a;
+  background-color: var(--green-dark);
   color: white;
 }
 
 @media (max-width: 768px) {
-  .trainings-banner h1 {
-    font-size: 2.2rem;
-    padding: 0 10px;
+  .trainings-section {
+    padding: 40px 16px;
   }
 
   .trainings-section h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
-  .trainings-benefits li {
-    font-size: 0.95rem;
-    padding: 12px 16px;
+  .trainings-benefits {
+    grid-template-columns: 1fr;
   }
 
-  .trainings-card {
-    width: 100%;
-    max-width: 320px;
+  .trainings-cards {
+    grid-template-columns: 1fr;
   }
 
   .trainings-cta h2 {
@@ -160,6 +188,7 @@
   }
 
   .cta-button {
-    padding: 12px 24px;
+    width: 100%;
+    max-width: 300px;
   }
 }

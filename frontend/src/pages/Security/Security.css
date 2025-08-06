@@ -15,10 +15,12 @@
   background-color: var(--gray-bg);
 }
 
+/* Banner com imagem de fundo escurecida */
 .security-banner {
   position: relative;
   text-align: center;
   color: var(--text-light);
+  overflow: hidden;
 }
 
 .security-banner img {
@@ -28,18 +30,9 @@
   filter: brightness(0.5);
 }
 
-.security-banner h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3rem;
-  font-weight: 700;
-  z-index: 2;
-}
-
+/* Seções gerais */
 .security-section {
-  padding: 40px 20px;
+  padding: 60px 20px;
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -67,23 +60,26 @@
   color: #333;
 }
 
+/* Benefícios em grid com ícones */
 .security-benefits {
   list-style: none;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 18px;
   margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
 }
 
 .security-benefits li {
   display: flex;
   align-items: center;
   gap: 14px;
-  background-color: transparent;
-  padding: 12px;
+  background-color: var(--green-light);
+  padding: 14px 18px;
   border-left: 4px solid var(--green-primary);
   font-weight: 500;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px var(--shadow-light);
 }
 
 .security-benefits svg {
@@ -99,11 +95,13 @@
 }
 
 .security-card {
-  background-color: transparent;
+  background-color: #fff;
   padding: 24px 16px;
   border-radius: 12px;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px var(--shadow-light);
+  border-bottom: 4px solid var(--green-primary);
 }
 
 .security-card:hover {
@@ -119,11 +117,12 @@
 .security-card p {
   font-weight: 500;
   color: var(--text-dark);
+  font-size: 1.05rem;
 }
 
 .security-cta {
-  background-color: #1E3640;
-  color: white;
+  background-color: var(--text-dark);
+  color: var(--text-light);
   text-align: center;
   padding: 60px 20px;
   margin-top: 50px;
@@ -154,6 +153,8 @@
   font-size: 1rem;
   transition: background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
+  display: inline-block;
+  box-shadow: 0 3px 10px var(--shadow-light);
 }
 
 .cta-button:hover {
@@ -162,18 +163,23 @@
 }
 
 @media (max-width: 768px) {
-  .security-banner h1 {
-    font-size: 2.2rem;
-    padding: 0 16px;
+  .security-banner img {
+    max-height: 240px;
   }
 
   .security-section {
-    padding: 30px 16px;
-    margin-top: 24px;
+    padding: 40px 16px;
   }
 
-  .security-cards,
+  .security-section h2 {
+    font-size: 1.8rem;
+  }
+
   .security-benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .security-cards {
     grid-template-columns: 1fr;
   }
 
