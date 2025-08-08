@@ -172,6 +172,13 @@
     padding-bottom: 40px;
   }
 
+  .topic.left .icon-box,
+  .topic.left .text-box,
+  .topic.right .icon-box,
+  .topic.right .text-box {
+    order: initial;
+  }
+
   .icon-box {
     margin-bottom: 20px;
   }
