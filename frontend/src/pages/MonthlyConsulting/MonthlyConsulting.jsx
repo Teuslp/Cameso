@@ -1,6 +1,13 @@
 import React from "react";
+import {
+  FaRegCalendarCheck,
+  FaFileAlt,
+  FaBullhorn,
+  FaUserMd
+} from "react-icons/fa";
+
 import "./MonthlyConsulting.css";
-import banner from "../../assets/assessoria-banner.jpg"; // substitua com a imagem real
+import banner from "../../assets/assessoria-banner.jpg";
 
 function MonthlyConsulting() {
   return (
@@ -21,19 +28,19 @@ function MonthlyConsulting() {
         <h2>Serviços Inclusos</h2>
         <div className="monthly-cards">
           <div className="monthly-card">
-            <div className="icon">📆</div>
+            <FaRegCalendarCheck className="icon" />
             <p>Acompanhamento periódico de documentos legais</p>
           </div>
           <div className="monthly-card">
-            <div className="icon">📝</div>
+            <FaFileAlt className="icon" />
             <p>Atualização de laudos e programas obrigatórios</p>
           </div>
           <div className="monthly-card">
-            <div className="icon">📣</div>
+            <FaBullhorn className="icon" />
             <p>Notificações sobre mudanças na legislação</p>
           </div>
           <div className="monthly-card">
-            <div className="icon">👨‍⚕️</div>
+            <FaUserMd className="icon" />
             <p>Suporte técnico nas áreas de saúde e segurança</p>
           </div>
         </div>
@@ -52,7 +59,12 @@ function MonthlyConsulting() {
       <section className="monthly-cta">
         <h2>Garanta regularidade e tranquilidade para sua empresa</h2>
         <p>Fale com nossos especialistas e solicite sua assessoria mensal personalizada.</p>
-        <a href="https://api.whatsapp.com/send?phone=5581988213512&text=Ol%C3%A1,%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20e%20or%C3%A7amento%20quanto%20a%20parte%20de%20gest%C3%A3o%20em%20SST%20de%20voc%C3%AAs.%20" className="cta-button">Solicitar agora</a>
+        <a
+          href="https://api.whatsapp.com/send?phone=5581988213512&text=Ol%C3%A1,%20Gostaria%20de%20uma%20orienta%C3%A7%C3%A3o%20e%20or%C3%A7amento%20quanto%20a%20parte%20de%20gest%C3%A3o%20em%20SST%20de%20voc%C3%AAs.%20"
+          className="cta-button"
+        >
+          Solicitar agora
+        </a>
       </section>
     </main>
   );

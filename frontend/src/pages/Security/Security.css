@@ -2,12 +2,21 @@
   --green-primary: #45BF4D;
   --green-dark: #2e8b3c;
   --green-light: #e6f4e8;
+
   --text-dark: #1E3640;
   --text-light: #fff;
   --gray-bg: #f9f9f9;
+
   --shadow-light: rgba(0, 0, 0, 0.05);
-  --shadow-medium: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.12);
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+
+  --transition: 0.3s ease;
 }
+
 
 .security-page {
   font-family: "Segoe UI", sans-serif;
@@ -20,14 +29,20 @@
   position: relative;
   text-align: center;
   color: var(--text-light);
-  overflow: hidden;
 }
 
 .security-banner img {
   width: 100%;
-  max-height: 320px;
+  max-height: 380px;
   object-fit: cover;
-  filter: brightness(0.5);
+}
+
+.security-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  /* overlay */
 }
 
 /* Seções gerais */
@@ -35,13 +50,6 @@
   padding: 60px 20px;
   max-width: 1100px;
   margin: 0 auto;
-}
-
-.security-section h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: var(--green-dark);
-  position: relative;
 }
 
 .security-section h2::after {
@@ -52,6 +60,11 @@
   display: block;
   margin-top: 8px;
   border-radius: 2px;
+  transition: width var(--transition);
+}
+
+.security-section h2:hover::after {
+  width: 100px;
 }
 
 .security-section p {
@@ -96,17 +109,18 @@
 
 .security-card {
   background-color: #fff;
-  padding: 24px 16px;
-  border-radius: 12px;
+  padding: 28px 20px;
+  border-radius: var(--radius-md);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform var(--transition), box-shadow var(--transition);
   box-shadow: 0 4px 10px var(--shadow-light);
   border-bottom: 4px solid var(--green-primary);
+  cursor: pointer;
 }
 
 .security-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px var(--shadow-medium);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 10px 24px var(--shadow-medium);
 }
 
 .security-card .icon {
@@ -151,7 +165,7 @@
   text-decoration: none;
   border: none;
   font-size: 1rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: transform var(--transition), background-color var(--transition), color var(--transition);
   cursor: pointer;
   display: inline-block;
   box-shadow: 0 3px 10px var(--shadow-light);
@@ -160,6 +174,14 @@
 .cta-button:hover {
   background-color: var(--green-dark);
   color: white;
+  transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+  .security-benefits,
+  .security-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
@@ -172,13 +194,10 @@
   }
 
   .security-section h2 {
-    font-size: 1.8rem;
+    font-size: clamp(1.6rem, 4vw, 1.8rem);
   }
 
-  .security-benefits {
-    grid-template-columns: 1fr;
-  }
-
+  .security-benefits,
   .security-cards {
     grid-template-columns: 1fr;
   }
@@ -189,6 +208,6 @@
 
   .cta-button {
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
   }
 }

@@ -1,168 +1,299 @@
+/* =======================
+   Tema & base
+======================= */
+:root {
+  --green-primary: #22c55e;
+  --green-dark: #15803d;
+  --green-light: #dcfce7;
+
+  --text-dark: #1E3640;
+  --text-mid: #334155;
+  --text-light: #fff;
+  --gray-bg: #f8f8f8;
+
+  --shadow-sm: 0 2px 6px rgba(0,0,0,.06);
+  --shadow-md: 0 6px 18px rgba(0,0,0,.10);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --transition: .25s ease;
+}
+
+/* Reset suave para consistência */
+.contact-wrapper *, .contact-wrapper *::before, .contact-wrapper *::after {
+  box-sizing: border-box;
+}
+.contact-wrapper img { display:block; max-width:100%; }
+
+/* =======================
+   Layout
+======================= */
 .contact-wrapper {
-  background-color: #f4f4f4;
-  padding: 80px 20px;
   display: flex;
   justify-content: center;
+  padding: 60px 20px;
+  background: var(--gray-bg);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--text-dark);
 }
 
 .contact-box {
-  display: flex;
-  max-width: 1200px;
   width: 100%;
-  background-color: transparent;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
 }
 
+/* Colunas-Card */
+.contact-left,
+.contact-right {
+  background: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 28px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.contact-left:hover,
+.contact-right:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* =======================
+   Coluna Esquerda (Info Compacta corrigida)
+======================= */
 .contact-left {
-  background-color: #45BF4D;
-  color: white;
-  padding: 40px 30px;
-  width: 40%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 18px;              /* espaçamento entre os itens */
 }
 
+/* Blocos de informação em lista */
 .info-item {
   display: flex;
-  gap: 16px;
-  margin-bottom: 20px;
+  align-items: flex-start;   /* alinha o topo do ícone com o topo do texto */
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eef2f7;
 }
+.info-item:last-of-type { border-bottom: none; }
 
 .info-item .icon {
-  width: 30px;
-  font-size: 10px;
-  margin-top: 4px;
-  color: white;
+  flex-shrink: 0;           /* ícone nunca diminui */
+  font-size: 22px;
+  line-height: 1;
+  color: #ffffff;
+  margin-top: 2px;          /* pequeno ajuste vertical */
 }
 
 .info-item h4 {
-  font-size: 15px;
+  margin: 0 0 4px 0;
+  font-size: 16px;
   font-weight: 700;
-  text-transform: uppercase;
-  margin-bottom: 6px;
+  color: var(--text-dark);
 }
 
 .info-item p {
+  margin: 0;
   font-size: 14px;
-  line-height: 1.4;
+  color: var(--text-mid);
+  line-height: 1.45;
 }
 
+/* Ícones sociais no rodapé da coluna, sempre “colados” embaixo */
 .social-icons {
-  display: flex;
-  gap: 16px;
   margin-top: auto;
-}
-
-.social-icons a {
-  font-size: 30px;
-  color: white;
-  transition: transform 0.3s ease;
-}
-
-.social-icons a:hover {
-  transform: scale(1.2);
-}
-
-.contact-right {
-  background-color: white;
-  padding: 40px 30px;
-  width: 60%;
-}
-
-.contact-right h2 {
-  font-size: 28px;
-  margin-bottom: 30px;
-  color: #1E3640;
-}
-
-.contact-right form {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 8px;
 }
-
-.contact-right input,
-.contact-right textarea {
-  padding: 12px 14px;
-  border: none;
-  border-bottom: 2px solid #ccc;
-  background: transparent;
-  font-size: 15px;
+.social-icons a {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  background: var(--green-primary);
+  color: #fff;
+  font-size: 16px;
+  transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.social-icons a:hover,
+.social-icons a:focus-visible {
+  background: var(--green-dark);
+  transform: translateY(-2px);
   outline: none;
 }
 
-.contact-right input:focus,
-.contact-right textarea:focus {
-  border-color: #45BF4D;
+/* =======================
+   Coluna Direita (Form)
+======================= */
+.contact-right h2 {
+  margin: 0 0 16px 0;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-dark);
+  position: relative;
+}
+.contact-right h2::after {
+  content: "";
+  display: block;
+  width: 64px; height: 4px;
+  background: var(--green-primary);
+  border-radius: 2px;
+  margin-top: 8px;
 }
 
-.contact-right textarea {
-  resize: vertical;
-  min-height: 120px;
+.contact-right form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
 }
 
-.contact-right button {
-  padding: 14px;
-  background-color: transparent;
-  border: 2px solid #1E3640;
-  color: #1E3640;
-  font-weight: bold;
+/* Campos base */
+.contact-right form input,
+.contact-right form select,
+.contact-right form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-sm);
+  background: #fafafa;
+  font-size: 15px;
+  color: var(--text-mid);
+  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+}
+.contact-right form input::placeholder,
+.contact-right form textarea::placeholder { color: #94a3b8; }
+
+.contact-right form input:focus,
+.contact-right form select:focus,
+.contact-right form textarea:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--green-primary);
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, .15);
+}
+
+/* Campos que ocupam duas colunas no desktop */
+.contact-right form textarea,
+.contact-right form button,
+.contact-right form .checklist {
+  grid-column: 1 / -1;
+}
+.contact-right form textarea { min-height: 130px; resize: vertical; }
+
+/* Botão */
+.contact-right form button {
+  justify-self: start;
+  background: var(--green-primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 12px 22px;
+  border: none;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: 0.3s;
-  text-transform: uppercase;
+  transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.contact-right form button:hover,
+.contact-right form button:focus-visible {
+  background: var(--green-dark);
+  transform: translateY(-1px);
+  outline: none;
 }
 
-.contact-right button:hover {
-  background-color: #45BF4D;
-  color: white;
-  border-color: #45BF4D;
+/* =======================
+   Checklist SST (centralizado + grid responsivo)
+======================= */
+.checklist {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-sm);
+  padding: 18px 16px;
+
+  /* Centraliza o bloco inteiro no form e limita largura */
+  max-width: 720px;
+  margin: 6px auto 2px;
+
+  /* Layout interno em grid: título 100% + labels em colunas auto-fit */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px 16px;
 }
 
-@media (max-width: 768px) {
-  .contact-wrapper {
-    padding: 0px 0;
+.checklist h4 {
+  grid-column: 1 / -1;           /* título ocupa toda a linha */
+  margin: 0 0 6px 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;        /* centraliza o título */
+  gap: 8px;
+  text-align: center;
+}
+
+.checklist label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.3;
+  user-select: none;
+}
+
+.checklist input[type="checkbox"] {
+  width: 18px; height: 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  accent-color: var(--green-primary); /* melhora a cor no checkbox moderno */
+}
+
+/* =======================
+   Acessibilidade e Motion
+======================= */
+@media (prefers-reduced-motion: reduce) {
+  .contact-left:hover,
+  .contact-right:hover,
+  .social-icons a:hover,
+  .contact-right form button:hover {
+    transform: none;
   }
+  * { transition: none !important; }
+}
 
+/* =======================
+   Responsividade
+======================= */
+@media (max-width: 1024px) {
+  .contact-right form {
+    grid-template-columns: 1fr; /* form 1 coluna no tablet/mobile */
+  }
+  .contact-right form button {
+    justify-self: stretch; /* botão ocupa largura total */
+  }
+}
+
+@media (max-width: 900px) {
   .contact-box {
-    flex-direction: column;
-    box-shadow: none;
+    grid-template-columns: 1fr; /* 1 coluna */
+    gap: 22px;
   }
+  .social-icons { justify-content: center; }
+}
 
-  .contact-left,
-  .contact-right {
-    width: 89%;
-    padding: 30px 20px;
-  }
-
-  .contact-left {
-    align-items: center;
-    text-align: center;
-  }
-
-  .info-item {
-    gap: 0%;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .social-icons {
-    justify-content: space-around;
-  }
-
-  .contact-right {
-    margin-left: 0;
-    box-shadow: none;
-  }
-
-  .contact-form form input,
-  .contact-form form textarea {
-    font-size: 14px;
-  }
-
-  .contact-form button {
-    font-size: 14px;
-    padding: 12px;
-  }
+/* Microajustes mobile */
+@media (max-width: 420px) {
+  .contact-right h2 { font-size: 22px; }
+  .info-item { grid-template-columns: 28px 1fr; }
+  .info-item .icon { font-size: 20px; }
 }
