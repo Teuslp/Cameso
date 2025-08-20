@@ -9,8 +9,6 @@ import {
   FaYoutube,
   FaWhatsapp,
   FaUserShield,
-  FaBriefcaseMedical,
-  FaFileAlt
 } from "react-icons/fa";
 import "./Contact.css";
 
@@ -18,7 +16,7 @@ function Contact() {
   const [checklist, setChecklist] = useState({
     pcmso: false,
     ppra: false,
-    treinamentos: false
+    treinamentos: false,
   });
 
   const handleSubmit = async (e) => {
@@ -32,8 +30,26 @@ function Contact() {
       sector: form.sector.value,
       service: form.service.value,
       message: form.message.value,
-      checklist
+      checklist,
     };
+
+    // Confirmação antes de enviar
+    const resumo = `
+    Nome: ${data.name}
+    Email: ${data.email}
+    Nº Funcionários: ${data.employees}
+    Setor: ${data.sector}
+    Serviço: ${data.service}
+    Mensagem: ${data.message}
+
+    Checklist SST:
+    - PCMSO atualizado: ${checklist.pcmso ? "Sim" : "Não"}
+    - PPRA / PGR atualizado: ${checklist.ppra ? "Sim" : "Não"}
+    - Funcionários treinados em NR’s: ${checklist.treinamentos ? "Sim" : "Não"}
+    `;
+
+    const confirmar = window.confirm("Confira os dados antes de enviar:\n\n" + resumo);
+    if (!confirmar) return;
 
     try {
       const response = await fetch("http://localhost:3001/contact", {
@@ -57,7 +73,7 @@ function Contact() {
   return (
     <section className="contact-wrapper" style={{ background: "#f8f8f8" }}>
       <div className="contact-box">
-        {/* Lado esquerdo - informações */}
+        {/* Lado esquerdo */}
         <div className="contact-left">
           <div className="info-item">
             <FaPhoneAlt className="icon" />
@@ -72,7 +88,7 @@ function Contact() {
             <div>
               <h4>Localização</h4>
               <p>R. Eurico Valois, 128, Centro<br />VITÓRIA, PE</p>
-              <p>Av. Caxangá, 279, Madalena, Recife<br />RECIFE, PE</p>
+              <p>Av. Caxangá, 279, Madalena<br />RECIFE, PE</p>
             </div>
           </div>
 
@@ -80,20 +96,20 @@ function Contact() {
             <FaClock className="icon" />
             <div>
               <h4>Horário Comercial</h4>
-              <p>Seg - Sex: 07h - 17h<br />Sáb: Fechado<br />Dom: Fechado</p>
+              <p>Seg - Sex: 07h - 17h<br />Sáb/Dom: Fechado</p>
             </div>
           </div>
 
           <div className="social-icons">
             <a href="#"><FaFacebookF /></a>
-            <a href="https://www.instagram.com/cameso_clinica_sst/?next=%2F"><FaInstagram /></a>
+            <a href="https://www.instagram.com/cameso_clinica_sst/"><FaInstagram /></a>
             <a href="https://br.linkedin.com/company/cameso-assessoria"><FaLinkedinIn /></a>
             <a href="https://www.youtube.com/@camesomedicinaesegurancadotrab/videos"><FaYoutube /></a>
-            <a href="https://api.whatsapp.com/send?phone=5581988213512&text=Olá,%20Gostaria%20de%20informações%20sobre%20os%20serviços%20de%20SST."><FaWhatsapp /></a>
+            <a href="https://api.whatsapp.com/send?phone=5581988213512"><FaWhatsapp /></a>
           </div>
         </div>
 
-        {/* Lado direito - formulário */}
+        {/* Lado direito */}
         <div className="contact-right">
           <h2>Contate-nos</h2>
           <form onSubmit={handleSubmit}>
@@ -118,7 +134,6 @@ function Contact() {
 
             <textarea name="message" placeholder="Sua mensagem" required />
 
-            {/* Checklist rápido de SST */}
             <div className="checklist">
               <h4><FaUserShield /> Checklist de SST</h4>
               <label>
@@ -126,21 +141,21 @@ function Contact() {
                   type="checkbox"
                   checked={checklist.pcmso}
                   onChange={() => setChecklist({ ...checklist, pcmso: !checklist.pcmso })}
-                /> Possui PCMSO atualizado
+                /> PCMSO atualizado
               </label>
               <label>
                 <input
                   type="checkbox"
                   checked={checklist.ppra}
                   onChange={() => setChecklist({ ...checklist, ppra: !checklist.ppra })}
-                /> Possui PPRA / PGR atualizado
+                /> PPRA / PGR atualizado
               </label>
               <label>
                 <input
                   type="checkbox"
                   checked={checklist.treinamentos}
                   onChange={() => setChecklist({ ...checklist, treinamentos: !checklist.treinamentos })}
-                /> Funcionários treinados em NR’s obrigatórias
+                /> Funcionários treinados em NR’s
               </label>
             </div>
 
