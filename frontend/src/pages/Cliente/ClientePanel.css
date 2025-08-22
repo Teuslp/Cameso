@@ -1,0 +1,105 @@
+/* ClientePanel.css */
+.cliente-panel {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+}
+
+/* Menu lateral */
+.sidebar {
+  width: 220px;
+  background-color: #1f2937;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  position: fixed;
+  height: 100%;
+}
+
+.sidebar h2 {
+  text-align: center;
+  color: #00bcd4;
+  margin-bottom: 30px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.sidebar ul li {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sidebar ul li i {
+  margin-right: 10px;
+}
+
+.sidebar ul li.active,
+.sidebar ul li:hover {
+  background-color: #374151;
+}
+
+/* Conteúdo principal */
+.main-content {
+  margin-left: 220px;
+  padding: 30px;
+  flex: 1;
+}
+
+.main-content section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.main-content h2 {
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+.main-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.main-content ul li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.main-content ul li:last-child {
+  border-bottom: none;
+}
+
+.main-content input[type="file"],
+.main-content input[type="text"] {
+  padding: 8px;
+  width: calc(100% - 16px);
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.main-content button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #00bcd4;
+  color: white;
+  cursor: pointer;
+}
+
+.main-content button:hover {
+  background-color: #0097a7;
+}

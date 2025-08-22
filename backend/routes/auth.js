@@ -4,8 +4,9 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 const router = express.Router();
+const SECRET = process.env.JWT_SECRET || "segredo_super_secreto";
 
-// Rota de cadastro (apenas para criar usuários iniciais)
+// Registro de usuário (pode ser usado para criar admins e clientes)
 router.post("/register", async (req, res) => {
   try {
     const { nome, email, senha, role } = req.body;
@@ -24,7 +25,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Rota de login
+// Login
 router.post("/login", async (req, res) => {
   try {
     const { email, senha } = req.body;
@@ -35,11 +36,7 @@ router.post("/login", async (req, res) => {
     const isMatch = await bcrypt.compare(senha, user.senha);
     if (!isMatch) return res.status(400).json({ message: "Credenciais inválidas" });
 
-    const token = jwt.sign(
-      { id: user._id, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "1d" }
-    );
+    const token = jwt.sign({ id: user._id, role: user.role }, SECRET, { expiresIn: "1d" });
 
     res.json({ token, role: user.role, nome: user.nome });
   } catch (err) {

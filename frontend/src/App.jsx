@@ -16,8 +16,8 @@ import MonthlyConsulting from "./pages/MonthlyConsulting/MonthlyConsulting";
 import Login from "./pages/Login/Login";
 
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import PainelCliente from "./pages/PainelCliente/PainelCliente";
 import PainelAdmin from "./pages/PainelAdmin/PainelAdmin";
+import ClientePanel from "./pages/Cliente/ClientePanel";
 
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -73,10 +73,11 @@ function App() {
             path="/cliente"
             element={
               <PrivateRoute role="cliente">
-                <PainelCliente />
+                <ClientePanel />
               </PrivateRoute>
             }
           />
+
 
           <Route
             path="/admin"
