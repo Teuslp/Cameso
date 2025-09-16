@@ -1,14 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+// CAMINHO CORRIGIDO AQUI
+import { useAuth } from "../../context/AuthContext";
 import "./ChatCliente.css";
 
-function ChatCliente({ userId }) {
+function ChatCliente() {
+  // USO DO HOOK CORRIGIDO AQUI
+  const { user } = useAuth();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [chatId, setChatId] = useState(null);
+  const [chat, setChat] = useState(null);
   const messagesEndRef = useRef(null);
 
-  // Rolar automaticamente para a última mensagem
+  const token = localStorage.getItem("userToken");
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -17,79 +22,57 @@ function ChatCliente({ userId }) {
     scrollToBottom();
   }, [messages]);
 
-  // Buscar ou criar chat
   useEffect(() => {
-    const fetchChat = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:3001/chat", {
-          headers: { Authorization: "Bearer " + token },
-        });
+    if (!token) return;
 
-        if (res.data.length > 0) {
-          setChatId(res.data[0]._id);
-          setMessages(
-            res.data[0].messages.map((m) => ({
-              text: m.content,
-              sender: m.sender?.role === "cliente" ? "cliente" : "admin",
-            }))
-          );
-        } else {
-          const create = await axios.post(
-            "http://localhost:3001/chat/create",
-            { participantIds: [userId] },
-            { headers: { Authorization: "Bearer " + localStorage.getItem("token") } }
-          );
-          setChatId(create.data._id);
-          setMessages([]);
-        }
+    const initChat = async () => {
+      try {
+        const res = await axios.post(
+          "http://localhost:3001/chat/create",
+          {},
+          { headers: { Authorization: "Bearer " + token } }
+        );
+        setChat(res.data);
+        setMessages(res.data.messages || []);
       } catch (err) {
-        console.error("Erro ao buscar/criar chat:", err.response?.data || err);
+        console.error("Erro ao iniciar o chat:", err.response?.data || err);
       }
     };
-    fetchChat();
-  }, [userId]);
 
-  // Enviar mensagem
+    initChat();
+  }, [token]);
+
   const handleSend = async () => {
-    console.log("handleSend chamado"); // <--- linha de teste
-    if (!input.trim() || !chatId) return;
-
+    if (!input.trim() || !chat) return;
     try {
-      const token = localStorage.getItem("token");
       const res = await axios.post(
-        `http://localhost:3001/chat/${chatId}/message`,
+        `http://localhost:3001/chat/${chat._id}/message`,
         { content: input },
         { headers: { Authorization: "Bearer " + token } }
       );
-
-      setMessages(
-        res.data.messages.map((m) => ({
-          text: m.content,
-          sender: m.sender?.role === "cliente" ? "cliente" : "admin",
-        }))
-      );
+      setChat(res.data);
+      setMessages(res.data.messages);
       setInput("");
     } catch (err) {
       console.error("Erro ao enviar mensagem:", err.response?.data || err);
     }
   };
 
-  // Envio ao pressionar Enter
   const handleKeyPress = (e) => {
     if (e.key === "Enter") handleSend();
   };
+
+  if (!user || !chat) {
+    return <div>Carregando conversa...</div>;
+  }
 
   return (
     <div className="chat-container">
       <div className="chat-header">Mensagens</div>
       <div className="chat-messages">
         {messages.map((msg, idx) => (
-          <div
-            key={idx}
-            className={`message ${msg.sender === "cliente" ? "sent" : "received"}`}
-          >
-            {msg.text}
+          <div key={idx} className={`message ${msg.sender._id === user._id ? "sent" : "received"}`}>
+            {msg.content}
           </div>
         ))}
         <div ref={messagesEndRef}></div>

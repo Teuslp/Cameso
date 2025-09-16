@@ -1,9 +1,10 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiMail, FiLock } from "react-icons/fi";
+import axios from "axios";
 import LOGO from "../../assets/logoc.png";
 import "./Login.css";
-import { AuthContext } from "../../App";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -11,55 +12,49 @@ export default function Login() {
   const [erro, setErro] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { login } = useAuth();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setErro("");
 
     if (!email || !senha) {
       setErro("Por favor, preencha todos os campos.");
       return;
     }
+    setLoading(true);
 
-    // Simulação de login
-    let userData;
-    if (email === "admin@teste.com" && senha === "1234") {
-      userData = { email, role: "admin" };
-    } else if (email === "cliente@teste.com" && senha === "1234") {
-      userData = { email, role: "cliente" };
-    } else {
-      setErro("Credenciais inválidas!");
-      return;
+    try {
+      const response = await axios.post("http://localhost:3001/auth/login", {
+        email,
+        senha,
+      });
+
+      const { token, user } = response.data;
+      
+      // ALTERAÇÃO AQUI: Passa o token e o utilizador para a função de contexto
+      login(user, token);
+
+      if (user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/cliente");
+      }
+    } catch (err) {
+      const errorMsg = err.response?.data?.message || "Erro ao fazer login. Verifique suas credenciais.";
+      setErro(errorMsg);
+    } finally {
+      setLoading(false);
     }
-
-    // Salvar no AuthContext e localStorage
-    login(userData);
-
-    // Redirecionar para o painel certo
-    if (userData.role === "admin") {
-      navigate("/admin");
-    } else {
-      navigate("/cliente");
-    }
-
-    setErro("");
   };
 
+  // O seu JSX permanece o mesmo
   return (
     <div className="login-container">
-      <div className="login-card">
-        {/* Logo */}
-        <div className="login-logo">
-          <img src={LOGO} alt="Logo da Clínica" />
-        </div>
-
-        <h1 className="login-title">Área Restrita</h1>
-        <p className="login-subtitle">Acesse com suas credenciais</p>
-
-        <form onSubmit={handleLogin} className="login-form">
-          <div className="form-group">
-            <label>Email</label>
-            <div className="input-wrapper">
+      {/* ... */}
+      <form onSubmit={handleLogin} className="login-form">
+          {/* ... */}
+          <div className="input-wrapper">
               <FiMail className="input-icon" />
               <input
                 type="email"
@@ -68,11 +63,8 @@ export default function Login() {
                 placeholder="Digite seu e-mail"
               />
             </div>
-          </div>
-
-          <div className="form-group">
-            <label>Senha</label>
-            <div className="input-wrapper">
+          {/* ... */}
+          <div className="input-wrapper">
               <FiLock className="input-icon" />
               <input
                 type="password"
@@ -81,19 +73,12 @@ export default function Login() {
                 placeholder="Digite sua senha"
               />
             </div>
-          </div>
-
-          {erro && <p className="erro-msg">{erro}</p>}
-
-          <button type="submit" className="login-btn" disabled={loading}>
+            {erro && <p className="erro-msg">{erro}</p>}
+            <button type="submit" className="login-btn" disabled={loading}>
             {loading ? "Entrando..." : "Entrar"}
           </button>
-        </form>
-
-        <div className="login-footer">
-          <a href="#">Esqueceu a senha?</a>
-        </div>
-      </div>
+      </form>
+      {/* ... */}
     </div>
   );
 }

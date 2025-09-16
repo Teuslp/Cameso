@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin.js";
 import clienteRoutes from "./routes/cliente.js";
 import chatRoutes from "./routes/chat.js";
+import colaboradorRoutes from './routes/colaborador.js';
 
 dotenv.config();
 
@@ -62,6 +63,7 @@ app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
 app.use("/cliente", clienteRoutes);
 app.use("/chat", chatRoutes);
+app.use('/api/colaboradores', colaboradorRoutes);
 
 // Conexão ao MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })

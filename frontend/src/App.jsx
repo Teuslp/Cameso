@@ -1,7 +1,18 @@
-import React, { createContext, useState, useEffect } from "react";
+// frontend/src/App.jsx (VERSÃO COMPLETA E CORRIGIDA)
+
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+
+// --- CONTEXTO DE AUTENTICAÇÃO ---
+import { AuthProvider } from "./context/AuthContext";
+
+// --- COMPONENTES DE LAYOUT E UTILITÁRIOS ---
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import ScrollToTop from "./components/ScrollToTop";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
+// --- PÁGINAS PÚBLICAS ---
 import HomePage from "./pages/Homepage";
 import About from "./pages/About";
 import Esocial from "./pages/Esocial/Esocial";
@@ -15,46 +26,29 @@ import Consulting from "./pages/Consulting/Consulting";
 import MonthlyConsulting from "./pages/MonthlyConsulting/MonthlyConsulting";
 import Login from "./pages/Login/Login";
 
-import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+// --- PAINÉIS PRINCIPAIS (ROTAS PROTEGIDAS) ---
 import PainelAdmin from "./pages/PainelAdmin/PainelAdmin";
-import ClientePanel from "./pages/Cliente/ClientePanel";
+import ClientePanel from "./pages/Cliente/ClientePanel"; // O layout do painel do cliente
 
-import ScrollToTop from "./components/ScrollToTop";
+// --- PÁGINAS DO PAINEL DO CLIENTE (ROTAS FILHAS) ---
+import Colaboradores from "./pages/Cliente/Colaboradores/Colaboradores";
+// ❗ ATENÇÃO: Crie os arquivos para os componentes abaixo.
+import Documentos from "./pages/Cliente/Documentos/Documentos";
+// import Agenda from "./pages/Cliente/Agenda/Agenda";
+// import Relatorios from "./pages/Cliente/Relatorios/Relatorios";
+// import Upload from "./pages/Cliente/Upload/Upload";
+// import Mensagens from "./pages/Cliente/Mensagens/Mensagens";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-// 🔹 Criando contexto global de autenticação
-export const AuthContext = createContext();
 
 function App() {
-  const [user, setUser] = useState(null);
-
-  // Carregar usuário do localStorage quando abrir a página
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
-
-  const login = (userData) => {
-    localStorage.setItem("user", JSON.stringify(userData));
-    setUser(userData);
-  };
-
-  const logout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-  };
-
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthProvider>
       <Router>
         <ScrollToTop />
         <Navbar />
 
         <Routes>
-          {/* Rotas públicas */}
+          {/* --- ROTAS PÚBLICAS --- */}
           <Route path="/" element={<HomePage />} />
           <Route path="/About" element={<About />} />
           <Route path="/Esocial" element={<Esocial />} />
@@ -68,7 +62,7 @@ function App() {
           <Route path="/Consulting" element={<Consulting />} />
           <Route path="/MonthlyConsulting" element={<MonthlyConsulting />} />
 
-          {/* Rotas protegidas */}
+          {/* --- ROTAS PROTEGIDAS DO CLIENTE (com rotas aninhadas) --- */}
           <Route
             path="/cliente"
             element={
@@ -76,9 +70,22 @@ function App() {
                 <ClientePanel />
               </PrivateRoute>
             }
-          />
+          >
+            {/* Redireciona /cliente para /cliente/documentos por padrão */}
+            <Route index element={<Navigate to="documentos" replace />} />
 
+            {/* As rotas filhas serão renderizadas dentro do <Outlet /> do ClientePanel */}
+            <Route path="colaboradores" element={<Colaboradores />} />
 
+            {/* ❗ ATENÇÃO: Descomente as rotas abaixo após criar os arquivos de cada componente */}
+            <Route path="documentos" element={<Documentos />} /> 
+            {/* <Route path="agenda" element={<Agenda />} /> */}
+            {/* <Route path="relatorios" element={<Relatorios />} /> */}
+            {/* <Route path="upload" element={<Upload />} /> */}
+            {/* <Route path="mensagens" element={<Mensagens />} /> */}
+          </Route>
+
+          {/* --- ROTA PROTEGIDA DO ADMIN --- */}
           <Route
             path="/admin"
             element={
@@ -91,7 +98,7 @@ function App() {
 
         <Footer />
       </Router>
-    </AuthContext.Provider>
+    </AuthProvider>
   );
 }
 

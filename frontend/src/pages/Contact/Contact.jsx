@@ -148,7 +148,7 @@ function Contact() {
                   type="checkbox"
                   checked={checklist.ppra}
                   onChange={() => setChecklist({ ...checklist, ppra: !checklist.ppra })}
-                /> PPRA / PGR atualizado
+                /> PGR atualizado
               </label>
               <label>
                 <input

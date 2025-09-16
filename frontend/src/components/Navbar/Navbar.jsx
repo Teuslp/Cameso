@@ -4,17 +4,18 @@ import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import logo from "../../assets/cameso_logo.png";
 import "./Navbar.css";
 
+// CAMINHO CORRIGIDO AQUI para apontar para a pasta 'context'
+import { useAuth } from "../../context/AuthContext";
+
 function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);         // side menu (mobile)
-  const [dropdownOpen, setDropdownOpen] = useState(false); // serviços (mobile)
-  const [userMenuOpen, setUserMenuOpen] = useState(false); // menu do usuário (desktop)
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuRef = useRef(null);
   const navigate = useNavigate();
 
-  // usuário atual (lido do localStorage a cada render)
-  const user = JSON.parse(localStorage.getItem("user"));
+  const { user, logout } = useAuth();
 
-  // fecha o menu do usuário ao clicar fora
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
@@ -26,21 +27,19 @@ function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    logout();
     setUserMenuOpen(false);
     setMenuOpen(false);
-    navigate("/"); // volta à home
+    navigate("/");
   };
 
   return (
     <header className="navbar">
       <div className="navbar-container">
-        {/* Ícone mobile (abre side-menu) */}
         <div className="menu-icon" onClick={() => setMenuOpen(true)}>
           <FaBars />
         </div>
 
-        {/* Logo */}
         <div className="navbar-logo">
           <Link to="/">
             <img
@@ -51,7 +50,6 @@ function Navbar() {
           </Link>
         </div>
 
-        {/* Menu desktop */}
         <ul className="navbar-menu">
           <li><Link to="/">Início</Link></li>
           <li><Link to="/About">Sobre</Link></li>
@@ -72,7 +70,6 @@ function Navbar() {
 
           <li><Link to="/Contact">Contato</Link></li>
 
-          {/* Autenticação (desktop) */}
           {user ? (
             <li className="user-dropdown" ref={userMenuRef}>
               <FaUserCircle
@@ -100,7 +97,6 @@ function Navbar() {
         </ul>
       </div>
 
-      {/* Side-menu (mobile) */}
       <div className={`side-menu ${menuOpen ? "open" : ""}`}>
         <div className="side-menu-header">
           <FaTimes onClick={() => setMenuOpen(false)} className="close-icon" />

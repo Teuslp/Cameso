@@ -1,19 +1,23 @@
-import React, { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../../App";
+import React, { useEffect, useState } from "react";
+// CAMINHO CORRIGIDO AQUI
+import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 import "./ChatAdmin.css";
 
 function ChatAdmin() {
-  const { user } = useContext(AuthContext);
+  // USO DO HOOK CORRIGIDO AQUI
+  const { user } = useAuth();
   const [chats, setChats] = useState([]);
   const [activeChat, setActiveChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
 
-  const token = localStorage.getItem("userToken"); // certifique-se de salvar token no login
+  const token = localStorage.getItem("userToken");
 
   useEffect(() => {
-    fetchChats();
-  }, []);
+    if (token) {
+        fetchChats();
+    }
+  }, [token]);
 
   const fetchChats = async () => {
     try {
@@ -21,7 +25,9 @@ function ChatAdmin() {
         headers: { Authorization: `Bearer ${token}` },
       });
       setChats(res.data);
-      if (res.data.length > 0) setActiveChat(res.data[0]);
+      if (res.data.length > 0 && !activeChat) {
+        setActiveChat(res.data[0]);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -36,13 +42,22 @@ function ChatAdmin() {
         { content: newMessage },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setActiveChat(res.data);
+      const updatedChat = res.data;
+      setActiveChat(updatedChat);
+      setChats(
+        chats.map((chat) =>
+          chat._id === updatedChat._id ? updatedChat : chat
+        )
+      );
       setNewMessage("");
-      fetchChats(); // atualizar lista de chats
     } catch (err) {
       console.error(err);
     }
   };
+
+  if (!user) {
+    return <div>Carregando...</div>;
+  }
 
   return (
     <div className="chat-container">
@@ -56,36 +71,41 @@ function ChatAdmin() {
               onClick={() => setActiveChat(chat)}
             >
               {chat.participants
-                .filter((p) => p._id !== user.id)
+                .filter((p) => p._id !== user._id)
                 .map((p) => p.nome)
                 .join(", ")}
             </li>
           ))}
         </ul>
       </div>
-
       <div className="chat-main">
-        <div className="messages">
-          {activeChat?.messages.map((msg, idx) => (
-            <div
-              key={idx}
-              className={`message ${msg.sender._id === user.id ? "sent" : "received"}`}
-            >
-              <span className="sender">{msg.sender.nome}</span>
-              <span className="content">{msg.content}</span>
-            </div>
-          ))}
-        </div>
-        <div className="chat-input">
-          <input
-            type="text"
-            placeholder="Digite sua mensagem..."
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-          />
-          <button onClick={sendMessage}>Enviar</button>
-        </div>
+        {activeChat ? (
+            <>
+              <div className="messages">
+                  {activeChat.messages.map((msg, idx) => (
+                      <div
+                      key={idx}
+                      className={`message ${msg.sender._id === user._id ? "sent" : "received"}`}
+                      >
+                      <span className="sender">{msg.sender.nome}</span>
+                      <span className="content">{msg.content}</span>
+                      </div>
+                  ))}
+              </div>
+              <div className="chat-input">
+                  <input
+                      type="text"
+                      placeholder="Digite sua mensagem..."
+                      value={newMessage}
+                      onChange={(e) => setNewMessage(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+                  />
+                  <button onClick={sendMessage}>Enviar</button>
+              </div>
+            </>
+        ) : (
+            <div className="no-chat-selected">Selecione uma conversa para começar.</div>
+        )}
       </div>
     </div>
   );

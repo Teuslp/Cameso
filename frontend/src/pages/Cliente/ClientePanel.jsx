@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { FaFileAlt, FaCalendarAlt, FaDownload, FaUpload, FaEnvelope } from "react-icons/fa";
+// frontend/src/pages/Cliente/ClientePanel.jsx (VERSÃO ATUALIZADA)
+
+import React from "react";
+// 1. Importamos NavLink e Outlet do react-router-dom
+import { NavLink, Outlet } from "react-router-dom"; 
+import { FaFileAlt, FaCalendarAlt, FaDownload, FaUpload, FaEnvelope, FaUsers } from "react-icons/fa";
 import "./ClientePanel.css";
 
-// 🔹 Importando o ChatCliente
-import ChatCliente from "./ChatCliente";
-
-function ClientePanel({ token }) {
-  const [activeTab, setActiveTab] = useState("documentos");
+function ClientePanel() {
+  // 2. Removemos completamente o 'useState' para 'activeTab'. O router vai cuidar disso.
 
   return (
     <div className="cliente-panel">
@@ -14,67 +15,35 @@ function ClientePanel({ token }) {
       <aside className="sidebar">
         <h2>Meu Painel</h2>
         <ul>
-          <li className={activeTab === "documentos" ? "active" : ""} onClick={() => setActiveTab("documentos")}>
-            <FaFileAlt /> Documentos
+          {/* 3. Substituímos <li> por <NavLink>. 
+              NavLink automaticamente adiciona a classe 'active' ao link que corresponde à URL atual. */}
+          <li>
+            <NavLink to="/cliente/documentos"><FaFileAlt /> Documentos</NavLink>
           </li>
-          <li className={activeTab === "agenda" ? "active" : ""} onClick={() => setActiveTab("agenda")}>
-            <FaCalendarAlt /> Agenda
+          {/* Adicionamos nosso novo link! */}
+          <li>
+            <NavLink to="/cliente/colaboradores"><FaUsers /> Colaboradores</NavLink>
           </li>
-          <li className={activeTab === "relatorios" ? "active" : ""} onClick={() => setActiveTab("relatorios")}>
-            <FaDownload /> Relatórios
+          <li>
+            <NavLink to="/cliente/agenda"><FaCalendarAlt /> Agenda</NavLink>
           </li>
-          <li className={activeTab === "upload" ? "active" : ""} onClick={() => setActiveTab("upload")}>
-            <FaUpload /> Upload
+          <li>
+            <NavLink to="/cliente/relatorios"><FaDownload /> Relatórios</NavLink>
           </li>
-          <li className={activeTab === "mensagens" ? "active" : ""} onClick={() => setActiveTab("mensagens")}>
-            <FaEnvelope /> Mensagens
+          <li>
+            <NavLink to="/cliente/upload"><FaUpload /> Upload</NavLink>
+          </li>
+          <li>
+            <NavLink to="/cliente/mensagens"><FaEnvelope /> Mensagens</NavLink>
           </li>
         </ul>
       </aside>
 
       {/* Conteúdo principal */}
       <main className="main-content">
-        {activeTab === "documentos" && (
-          <section>
-            <h2>Documentos Disponíveis</h2>
-            <ul>
-              <li>Laudo 01</li>
-              <li>Relatório 02</li>
-            </ul>
-          </section>
-        )}
-
-        {activeTab === "agenda" && (
-          <section>
-            <h2>Agenda de Exames</h2>
-            <ul>
-              <li>Exame X - 10/09/2025</li>
-              <li>Exame Y - 15/09/2025</li>
-            </ul>
-          </section>
-        )}
-
-        {activeTab === "relatorios" && (
-          <section>
-            <h2>Relatórios</h2>
-            <ul>
-              <li>Relatório Mensal</li>
-            </ul>
-          </section>
-        )}
-
-        {activeTab === "upload" && (
-          <section>
-            <h2>Upload de Documentos</h2>
-            <input type="file" />
-            <button>Enviar</button>
-          </section>
-        )}
-
-        {activeTab === "mensagens" && (
-          // 🔹 Renderizando o ChatCliente real
-          <ChatCliente token={token} />
-        )}
+        {/* 4. A mágica acontece aqui. O <Outlet /> é um espaço reservado onde o 
+            React Router irá renderizar o componente da rota filha correspondente. */}
+        <Outlet />
       </main>
     </div>
   );
