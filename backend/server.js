@@ -8,6 +8,12 @@ import adminRoutes from "./routes/admin.js";
 import clienteRoutes from "./routes/cliente.js";
 import chatRoutes from "./routes/chat.js";
 import colaboradorRoutes from './routes/colaborador.js';
+import documentoRoutes from './routes/documento.js';
+import asoRoutes from './routes/aso.js';
+import dashboardRoutes from './routes/dashboard.js';
+import agendamentoRoutes from './routes/agendamento.js';
+import treinamentoRoutes from './routes/treinamento.js';
+import registroTreinamentoRoutes from './routes/registroTreinamento.js';
 
 dotenv.config();
 
@@ -15,7 +21,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 📩 Rota de contato
+// Rota de contato
 app.post("/contact", async (req, res) => {
   const { name, email, employees, sector, service, message, checklist } = req.body;
 
@@ -58,12 +64,19 @@ app.post("/contact", async (req, res) => {
   }
 });
 
-// 🔐 Rotas de autenticação, admin e cliente
+// Rotas de autenticação, admin e cliente
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
 app.use("/cliente", clienteRoutes);
 app.use("/chat", chatRoutes);
 app.use('/api/colaboradores', colaboradorRoutes);
+app.use('/api/documentos', documentoRoutes);
+app.use('/uploads', express.static('uploads')); 
+app.use('/api/asos', asoRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/agendamentos', agendamentoRoutes);
+app.use('/api/treinamentos', treinamentoRoutes); 
+app.use('/api/registros-treinamento', registroTreinamentoRoutes); 
 
 // Conexão ao MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })

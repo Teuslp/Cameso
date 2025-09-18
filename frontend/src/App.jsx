@@ -1,4 +1,4 @@
-// frontend/src/App.jsx (VERSÃO COMPLETA E CORRIGIDA)
+// frontend/src/App.jsx (VERSÃO CORRIGIDA E FINAL)
 
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
@@ -31,13 +31,12 @@ import PainelAdmin from "./pages/PainelAdmin/PainelAdmin";
 import ClientePanel from "./pages/Cliente/ClientePanel"; // O layout do painel do cliente
 
 // --- PÁGINAS DO PAINEL DO CLIENTE (ROTAS FILHAS) ---
+import Dashboard from "./pages/Cliente/Dashboard/Dashboard";
 import Colaboradores from "./pages/Cliente/Colaboradores/Colaboradores";
-// ❗ ATENÇÃO: Crie os arquivos para os componentes abaixo.
 import Documentos from "./pages/Cliente/Documentos/Documentos";
-// import Agenda from "./pages/Cliente/Agenda/Agenda";
-// import Relatorios from "./pages/Cliente/Relatorios/Relatorios";
-// import Upload from "./pages/Cliente/Upload/Upload";
-// import Mensagens from "./pages/Cliente/Mensagens/Mensagens";
+import Asos from "./pages/Cliente/Asos/Asos";
+import Agenda from "./pages/Cliente/Agenda/Agenda";
+import Treinamentos from "./pages/Cliente/Treinamentos/Treinamentos";
 
 
 function App() {
@@ -71,18 +70,15 @@ function App() {
               </PrivateRoute>
             }
           >
-            {/* Redireciona /cliente para /cliente/documentos por padrão */}
-            <Route index element={<Navigate to="documentos" replace />} />
+            <Route index element={<Dashboard />} />
 
-            {/* As rotas filhas serão renderizadas dentro do <Outlet /> do ClientePanel */}
+            <Route path="dashboard" element={<Dashboard />} /> 
             <Route path="colaboradores" element={<Colaboradores />} />
+            <Route path="documentos" element={<Documentos />} />
+            <Route path="asos" element={<Asos />} />
+            <Route path="agenda" element={<Agenda />} />
+            <Route path="gestao-treinamentos" element={<Treinamentos />} />
 
-            {/* ❗ ATENÇÃO: Descomente as rotas abaixo após criar os arquivos de cada componente */}
-            <Route path="documentos" element={<Documentos />} /> 
-            {/* <Route path="agenda" element={<Agenda />} /> */}
-            {/* <Route path="relatorios" element={<Relatorios />} /> */}
-            {/* <Route path="upload" element={<Upload />} /> */}
-            {/* <Route path="mensagens" element={<Mensagens />} /> */}
           </Route>
 
           {/* --- ROTA PROTEGIDA DO ADMIN --- */}
