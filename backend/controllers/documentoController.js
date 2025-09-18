@@ -35,11 +35,28 @@ export const uploadDocumento = async (req, res) => {
  */
 export const getDocumentos = async (req, res) => {
   try {
-    const clienteId = req.user.id; // ID do cliente logado, vindo do authMiddleware
+    const clienteId = req.user.id;
+    // Pega os parâmetros de filtro da URL (ex: /api/documentos?tipo=ASO&search=joao)
+    const { tipo, colaboradorId, search } = req.query;
 
-    const documentos = await Documento.find({ clienteId: clienteId })
-      .populate('colaboradorId', 'nomeCompleto') // A "mágica" para buscar o nome do colaborador
-      .sort({ createdAt: -1 }); // Ordena pelos mais recentes primeiro
+    // --- Lógica de Filtro Dinâmico ---
+    const filtro = { clienteId: clienteId };
+
+    if (tipo) {
+      filtro.tipo = tipo;
+    }
+    if (colaboradorId) {
+      filtro.colaboradorId = colaboradorId;
+    }
+    if (search) {
+      // Busca pelo termo 'search' no nome do arquivo, ignorando maiúsculas/minúsculas
+      filtro.nomeArquivo = { $regex: search, $options: 'i' };
+    }
+    // --- Fim da Lógica de Filtro ---
+
+    const documentos = await Documento.find(filtro) // Usa o objeto de filtro dinâmico
+      .populate('colaboradorId', 'nomeCompleto')
+      .sort({ createdAt: -1 });
 
     res.status(200).json(documentos);
 
