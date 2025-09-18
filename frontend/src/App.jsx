@@ -39,6 +39,7 @@ import Agenda from "./pages/Cliente/Agenda/Agenda";
 import Treinamentos from "./pages/Cliente/Treinamentos/Treinamentos";
 import Chamados from "./pages/Cliente/Chamados/Chamados";
 import DetalheChamado from "./pages/Cliente/Chamados/DetalheChamado";
+import PerfilColaborador from "./pages/Cliente/Colaboradores/PerfilColaborador";
 
 
 function App() {
@@ -82,6 +83,7 @@ function App() {
             <Route path="gestao-treinamentos" element={<Treinamentos />} />
             <Route path="chamados" element={<Chamados />} />
             <Route path="chamados/:id" element={<DetalheChamado />} />
+            <Route path="colaboradores/:id" element={<PerfilColaborador />} />
 
           </Route>
 

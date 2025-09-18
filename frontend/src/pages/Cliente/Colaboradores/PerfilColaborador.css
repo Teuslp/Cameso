@@ -1,0 +1,84 @@
+/* frontend/src/pages/Cliente/Colaboradores/PerfilColaborador.css (NOVO ARQUIVO) */
+
+.perfil-container {
+  padding: 20px;
+}
+
+/* --- Cabeçalho com o nome --- */
+.perfil-header {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+  border-left: 5px solid #007bff;
+}
+
+.perfil-header h1 {
+  margin: 0 0 5px 0;
+  font-size: 2rem;
+  color: #343a40;
+}
+
+.perfil-header p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #6c757d;
+}
+
+/* --- Widgets de conteúdo (ASOs, Treinamentos, etc.) --- */
+.perfil-widget {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+}
+
+.perfil-widget h3 {
+  margin-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #495057;
+}
+
+/* --- Estilo unificado para as tabelas --- */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.styled-table thead tr {
+  background-color: #f8f9fa;
+  color: #495057;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+  border: 1px solid #dee2e6;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #007bff;
+}
+
+.styled-table a {
+    color: #007bff;
+    text-decoration: none;
+}
+.styled-table a:hover {
+    text-decoration: underline;
+}

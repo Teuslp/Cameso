@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import FormAdicionarColaborador from './FormAdicionarColaborador';
+import { Link } from 'react-router-dom';
 
 const Colaboradores = () => {
   const [colaboradores, setColaboradores] = useState([]);
@@ -14,7 +15,7 @@ const Colaboradores = () => {
   const fetchColaboradores = async () => {
     try {
       // Garante que o loading seja reativado em um refetch
-      setLoading(true); 
+      setLoading(true);
       const token = localStorage.getItem('userToken');
       if (!token) {
         throw new Error('Acesso não autorizado. Faça login novamente.');
@@ -88,7 +89,7 @@ const Colaboradores = () => {
         throw new Error('Falha ao desativar o colaborador.');
       }
 
-      setColaboradores(prevColaboradores => 
+      setColaboradores(prevColaboradores =>
         prevColaboradores.filter(c => c._id !== colaboradorId)
       );
     } catch (err) {
@@ -132,10 +133,15 @@ const Colaboradores = () => {
           {colaboradores.length > 0 ? (
             colaboradores.map((colaborador) => (
               <tr key={colaborador._id}>
-                <td style={{ padding: '12px', border: '1px solid #ddd' }}>{colaborador.nomeCompleto}</td>
+                <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                  {/* --- ALTERAÇÃO APLICADA AQUI --- */}
+                  <Link to={`/cliente/colaboradores/${colaborador._id}`} style={{ textDecoration: 'underline', color: '#007bff' }}>
+                    {colaborador.nomeCompleto}
+                  </Link>
+                </td>
                 <td style={{ padding: '12px', border: '1px solid #ddd' }}>{colaborador.cpf}</td>
                 <td style={{ padding: '12px', border: '1px solid #ddd' }}>{colaborador.funcao}</td>
-                <td style={{ padding: '12px', border: '1px solid #ddd' }}>{new Date(colaborador.dataAdmissao).toLocaleDateString()}</td>
+                <td style={{ padding: '12px', border: '1px solid #ddd' }}>{new Date(colaborador.dataAdmissao).toLocaleDateString('pt-BR')}</td>
                 <td style={{ padding: '12px', border: '1px solid #ddd', display: 'flex', gap: '10px' }}>
                   <button onClick={() => handleOpenModalEditar(colaborador)}>Editar</button>
                   <button onClick={() => handleDeleteColaborador(colaborador._id)} style={{ backgroundColor: '#dc3545', color: 'white', border: 'none', padding: '8px 12px', borderRadius: '4px', cursor: 'pointer' }}>
@@ -146,8 +152,8 @@ const Colaboradores = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="5" style={{ padding: '12px', border: '1px solid #ddd', textAlign: 'center' }}>
-                Nenhum colaborador cadastrado ainda. Clique em "Adicionar" para começar.
+              <td colSpan="5" style={{ padding: '12px', textAlign: 'center' }}>
+                Nenhum colaborador cadastrado.
               </td>
             </tr>
           )}

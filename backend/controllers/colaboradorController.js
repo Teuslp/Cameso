@@ -1,5 +1,8 @@
 import Colaborador from '../models/Colaborador.js';
 import User from '../models/User.js';
+import Aso from '../models/Aso.js';
+import RegistroTreinamento from '../models/RegistroTreinamento.js';
+import Documento from '../models/Documento.js';
 
 /**
  * Cria um novo colaborador no banco de dados.
@@ -127,5 +130,40 @@ export const deactivateColaborador = async (req, res) => {
   } catch (error) {
     console.error("Erro ao desativar colaborador:", error);
     res.status(500).json({ message: "Erro no servidor ao tentar desativar colaborador." });
+  }
+};
+
+/**
+ * Busca um colaborador específico pelo ID e todos os seus dados relacionados.
+ */
+export const getColaboradorById = async (req, res) => {
+  try {
+    const clienteId = req.user.id;
+    const { id: colaboradorId } = req.params;
+
+    // 1. Busca o colaborador principal e verifica a permissão
+    const colaborador = await Colaborador.findOne({ _id: colaboradorId, clienteId: clienteId });
+    if (!colaborador) {
+      return res.status(404).json({ message: "Colaborador não encontrado ou acesso não permitido." });
+    }
+
+    // 2. Busca todos os dados relacionados em paralelo para mais eficiência
+    const [asos, treinamentos, documentos] = await Promise.all([
+      Aso.find({ colaboradorId: colaboradorId }).sort({ dataExame: -1 }),
+      RegistroTreinamento.find({ colaboradorId: colaboradorId }).populate('treinamentoId', 'nome').sort({ dataRealizacao: -1 }),
+      Documento.find({ colaboradorId: colaboradorId }).sort({ createdAt: -1 })
+    ]);
+
+    // 3. Monta e envia a resposta completa
+    res.status(200).json({
+      colaborador,
+      asos,
+      treinamentos,
+      documentos
+    });
+
+  } catch (error) {
+    console.error("Erro ao buscar detalhes do colaborador:", error);
+    res.status(500).json({ message: "Erro no servidor ao buscar detalhes do colaborador." });
   }
 };
