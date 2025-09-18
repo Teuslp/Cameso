@@ -18,6 +18,9 @@ import agendamentoRoutes from './routes/agendamento.js';
 import treinamentoRoutes from './routes/treinamento.js';
 import registroTreinamentoRoutes from './routes/registroTreinamento.js';
 import chamadoRoutes from './routes/chamado.js';
+import funcaoRoutes from './routes/funcao.js';
+import riscoRoutes from './routes/risco.js';
+import exameRoutes from './routes/exame.js';
 
 dotenv.config();
 
@@ -83,6 +86,9 @@ app.use('/api/agendamentos', agendamentoRoutes);
 app.use('/api/treinamentos', treinamentoRoutes); 
 app.use('/api/registros-treinamento', registroTreinamentoRoutes);
 app.use('/api/chamados', chamadoRoutes);
+app.use('/api/funcoes', funcaoRoutes);
+app.use('/api/riscos', riscoRoutes);
+app.use('/api/exames', exameRoutes);
 
 // Conexão ao MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })

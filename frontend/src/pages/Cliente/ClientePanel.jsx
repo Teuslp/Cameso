@@ -3,7 +3,8 @@ import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import {
   FaFileAlt, FaCalendarAlt, FaDownload, FaUpload,
-  FaEnvelope, FaUsers, FaHome, FaHeartbeat, FaCertificate
+  FaEnvelope, FaUsers, FaHome, FaHeartbeat, FaCertificate,
+  FaTasks
 } from "react-icons/fa";
 
 import "./ClientePanel.css";
@@ -26,6 +27,9 @@ function ClientePanel() {
           </li>
           <li>
             <NavLink to="/cliente/asos"><FaHeartbeat /> ASOs</NavLink>
+          </li>
+          <li>
+            <NavLink to="/cliente/funcoes"><FaTasks /> Funções e Riscos</NavLink>
           </li>
           <li>
             <NavLink to="/cliente/agenda"><FaCalendarAlt /> Agenda</NavLink>

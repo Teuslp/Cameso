@@ -40,6 +40,8 @@ import Treinamentos from "./pages/Cliente/Treinamentos/Treinamentos";
 import Chamados from "./pages/Cliente/Chamados/Chamados";
 import DetalheChamado from "./pages/Cliente/Chamados/DetalheChamado";
 import PerfilColaborador from "./pages/Cliente/Colaboradores/PerfilColaborador";
+import ListaFuncoes from "./pages/Cliente/Funcoes/ListaFuncoes";
+import FormFuncao from "./pages/Cliente/Funcoes/FormFuncao";
 
 
 function App() {
@@ -84,6 +86,9 @@ function App() {
             <Route path="chamados" element={<Chamados />} />
             <Route path="chamados/:id" element={<DetalheChamado />} />
             <Route path="colaboradores/:id" element={<PerfilColaborador />} />
+            <Route path="funcoes" element={<ListaFuncoes />} />
+            <Route path="funcoes/nova" element={<FormFuncao />} />
+            <Route path="funcoes/editar/:id" element={<FormFuncao />} />
 
           </Route>
 
