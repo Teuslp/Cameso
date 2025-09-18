@@ -45,3 +45,62 @@
   font-size: 1rem;
   color: #6c757d;
 }
+
+.widget-vencimentos {
+  margin-top: 40px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.widget-vencimentos h3 {
+  margin-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.vencimentos-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.vencimento-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.vencimento-item:last-child {
+  border-bottom: none;
+}
+
+.vencimento-icon {
+  font-size: 1.5rem;
+  color: #007bff;
+  margin-right: 15px;
+}
+
+.vencimento-details {
+  flex-grow: 1;
+}
+
+.vencimento-colaborador {
+  font-weight: bold;
+  display: block;
+}
+
+.vencimento-descricao {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.vencimento-data {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  color: #dc3545;
+}

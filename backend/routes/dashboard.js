@@ -1,16 +1,21 @@
-// backend/routes/dashboard.js (NOVO ARQUIVO)
+// backend/routes/dashboard.js (VERSÃO ATUALIZADA)
 
 import express from 'express';
-import { getDashboardSummary } from '../controllers/dashboardController.js';
+// 1. Importe a nova função
+import { getDashboardSummary, getUpcomingDeadlines } from '../controllers/dashboardController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// Protege a rota do dashboard
+// Protege todas as rotas do dashboard
 router.use(authMiddleware);
 
-// Rota para obter o resumo dos dados
+// Rota para obter o resumo dos dados (cards)
 // GET -> /api/dashboard/summary
 router.get('/summary', getDashboardSummary);
+
+// 2. Adicione a nova rota para obter a lista de vencimentos
+// GET -> /api/dashboard/vencimentos
+router.get('/vencimentos', getUpcomingDeadlines);
 
 export default router;

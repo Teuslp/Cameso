@@ -1,12 +1,15 @@
+// backend/server.js (VERSÃO 100% COMPLETA E CORRIGIDA)
+
 import express from "express";
 import nodemailer from "nodemailer";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+
+// Imports das rotas da nossa aplicação
 import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin.js";
 import clienteRoutes from "./routes/cliente.js";
-import chatRoutes from "./routes/chat.js";
 import colaboradorRoutes from './routes/colaborador.js';
 import documentoRoutes from './routes/documento.js';
 import asoRoutes from './routes/aso.js';
@@ -14,6 +17,7 @@ import dashboardRoutes from './routes/dashboard.js';
 import agendamentoRoutes from './routes/agendamento.js';
 import treinamentoRoutes from './routes/treinamento.js';
 import registroTreinamentoRoutes from './routes/registroTreinamento.js';
+import chamadoRoutes from './routes/chamado.js';
 
 dotenv.config();
 
@@ -21,7 +25,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Rota de contato
+// Torna a pasta 'uploads' publicamente acessível para downloads
+app.use('/uploads', express.static('uploads')); 
+
+// Rota de contato (funcionalidade original)
 app.post("/contact", async (req, res) => {
   const { name, email, employees, sector, service, message, checklist } = req.body;
 
@@ -64,19 +71,18 @@ app.post("/contact", async (req, res) => {
   }
 });
 
-// Rotas de autenticação, admin e cliente
+// Rotas da aplicação do portal
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
 app.use("/cliente", clienteRoutes);
-app.use("/chat", chatRoutes);
 app.use('/api/colaboradores', colaboradorRoutes);
 app.use('/api/documentos', documentoRoutes);
-app.use('/uploads', express.static('uploads')); 
 app.use('/api/asos', asoRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/agendamentos', agendamentoRoutes);
 app.use('/api/treinamentos', treinamentoRoutes); 
-app.use('/api/registros-treinamento', registroTreinamentoRoutes); 
+app.use('/api/registros-treinamento', registroTreinamentoRoutes);
+app.use('/api/chamados', chamadoRoutes);
 
 // Conexão ao MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -86,4 +92,3 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 // Start do servidor
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`🚀 Servidor rodando em http://localhost:${PORT}`));
-

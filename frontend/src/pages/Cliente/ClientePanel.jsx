@@ -33,6 +33,9 @@ function ClientePanel() {
           <li>
             <NavLink to="/cliente/gestao-treinamentos"><FaCertificate /> Treinamentos</NavLink>
           </li>
+          <li>
+            <NavLink to="/cliente/chamados"><FaEnvelope /> Suporte</NavLink>
+          </li>
         </ul>
       </aside>
 

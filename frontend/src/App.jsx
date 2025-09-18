@@ -37,6 +37,8 @@ import Documentos from "./pages/Cliente/Documentos/Documentos";
 import Asos from "./pages/Cliente/Asos/Asos";
 import Agenda from "./pages/Cliente/Agenda/Agenda";
 import Treinamentos from "./pages/Cliente/Treinamentos/Treinamentos";
+import Chamados from "./pages/Cliente/Chamados/Chamados";
+import DetalheChamado from "./pages/Cliente/Chamados/DetalheChamado";
 
 
 function App() {
@@ -72,12 +74,14 @@ function App() {
           >
             <Route index element={<Dashboard />} />
 
-            <Route path="dashboard" element={<Dashboard />} /> 
+            <Route path="dashboard" element={<Dashboard />} />
             <Route path="colaboradores" element={<Colaboradores />} />
             <Route path="documentos" element={<Documentos />} />
             <Route path="asos" element={<Asos />} />
             <Route path="agenda" element={<Agenda />} />
             <Route path="gestao-treinamentos" element={<Treinamentos />} />
+            <Route path="chamados" element={<Chamados />} />
+            <Route path="chamados/:id" element={<DetalheChamado />} />
 
           </Route>
 
