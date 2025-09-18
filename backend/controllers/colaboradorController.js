@@ -3,6 +3,7 @@ import User from '../models/User.js';
 import Aso from '../models/Aso.js';
 import RegistroTreinamento from '../models/RegistroTreinamento.js';
 import Documento from '../models/Documento.js';
+import Funcao from '../models/Funcao.js';
 
 /**
  * Cria um novo colaborador no banco de dados.
@@ -141,22 +142,27 @@ export const getColaboradorById = async (req, res) => {
     const clienteId = req.user.id;
     const { id: colaboradorId } = req.params;
 
-    // 1. Busca o colaborador principal e verifica a permissão
     const colaborador = await Colaborador.findOne({ _id: colaboradorId, clienteId: clienteId });
     if (!colaborador) {
       return res.status(404).json({ message: "Colaborador não encontrado ou acesso não permitido." });
     }
 
-    // 2. Busca todos os dados relacionados em paralelo para mais eficiência
+    // 2. ADICIONAMOS A BUSCA PELOS DETALHES DA FUNÇÃO DELE
+    const detalhesFuncao = await Funcao.findOne({ clienteId: clienteId, nome: colaborador.funcao })
+        .populate('riscos')
+        .populate('examesRequeridos')
+        .populate('treinamentosRequeridos');
+
     const [asos, treinamentos, documentos] = await Promise.all([
       Aso.find({ colaboradorId: colaboradorId }).sort({ dataExame: -1 }),
       RegistroTreinamento.find({ colaboradorId: colaboradorId }).populate('treinamentoId', 'nome').sort({ dataRealizacao: -1 }),
       Documento.find({ colaboradorId: colaboradorId }).sort({ createdAt: -1 })
     ]);
 
-    // 3. Monta e envia a resposta completa
+    // 3. ADICIONAMOS OS DETALHES DA FUNÇÃO À RESPOSTA
     res.status(200).json({
       colaborador,
+      detalhesFuncao, // Enviamos os requisitos junto
       asos,
       treinamentos,
       documentos

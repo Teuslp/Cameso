@@ -1,6 +1,7 @@
 // frontend/src/pages/Cliente/Chamados/DetalheChamado.jsx (NOVO ARQUIVO)
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const DetalheChamado = () => {
     const { id } = useParams(); // Pega o ID do chamado da URL
@@ -11,7 +12,7 @@ const DetalheChamado = () => {
     const fetchChamado = async () => {
         // ... (lógica para buscar o chamado por ID)
     };
-    
+
     useEffect(() => {
         const fetchChamado = async () => {
             try {
@@ -46,13 +47,15 @@ const DetalheChamado = () => {
             console.error(err);
         }
     };
-    
+
     if (loading) return <div>Carregando conversa...</div>;
     if (!chamado) return <div>Chamado não encontrado.</div>;
 
     return (
         <div style={{ padding: '20px' }}>
-            <Link style={{ padding: '12px', border: '1px solid #ddd' }}to="/cliente/chamados">{"< Voltar para a lista de chamados"}</Link>
+            <Link to="/cliente/chamados" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: '#007bff', marginBottom: '20px' }}>
+                <FaArrowLeft /> Voltar para chamados
+            </Link>
             <h2 style={{ marginTop: '20px' }}>{chamado.assunto}</h2>
             <div style={{ border: '1px solid #ccc', borderRadius: '8px', marginTop: '20px', padding: '20px', minHeight: '300px' }}>
                 {chamado.mensagens.map(msg => (
@@ -65,12 +68,12 @@ const DetalheChamado = () => {
             </div>
 
             <form onSubmit={handleResponder} style={{ marginTop: '20px' }}>
-                <textarea 
-                    value={novaResposta} 
+                <textarea
+                    value={novaResposta}
                     onChange={e => setNovaResposta(e.target.value)}
-                    placeholder="Escreva sua resposta..." 
-                    rows="4" 
-                    required 
+                    placeholder="Escreva sua resposta..."
+                    rows="4"
+                    required
                     style={{ width: '100%', padding: '10px' }}
                 />
                 <button type="submit" style={{ marginTop: '10px', padding: '10px 15px' }}>Enviar Resposta</button>

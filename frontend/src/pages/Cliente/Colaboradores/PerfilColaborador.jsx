@@ -1,27 +1,31 @@
-// frontend/src/pages/Cliente/Colaboradores/PerfilColaborador.jsx (VERSÃO ATUALIZADA)
+// frontend/src/pages/Cliente/Colaboradores/PerfilColaborador.jsx (VERSÃO 100% COMPLETA)
 
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import './PerfilColaborador.css'; // 1. IMPORTA O NOSSO NOVO ARQUIVO CSS
+import './PerfilColaborador.css'; // Importa o nosso arquivo de estilo
 
 const PerfilColaborador = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // Pega o ID do colaborador da URL
   const [perfil, setPerfil] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // ... a função fetchPerfil continua a mesma ...
     const fetchPerfil = async () => {
       try {
         const token = localStorage.getItem('userToken');
-        const response = await fetch(`/api/colaboradores/${id}`, { headers: { 'Authorization': `Bearer ${token}` } });
+        const response = await fetch(`/api/colaboradores/${id}`, {
+          headers: { 'Authorization': `Bearer ${token}` },
+        });
         if (!response.ok) throw new Error('Falha ao buscar perfil do colaborador.');
         const data = await response.json();
         setPerfil(data);
-      } catch (err) { setError(err.message); } 
-      finally { setLoading(false); }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchPerfil();
   }, [id]);
@@ -30,10 +34,10 @@ const PerfilColaborador = () => {
   if (error) return <div style={{ color: 'red' }}>Erro: {error}</div>;
   if (!perfil) return <div>Perfil não encontrado.</div>;
 
-  const { colaborador, asos, treinamentos, documentos } = perfil;
+  // Desestrutura todos os dados recebidos da API
+  const { colaborador, detalhesFuncao, asos, treinamentos, documentos } = perfil;
 
   return (
-    // 2. ADICIONA AS CLASSES CSS PARA A ESTILIZAÇÃO
     <div className="perfil-container">
       <Link to="/cliente/colaboradores" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: '#007bff', marginBottom: '20px' }}>
         <FaArrowLeft /> Voltar para a lista
@@ -44,7 +48,28 @@ const PerfilColaborador = () => {
         <p>{colaborador.funcao}</p>
       </header>
 
-      {/* Seção de ASOs */}
+      {/* --- WIDGET DE REQUISITOS DA FUNÇÃO --- */}
+      {detalhesFuncao && (
+        <div className="perfil-widget">
+          <h3>Requisitos para a Função de "{detalhesFuncao.nome}"</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+            <div>
+              <strong>Riscos Associados:</strong>
+              <ul>{detalhesFuncao.riscos.map(r => <li key={r._id}>{r.nome}</li>)}</ul>
+            </div>
+            <div>
+              <strong>Exames Requeridos:</strong>
+              <ul>{detalhesFuncao.examesRequeridos.map(e => <li key={e._id}>{e.nome}</li>)}</ul>
+            </div>
+            <div>
+              <strong>Treinamentos Requeridos:</strong>
+              <ul>{detalhesFuncao.treinamentosRequeridos.map(t => <li key={t._id}>{t.nome}</li>)}</ul>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* --- WIDGET DE HISTÓRICO DE ASOS --- */}
       <div className="perfil-widget">
         <h3>Histórico de ASOs</h3>
         {asos.length > 0 ? (
@@ -64,7 +89,7 @@ const PerfilColaborador = () => {
         ) : <p>Nenhum ASO registrado.</p>}
       </div>
 
-      {/* Seção de Treinamentos */}
+      {/* --- WIDGET DE HISTÓRICO DE TREINAMENTOS --- */}
       <div className="perfil-widget">
         <h3>Histórico de Treinamentos</h3>
         {treinamentos.length > 0 ? (
@@ -83,7 +108,7 @@ const PerfilColaborador = () => {
         ) : <p>Nenhum treinamento registrado.</p>}
       </div>
 
-       {/* Seção de Documentos */}
+       {/* --- WIDGET DE OUTROS DOCUMENTOS VINCULADOS --- */}
        <div className="perfil-widget">
         <h3>Outros Documentos Vinculados</h3>
         {documentos.length > 0 ? (
