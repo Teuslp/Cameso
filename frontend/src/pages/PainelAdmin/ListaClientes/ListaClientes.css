@@ -87,3 +87,54 @@
   color: #dc3545;
   font-weight: bold;
 }
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.add-btn {
+  background-color: #28a745; /* verde */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.add-btn:hover {
+  background-color: #218838;
+}
+
+/* Adicione ao seu PainelAdmin.css */
+
+.actions-cell {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.action-btn.edit {
+  background-color: #ffc107; /* Amarelo */
+}
+.action-btn.edit:hover {
+  background-color: #e0a800;
+}
+
+.action-btn.delete {
+  background-color: #dc3545; /* Vermelho */
+}
+.action-btn.delete:hover {
+  background-color: #c82333;
+}
+
+.action-btn.details {
+  background-color: #007bff; /* Azul */
+  text-decoration: none; /* Remove sublinhado do Link */
+  display: inline-block;
+}
+.action-btn.details:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,111 @@
+/* frontend/src/pages/PainelAdmin/DetalhesCliente/DetalhesCliente.css (NOVO) */
+
+.details-container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #007bff;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+.details-header {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.details-header h1 {
+  margin: 0 0 10px 0;
+  font-size: 2rem;
+  color: #1e293b;
+}
+
+.details-header p {
+  margin: 5px 0 0;
+  color: #64748b;
+}
+
+/* --- Estilo do Acordeão --- */
+.details-accordion-item {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+.details-accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  background-color: #f8fafc;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.details-accordion-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #334155;
+}
+
+.details-accordion-icon {
+  font-size: 1rem;
+  color: #94a3b8;
+  transition: transform 0.3s ease;
+}
+
+.details-accordion-item.open .details-accordion-icon {
+  transform: rotate(180deg);
+}
+
+.details-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.details-accordion-content.open {
+  max-height: 1000px; /* Altura suficiente para qualquer conteúdo */
+}
+
+.details-content-padding {
+    padding: 20px;
+}
+
+/* --- Tabela para listas --- */
+.details-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.details-table th, .details-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.details-table thead th {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.details-table tbody tr:last-child td {
+    border-bottom: none;
+}

@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Adicione este código ao seu arquivo index.css */
+
+/* Garante que o layout base ocupe toda a altura */
+html, body, #root {
+  height: 100%;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* O container ocupa no mínimo 100% da altura da tela */
+}
+
+.app-content {
+  flex-grow: 1; /* Faz o conteúdo principal "crescer" e empurrar o footer para baixo */
+}
