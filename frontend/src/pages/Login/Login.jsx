@@ -1,84 +1,104 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FiMail, FiLock } from "react-icons/fi";
-import axios from "axios";
-import LOGO from "../../assets/logoc.png";
-import "./Login.css";
-import { useAuth } from "../../context/AuthContext";
+// frontend/src/pages/Login/Login.jsx (VERSÃO CORRIGIDA)
 
-export default function Login() {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [erro, setErro] = useState("");
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import logo from '../../assets/logoc.png';
+import './Login.css';
+
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false);
+
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setErro("");
-
-    if (!email || !senha) {
-      setErro("Por favor, preencha todos os campos.");
-      return;
-    }
     setLoading(true);
+    setError('');
 
     try {
-      const response = await axios.post("http://localhost:3001/auth/login", {
-        email,
-        senha,
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, senha }),
       });
 
-      const { token, user } = response.data;
-      
-      // ALTERAÇÃO AQUI: Passa o token e o utilizador para a função de contexto
-      login(user, token);
+      const data = await response.json();
 
-      if (user.role === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/cliente");
+      if (!response.ok) {
+        throw new Error(data.message || 'Falha no login. Verifique suas credenciais.');
       }
+
+      // --- CORREÇÃO APLICADA AQUI ---
+      setLoading(false); // 1. Primeiro, removemos o estado de "carregando".
+      setLoginSuccess(true); // 2. Agora, ativamos o estado de sucesso.
+      
+      setTimeout(() => {
+        login(data.user, data.token);
+        navigate(data.user.role === 'admin' ? '/admin' : '/cliente');
+      }, 1500);
+
     } catch (err) {
-      const errorMsg = err.response?.data?.message || "Erro ao fazer login. Verifique suas credenciais.";
-      setErro(errorMsg);
-    } finally {
+      setError(err.message);
       setLoading(false);
     }
   };
 
-  // O seu JSX permanece o mesmo
   return (
-    <div className="login-container">
-      {/* ... */}
-      <form onSubmit={handleLogin} className="login-form">
-          {/* ... */}
-          <div className="input-wrapper">
-              <FiMail className="input-icon" />
-              <input
-                type="email"
+    <div className="login-page">
+      <div className="login-container">
+        
+        <div className="login-branding">
+          <img src={logo} alt="Cameso Logo" />
+          <h1>Bem-vindo ao Portal do Cliente</h1>
+          <p>Sua plataforma completa para gestão de Saúde e Segurança do Trabalho.</p>
+        </div>
+
+        <div className="login-form-wrapper">
+          <h2>Acesse sua conta</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input 
+                type="email" 
+                id="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Digite seu e-mail"
+                required
               />
             </div>
-          {/* ... */}
-          <div className="input-wrapper">
-              <FiLock className="input-icon" />
-              <input
-                type="password"
+            <div className="form-group">
+              <label htmlFor="senha">Senha</label>
+              <input 
+                type="password" 
+                id="senha"
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
-                placeholder="Digite sua senha"
+                required
               />
             </div>
-            {erro && <p className="erro-msg">{erro}</p>}
-            <button type="submit" className="login-btn" disabled={loading}>
-            {loading ? "Entrando..." : "Entrar"}
-          </button>
-      </form>
-      {/* ... */}
+            {error && <p className="error-message">{error}</p>}
+            
+            <button type="submit" className={`login-btn ${loginSuccess ? 'success' : ''}`} disabled={loading || loginSuccess}>
+              {loading ? 'Entrando...' : (loginSuccess ? 'Bem-vindo!' : 'Entrar')}
+            </button>
+            
+            <div className="login-links">
+              <Link to="/esqueci-senha">Esqueceu sua senha?</Link>
+            </div>
+          </form>
+        </div>
+
+      </div>
     </div>
   );
-}
+};
+
+export default Login;
