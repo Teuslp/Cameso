@@ -45,6 +45,7 @@ import DetalhesCliente from "./pages/PainelAdmin/DetalhesCliente/DetalhesCliente
 import AdminLayout from "./pages/PainelAdmin/AdminLayout";
 import GestaoExames from "./pages/PainelAdmin/GestaoExames/GestaoExames";
 import GestaoRiscos from "./pages/PainelAdmin/GestaoRiscos/index.jsx";
+import GestaoTreinamentos from "./pages/PainelAdmin/GestaoTreinamentos/GestaoTreinamentos";
 
 
 
@@ -103,6 +104,7 @@ function App() {
                 <Route path="clientes/:id" element={<DetalhesCliente />} />
                 <Route path="exames" element={<GestaoExames />} />
                 <Route path="riscos" element={<GestaoRiscos />} />
+                <Route path="treinamentos" element={<GestaoTreinamentos />} />
               </Route>
             </Routes>
           </main>

@@ -1,0 +1,57 @@
+/* frontend/src/pages/PainelAdmin/GestaoRiscos/GestaoRiscos.css (NOVO) */
+
+.form-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin-bottom: 30px;
+}
+
+.form-card h2 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.risco-form-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.risco-form-inputs input,
+.risco-form-inputs select {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.risco-form-inputs input[name="nome"] {
+  flex-basis: 250px;
+}
+.risco-form-inputs select[name="tipo"] {
+  flex-basis: 150px;
+}
+.risco-form-inputs input[name="descricao"] {
+  flex-basis: 300px;
+}
+
+.risco-form-inputs button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  background-color: #28a745;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.risco-form-inputs button:hover {
+  background-color: #218838;
+}
