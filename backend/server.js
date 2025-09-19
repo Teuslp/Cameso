@@ -1,5 +1,3 @@
-// backend/server.js (VERSÃO CORRIGIDA)
-
 import express from "express";
 import nodemailer from "nodemailer";
 import cors from "cors";
@@ -7,7 +5,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cron from 'node-cron';
 
-// Imports das rotas da nossa aplicação
+//rotas 
 import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin.js";
 import clienteRoutes from "./routes/cliente.js";
@@ -41,8 +39,8 @@ app.post("/contact", async (req, res) => {
 });
 
 // Rotas da aplicação do portal
-app.use("/api/auth", authRoutes); // <-- CORREÇÃO APLICADA AQUI
-app.use("/admin", adminRoutes);
+app.use("/api/auth", authRoutes); 
+app.use("/api/admin", adminRoutes);
 app.use("/cliente", clienteRoutes);
 app.use('/api/colaboradores', colaboradorRoutes);
 app.use('/api/documentos', documentoRoutes);

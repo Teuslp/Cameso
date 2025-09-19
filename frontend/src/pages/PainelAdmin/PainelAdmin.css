@@ -1,107 +1,89 @@
-/* PainelAdmin.css */
-.admin-panel {
-  display: flex;
+/* frontend/src/pages/PainelAdmin/PainelAdmin.css (NOVO ARQUIVO) */
+
+.admin-container {
+  padding: 30px;
+  background-color: #f5f6fa;
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f6f8;
 }
 
-/* Menu lateral */
-.sidebar {
-  width: 220px;
-  background-color: #1f2937;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  padding: 20px 0;
-  position: fixed;
-  height: 100%;
-}
-
-.sidebar h2 {
-  text-align: center;
-  color: #00bcd4;
+.admin-header {
   margin-bottom: 30px;
 }
 
-.sidebar ul {
-  list-style: none;
-  padding: 0;
+.admin-header h1 {
+  font-size: 2.2rem;
+  color: #0f172a;
   margin: 0;
-  flex: 1;
 }
 
-.sidebar ul li {
-  display: flex;
-  align-items: center;
-  padding: 12px 20px;
-  cursor: pointer;
-  transition: 0.2s;
+.admin-header p {
+  font-size: 1.1rem;
+  color: #64748b;
+  margin-top: 5px;
 }
 
-.sidebar ul li i {
-  margin-right: 10px;
-}
-
-.sidebar ul li.active,
-.sidebar ul li:hover {
-  background-color: #374151;
-}
-
-/* Conteúdo principal */
-.main-content {
-  margin-left: 220px;
-  padding: 30px;
-  flex: 1;
-}
-
-.main-content section {
+.admin-card {
   background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-.main-content h2 {
-  margin-bottom: 15px;
-  color: #1f2937;
+.admin-card h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 15px;
 }
 
-.main-content ul {
-  list-style: none;
-  padding: 0;
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-.main-content ul li {
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-  display: flex;
-  justify-content: space-between;
+.admin-table th, .admin-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.main-content ul li:last-child {
+.admin-table thead th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #475569;
+}
+
+.admin-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.admin-table td {
+  color: #334155;
+}
+
+.admin-table td:last-child {
+  text-align: center;
+}
+.admin-table tr:last-child td {
   border-bottom: none;
 }
 
-.main-content input[type="file"],
-.main-content input[type="text"] {
-  padding: 8px;
-  width: calc(100% - 16px);
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.main-content button {
+.action-btn {
   padding: 8px 16px;
+  border-radius: 8px;
   border: none;
-  border-radius: 5px;
-  background-color: #00bcd4;
+  background-color: #007bff;
   color: white;
+  font-weight: 500;
   cursor: pointer;
+  transition: background-color 0.2s;
+}
+.action-btn:hover {
+  background-color: #0056b3;
 }
 
-.main-content button:hover {
-  background-color: #0097a7;
+.error-message {
+  color: #dc3545;
+  font-weight: bold;
 }

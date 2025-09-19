@@ -1,83 +1,91 @@
-import React, { useState } from "react";
-import { FaUsers, FaUserPlus, FaFileAlt, FaUpload, FaChartBar, FaComments } from "react-icons/fa";
-import ChatAdmin from "./ChatAdmin";
-import "./PainelAdmin.css";
+// frontend/src/pages/PainelAdmin/PainelAdmin.jsx
 
-function PainelAdmin() {
-  const [activeTab, setActiveTab] = useState("clientes");
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // não esqueça de importar!
+import './PainelAdmin.css';
+
+const PainelAdmin = () => {
+  const [clientes, setClientes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchClientes = async () => {
+      try {
+        const token = localStorage.getItem('userToken');
+        const response = await fetch('/api/admin/clientes', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Falha ao buscar a lista de clientes.');
+        }
+
+        const data = await response.json();
+        setClientes(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchClientes();
+  }, []);
+
+  if (loading) {
+    return <div className="admin-container">Carregando clientes...</div>;
+  }
+
+  if (error) {
+    return <div className="admin-container error-message">Erro: {error}</div>;
+  }
 
   return (
-    <div className="admin-panel">
-      {/* Menu lateral */}
-      <aside className="sidebar">
-        <h2>Administração</h2>
-        <ul>
-          <li className={activeTab === "clientes" ? "active" : ""} onClick={() => setActiveTab("clientes")}>
-            <FaUsers /> ㅤGerenciar Clientes
-          </li>
-          <li className={activeTab === "funcionarios" ? "active" : ""} onClick={() => setActiveTab("funcionarios")}>
-            <FaUserPlus /> ㅤExames
-          </li>
-          <li className={activeTab === "upload" ? "active" : ""} onClick={() => setActiveTab("upload")}>
-            <FaUpload /> ㅤUpload Documentos
-          </li>
-          <li className={activeTab === "relatorios" ? "active" : ""} onClick={() => setActiveTab("relatorios")}>
-            <FaChartBar /> ㅤRelatórios Internos
-          </li>
-          <li className={activeTab === "chat" ? "active" : ""} onClick={() => setActiveTab("chat")}>
-            <FaComments /> ㅤMensagens
-          </li>
-        </ul>
-      </aside>
+    <div className="admin-container">
+      <header className="admin-header">
+        <h1>Painel Administrativo</h1>
+        <p>Visão geral e gerenciamento de clientes.</p>
+      </header>
 
-      {/* Conteúdo principal */}
-      <main className="main-content">
-        {activeTab === "clientes" && (
-          <section>
-            <h2>Gerenciar Clientes</h2>
-            <ul>
-              <li>Cliente 01 <button>Editar</button></li>
-              <li>Cliente 02 <button>Editar</button></li>
-            </ul>
-            <button>Novo Cliente</button>
-          </section>
-        )}
-
-        {activeTab === "funcionarios" && (
-          <section>
-            <h2>Cadastrar Funcionários/Exames</h2>
-            <input type="text" placeholder="Nome do Funcionário" />
-            <input type="text" placeholder="Exame" />
-            <button>Adicionar</button>
-          </section>
-        )}
-
-        {activeTab === "upload" && (
-          <section>
-            <h2>Upload de Documentos</h2>
-            <input type="file" />
-            <button>Enviar</button>
-          </section>
-        )}
-
-        {activeTab === "relatorios" && (
-          <section>
-            <h2>Relatórios Internos</h2>
-            <ul>
-              <li>Relatório Mensal 01</li>
-              <li>Relatório Mensal 02</li>
-            </ul>
-          </section>
-        )}
-
-        {activeTab === "chat" && (
-          <section className="chat-section">
-            <ChatAdmin />
-          </section>
-        )}
-      </main>
+      <div className="admin-card">
+        <h2>Lista de Clientes</h2>
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th>Razão Social</th>
+              <th>CNPJ</th>
+              <th>Contato Principal</th>
+              <th>Email</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {clientes.length > 0 ? (
+              clientes.map((cliente) => (
+                <tr key={cliente._id}>
+                  <td>{cliente.razaoSocial || '--'}</td>
+                  <td>{cliente.cnpj || '--'}</td>
+                  <td>{cliente.nome || '--'}</td>
+                  <td>{cliente.email || '--'}</td>
+                  <td>
+                    <Link to={`/admin/clientes/${cliente._id}`} className="action-btn">
+                      Detalhes
+                    </Link>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5">Nenhum cliente encontrado.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
-}
+};
 
 export default PainelAdmin;
