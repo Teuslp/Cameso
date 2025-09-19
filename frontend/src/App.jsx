@@ -42,6 +42,7 @@ import DetalheChamado from "./pages/Cliente/Chamados/DetalheChamado";
 import PerfilColaborador from "./pages/Cliente/Colaboradores/PerfilColaborador";
 import ListaFuncoes from "./pages/Cliente/Funcoes/ListaFuncoes";
 import FormFuncao from "./pages/Cliente/Funcoes/FormFuncao";
+import Perfil from "./pages/Cliente/Perfil/Perfil";
 
 
 function App() {
@@ -89,6 +90,7 @@ function App() {
             <Route path="funcoes" element={<ListaFuncoes />} />
             <Route path="funcoes/nova" element={<FormFuncao />} />
             <Route path="funcoes/editar/:id" element={<FormFuncao />} />
+            <Route path="perfil" element={<Perfil />} />
 
           </Route>
 

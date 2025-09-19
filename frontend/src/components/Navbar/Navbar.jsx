@@ -1,4 +1,4 @@
-// frontend/src/components/Navbar/Navbar.jsx (VERSÃO CORRIGIDA E COMPLETA)
+// frontend/src/components/Navbar/Navbar.jsx (VERSÃO 100% COMPLETA E CORRIGIDA)
 
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -77,6 +77,10 @@ function Navbar() {
                 <FaUserCircle size={22} className="user-icon" onClick={() => setUserMenuOpen((v) => !v)} />
                 <ul className={`user-menu ${userMenuOpen ? "show" : ""}`}>
                   <li><Link to={user.role === "admin" ? "/admin" : "/cliente"} onClick={() => setUserMenuOpen(false)}>Meu Painel</Link></li>
+                  
+                  {/* --- LINK DE PERFIL ADICIONADO AQUI (DESKTOP) --- */}
+                  <li><Link to="/cliente/perfil" onClick={() => setUserMenuOpen(false)}>Configurações</Link></li>
+                  
                   <li><button onClick={handleLogout}>Sair</button></li>
                 </ul>
               </div>
@@ -87,7 +91,7 @@ function Navbar() {
         </div>
       </div>
 
-      {/* --- MENU MOBILE (sem alterações de estrutura) --- */}
+      {/* --- MENU MOBILE (com a alteração) --- */}
       <div className={`side-menu ${menuOpen ? "open" : ""}`}>
         <div className="side-menu-header">
           <FaTimes onClick={() => setMenuOpen(false)} className="close-icon" />
@@ -111,6 +115,10 @@ function Navbar() {
             {user ? (
                 <>
                     <li><Link to={user.role === "admin" ? "/admin" : "/cliente"} onClick={() => setMenuOpen(false)}>Meu Painel</Link></li>
+                    
+                    {/* --- LINK DE PERFIL ADICIONADO AQUI (MOBILE) --- */}
+                    <li><Link to="/cliente/perfil" onClick={() => setMenuOpen(false)}>Configurações</Link></li>
+
                     <li><button onClick={handleLogout}>Sair</button></li>
                 </>
             ) : (

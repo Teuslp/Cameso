@@ -24,6 +24,7 @@ import riscoRoutes from './routes/risco.js';
 import exameRoutes from './routes/exame.js';
 import gerarNotificacoesDeVencimento from './workers/notificationWorker.js';
 import notificacaoRoutes from './routes/notificacao.js';
+import perfilRoutes from './routes/perfil.js';
 
 dotenv.config();
 
@@ -55,6 +56,7 @@ app.use('/api/funcoes', funcaoRoutes);
 app.use('/api/riscos', riscoRoutes);
 app.use('/api/exames', exameRoutes);
 app.use('/api/notificacoes', notificacaoRoutes);
+app.use('/api/perfil', perfilRoutes);
 
 // Conexão ao MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
