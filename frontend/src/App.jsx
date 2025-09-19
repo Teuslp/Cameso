@@ -44,6 +44,8 @@ import ListaClientes from "./pages/PainelAdmin/ListaClientes/ListaClientes";
 import DetalhesCliente from "./pages/PainelAdmin/DetalhesCliente/DetalhesCliente";
 import AdminLayout from "./pages/PainelAdmin/AdminLayout";
 import GestaoExames from "./pages/PainelAdmin/GestaoExames/GestaoExames";
+import GestaoRiscos from "./pages/PainelAdmin/GestaoRiscos/index.jsx";
+
 
 
 function App() {
@@ -100,6 +102,7 @@ function App() {
                 <Route index element={<ListaClientes />} />
                 <Route path="clientes/:id" element={<DetalhesCliente />} />
                 <Route path="exames" element={<GestaoExames />} />
+                <Route path="riscos" element={<GestaoRiscos />} />
               </Route>
             </Routes>
           </main>
