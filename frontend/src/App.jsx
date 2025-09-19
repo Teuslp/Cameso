@@ -42,6 +42,7 @@ import Perfil from "./pages/Cliente/Perfil/Perfil";
 // --- PÁGINAS DO PAINEL DO ADMIN ---
 import ListaClientes from "./pages/PainelAdmin/ListaClientes/ListaClientes";
 import DetalhesCliente from "./pages/PainelAdmin/DetalhesCliente/DetalhesCliente";
+import AdminLayout from "./pages/PainelAdmin/AdminLayout";
 
 
 function App() {
@@ -87,7 +88,14 @@ function App() {
               </Route>
 
               {/* --- ROTAS PROTEGIDAS DO ADMIN --- */}
-              <Route path="/admin" element={<PrivateRoute role="admin"><Outlet /></PrivateRoute>}>
+              <Route
+                path="/admin"
+                element={
+                  <PrivateRoute role="admin">
+                    <AdminLayout /> {/* O Layout agora é o elemento principal */}
+                  </PrivateRoute>
+                }
+              >
                 <Route index element={<ListaClientes />} />
                 <Route path="clientes/:id" element={<DetalhesCliente />} />
               </Route>
