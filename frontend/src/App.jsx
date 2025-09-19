@@ -43,6 +43,7 @@ import Perfil from "./pages/Cliente/Perfil/Perfil";
 import ListaClientes from "./pages/PainelAdmin/ListaClientes/ListaClientes";
 import DetalhesCliente from "./pages/PainelAdmin/DetalhesCliente/DetalhesCliente";
 import AdminLayout from "./pages/PainelAdmin/AdminLayout";
+import GestaoExames from "./pages/PainelAdmin/GestaoExames/GestaoExames";
 
 
 function App() {
@@ -98,6 +99,7 @@ function App() {
               >
                 <Route index element={<ListaClientes />} />
                 <Route path="clientes/:id" element={<DetalhesCliente />} />
+                <Route path="exames" element={<GestaoExames />} />
               </Route>
             </Routes>
           </main>
