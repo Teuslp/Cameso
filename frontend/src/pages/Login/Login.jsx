@@ -1,8 +1,9 @@
-// frontend/src/pages/Login/Login.jsx (VERSÃO CORRIGIDA)
+// frontend/src/pages/Login/Login.jsx
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import api from '../../api/axios'; // <-- usamos a instância do axios configurada
 import logo from '../../assets/logoc.png';
 import './Login.css';
 
@@ -22,31 +23,27 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, senha }),
-      });
+      // Agora chamamos o backend usando axios
+      const response = await api.post('/auth/login', { email, senha });
+      const data = response.data;
 
-      const data = await response.json();
+      setLoading(false);
+      setLoginSuccess(true);
 
-      if (!response.ok) {
-        throw new Error(data.message || 'Falha no login. Verifique suas credenciais.');
-      }
-
-      // --- CORREÇÃO APLICADA AQUI ---
-      setLoading(false); // 1. Primeiro, removemos o estado de "carregando".
-      setLoginSuccess(true); // 2. Agora, ativamos o estado de sucesso.
-      
       setTimeout(() => {
         login(data.user, data.token);
         navigate(data.user.role === 'admin' ? '/admin' : '/cliente');
       }, 1500);
 
     } catch (err) {
-      setError(err.message);
+      console.error("Erro no login:", err);
+
+      // Captura erro do backend ou erro de rede
+      const errorMessage =
+        err.response?.data?.message ||
+        'Falha no login. Verifique suas credenciais ou tente novamente.';
+
+      setError(errorMessage);
       setLoading(false);
     }
   };
@@ -86,7 +83,11 @@ const Login = () => {
             </div>
             {error && <p className="error-message">{error}</p>}
             
-            <button type="submit" className={`login-btn ${loginSuccess ? 'success' : ''}`} disabled={loading || loginSuccess}>
+            <button 
+              type="submit" 
+              className={`login-btn ${loginSuccess ? 'success' : ''}`} 
+              disabled={loading || loginSuccess}
+            >
               {loading ? 'Entrando...' : (loginSuccess ? 'Bem-vindo!' : 'Entrar')}
             </button>
             
