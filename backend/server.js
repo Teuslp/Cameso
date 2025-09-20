@@ -1,4 +1,4 @@
-// backend/server.js (VERSÃO CORRIGIDA PARA DEPLOY)
+// backend/server.js (VERSÃO FINAL DE DEBUG PARA DEPLOY)
 
 import express from "express";
 import nodemailer from "nodemailer";
@@ -11,6 +11,7 @@ import cron from 'node-cron';
 import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin.js";
 import clienteRoutes from "./routes/cliente.js";
+// ... (todos os seus outros imports de rotas)
 import colaboradorRoutes from './routes/colaborador.js';
 import documentoRoutes from './routes/documento.js';
 import asoRoutes from './routes/aso.js';
@@ -26,28 +27,42 @@ import gerarNotificacoesDeVencimento from './workers/notificationWorker.js';
 import notificacaoRoutes from './routes/notificacao.js';
 import perfilRoutes from './routes/perfil.js';
 
+
 dotenv.config();
 
 const app = express();
 
-// --- CORREÇÃO APLICADA AQUI ---
+// --- LOG DE DIAGNÓSTICO ---
+// Este middleware irá imprimir no log da Render toda requisição que chegar.
+app.use((req, res, next) => {
+  console.log(`[LOG] Recebida requisição: ${req.method} ${req.path} de origem: ${req.headers.origin}`);
+  next();
+});
+
+// --- CONFIGURAÇÃO DE CORS MAIS ROBUSTA ---
+const whitelist = [
+    'https://cameso.vercel.app', 
+    'https://cameso-qxt3k8h4y-teuslps-projects.vercel.app' // Sua URL de preview da Vercel
+];
 const corsOptions = {
-  origin: 'https://cameso.vercel.app' // Sua URL do Vercel
+  origin: function (origin, callback) {
+    // Permite requisições sem 'origin' (como Postman ou testes de servidor) OU se a origem estiver na whitelist
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      console.error(`[CORS] Bloqueada a origem: ${origin}`);
+      callback(new Error('Não permitido pelo CORS'))
+    }
+  }
 };
-app.use(cors(corsOptions)); // Ativando as regras de CORS
-// --- FIM DA CORREÇÃO ---
+app.use(cors(corsOptions));
+// --- FIM DA CONFIGURAÇÃO DE CORS ---
 
 app.use(express.json());
 
-// Torna a pasta 'uploads' publicamente acessível para downloads
+// ... (o resto do seu server.js continua igual)
 app.use('/uploads', express.static('uploads'));
-
-// Rota de contato (funcionalidade original)
-app.post("/contact", async (req, res) => {
-  // ... seu código de envio de e-mail ...
-});
-
-// Rotas da aplicação do portal
+app.post("/contact", async (req, res) => { /* ... */ });
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/cliente", clienteRoutes);
@@ -65,20 +80,11 @@ app.use('/api/exames', exameRoutes);
 app.use('/api/notificacoes', notificacaoRoutes);
 app.use('/api/perfil', perfilRoutes);
 
-// Conexão ao MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("✅ MongoDB conectado"))
   .catch(err => console.error("❌ Erro ao conectar MongoDB:", err));
 
-// Agenda a tarefa para rodar todo dia à 1 da manhã
-cron.schedule('0 1 * * *', () => {
-  console.log('Executando a tarefa agendada de verificação de vencimentos...');
-  gerarNotificacoesDeVencimento();
-}, {
-  scheduled: true,
-  timezone: "America/Sao_Paulo"
-});
+cron.schedule('0 1 * * *', () => { /* ... */ });
 
-// Start do servidor
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`🚀 Servidor rodando em http://localhost:${PORT}`));
