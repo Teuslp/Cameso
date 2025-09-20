@@ -1,0 +1,14 @@
+/* frontend/src/pages/Cliente/Chamados/DetalheChamado.css */
+.conversa-container { background-color: #fff; border-radius: 12px; margin-top: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.conversa-header { padding: 20px; border-bottom: 1px solid #e2e8f0; }
+.conversa-header h3 { margin: 0 0 5px; } .conversa-header p { margin: 0; color: #64748b; }
+.conversa-mensagens { padding: 20px; max-height: 500px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+.mensagem { max-width: 70%; padding: 10px 15px; border-radius: 12px; }
+.mensagem.minha { background-color: #dcf8c6; align-self: flex-end; } /* Sua mensagem (cliente) */
+.mensagem.outra { background-color: #e2e8f0; align-self: flex-start; } /* Mensagem do Admin */
+.mensagem-autor { font-weight: bold; font-size: 0.8rem; margin-bottom: 5px; }
+.mensagem-timestamp { font-size: 0.75rem; color: #64748b; text-align: right; margin-top: 5px; }
+.conversa-resposta { padding: 20px; border-top: 1px solid #e2e8f0; }
+.conversa-resposta textarea { width: 100%; border-radius: 8px; padding: 10px; border: 1px solid #cbd5e1; margin-bottom: 10px; }
+.conversa-resposta button { padding: 10px 20px; border: none; border-radius: 8px; background-color: #28a745; color: white; font-weight: bold; cursor: pointer; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #007bff; text-decoration: none; }

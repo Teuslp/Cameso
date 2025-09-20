@@ -46,6 +46,8 @@ import AdminLayout from "./pages/PainelAdmin/AdminLayout";
 import GestaoExames from "./pages/PainelAdmin/GestaoExames/GestaoExames";
 import GestaoRiscos from "./pages/PainelAdmin/GestaoRiscos/index.jsx";
 import GestaoTreinamentos from "./pages/PainelAdmin/GestaoTreinamentos/GestaoTreinamentos";
+import ListaChamadosAdmin from "./pages/PainelAdmin/GestaoChamados/ListaChamadosAdmin";
+import DetalheChamadoAdmin from "./pages/PainelAdmin/GestaoChamados/DetalheChamadoAdmin";
 
 
 
@@ -105,6 +107,8 @@ function App() {
                 <Route path="exames" element={<GestaoExames />} />
                 <Route path="riscos" element={<GestaoRiscos />} />
                 <Route path="treinamentos" element={<GestaoTreinamentos />} />
+                <Route path="chamados" element={<ListaChamadosAdmin />} />
+                <Route path="chamados/:id" element={<DetalheChamadoAdmin />} />
               </Route>
             </Routes>
           </main>

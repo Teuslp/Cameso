@@ -1,83 +1,80 @@
-// frontend/src/pages/Cliente/Chamados/DetalheChamado.jsx (NOVO ARQUIVO)
-import React, { useState, useEffect } from 'react';
+// frontend/src/pages/Cliente/Chamados/DetalheChamado.jsx (VERSÃO PADRONIZADA)
+
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import { useAuth } from '../../../context/AuthContext';
+import api from '../../../api/axios';
+import './DetalheChamado.css';
 
 const DetalheChamado = () => {
-    const { id } = useParams(); // Pega o ID do chamado da URL
+    const { id } = useParams();
+    const { user } = useAuth();
     const [chamado, setChamado] = useState(null);
     const [loading, setLoading] = useState(true);
     const [novaResposta, setNovaResposta] = useState('');
+    const messagesEndRef = useRef(null);
 
-    const fetchChamado = async () => {
-        // ... (lógica para buscar o chamado por ID)
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     useEffect(() => {
         const fetchChamado = async () => {
             try {
-                const token = localStorage.getItem('userToken');
-                const response = await fetch(`/api/chamados/${id}`, { headers: { 'Authorization': `Bearer ${token}` } });
-                if (!response.ok) throw new Error('Chamado não encontrado.');
-                const data = await response.json();
-                setChamado(data);
-            } catch (err) {
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
+                const response = await api.get(`/api/chamados/${id}`);
+                setChamado(response.data);
+            } catch (err) { console.error(err); } 
+            finally { setLoading(false); }
         };
         fetchChamado();
     }, [id]);
 
+    useEffect(() => {
+        scrollToBottom();
+    }, [chamado]);
+
     const handleResponder = async (e) => {
         e.preventDefault();
         try {
-            const token = localStorage.getItem('userToken');
-            const response = await fetch(`/api/chamados/${id}/responder`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-                body: JSON.stringify({ conteudo: novaResposta })
-            });
-            if (!response.ok) throw new Error('Erro ao enviar resposta.');
-            const data = await response.json();
-            setChamado(data); // Atualiza o chamado com a nova mensagem
-            setNovaResposta(''); // Limpa o campo de texto
-        } catch (err) {
-            console.error(err);
-        }
+            const response = await api.post(`/api/chamados/${id}/responder`, { conteudo: novaResposta });
+            setChamado(response.data);
+            setNovaResposta('');
+        } catch (err) { console.error(err); }
     };
-
+    
     if (loading) return <div>Carregando conversa...</div>;
     if (!chamado) return <div>Chamado não encontrado.</div>;
 
     return (
-        <div style={{ padding: '20px' }}>
-            <Link to="/cliente/chamados" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none', color: '#007bff', marginBottom: '20px' }}>
-                <FaArrowLeft /> Voltar para chamados
-            </Link>
-            <h2 style={{ marginTop: '20px' }}>{chamado.assunto}</h2>
-            <div style={{ border: '1px solid #ccc', borderRadius: '8px', marginTop: '20px', padding: '20px', minHeight: '300px' }}>
-                {chamado.mensagens.map(msg => (
-                    <div key={msg._id} style={{ marginBottom: '15px', padding: '10px', borderRadius: '8px', backgroundColor: msg.autor.role === 'cliente' ? '#e1f5fe' : '#f1f8e9' }}>
-                        <strong>{msg.autor.nome} ({msg.autor.role}):</strong>
-                        <p style={{ margin: '5px 0 0' }}>{msg.conteudo}</p>
-                        <small>{new Date(msg.timestamp).toLocaleString('pt-BR')}</small>
-                    </div>
-                ))}
+        <div className="admin-container"> {/* Usando classe do admin para consistência */}
+            <Link to="/cliente/chamados" className="back-link">{"< Voltar para a lista de chamados"}</Link>
+            
+            <div className="conversa-container">
+                <div className="conversa-header">
+                    <h3>{chamado.assunto}</h3>
+                    <p>Status: {chamado.status}</p>
+                </div>
+                <div className="conversa-mensagens">
+                    {chamado.mensagens && [...chamado.mensagens].sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)).map(msg => {
+                        // A lógica de verificação de quem é a mensagem
+                        const isMyMessage = msg.autor._id === user._id;
+                        return (
+                            <div key={msg._id} className={`mensagem ${isMyMessage ? 'minha' : 'outra'}`}>
+                                <div className="mensagem-autor">{isMyMessage ? 'Você' : msg.autor.nome}</div>
+                                <div className="mensagem-conteudo">{msg.conteudo}</div>
+                                <div className="mensagem-timestamp">{new Date(msg.timestamp).toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}</div>
+                            </div>
+                        );
+                    })}
+                    <div ref={messagesEndRef} />
+                </div>
+                <form onSubmit={handleResponder} className="conversa-resposta">
+                    <textarea value={novaResposta} onChange={e => setNovaResposta(e.target.value)}
+                        placeholder="Escreva sua resposta..." rows="3" required
+                    />
+                    <button type="submit">Enviar Resposta</button>
+                </form>
             </div>
-
-            <form onSubmit={handleResponder} style={{ marginTop: '20px' }}>
-                <textarea
-                    value={novaResposta}
-                    onChange={e => setNovaResposta(e.target.value)}
-                    placeholder="Escreva sua resposta..."
-                    rows="4"
-                    required
-                    style={{ width: '100%', padding: '10px' }}
-                />
-                <button type="submit" style={{ marginTop: '10px', padding: '10px 15px' }}>Enviar Resposta</button>
-            </form>
         </div>
     );
 };
