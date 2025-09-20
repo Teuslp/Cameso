@@ -2,8 +2,10 @@
 
 import React, { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { FaUsers, FaClipboardList, FaShieldAlt, FaCertificate, 
-  FaSignOutAlt, FaAngleDoubleLeft, FaAngleDoubleRight, FaHeadset } from 'react-icons/fa';
+import {
+  FaUsers, FaClipboardList, FaShieldAlt, FaCertificate,
+  FaSignOutAlt, FaAngleDoubleLeft, FaAngleDoubleRight, FaHeadset, FaCalendarAlt
+} from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext';
 import './AdminLayout.css'; // Usará o novo CSS
 
@@ -24,12 +26,16 @@ const AdminLayout = () => {
           <h2>Painel ADM</h2>
           <ul>
             <li><NavLink to="/admin" end title="Clientes"><FaUsers /> <span className="nav-text">Clientes</span></NavLink></li>
-            
+
             <li className="menu-header"><span className="nav-text">Catálogos</span></li>
-            
+
             <li><NavLink to="/admin/exames" title="Exames"><FaClipboardList /> <span className="nav-text">Exames</span></NavLink></li>
             <li><NavLink to="/admin/riscos" title="Riscos"><FaShieldAlt /> <span className="nav-text">Riscos</span></NavLink></li>
             <li><NavLink to="/admin/treinamentos" title="Treinamentos"><FaCertificate /> <span className="nav-text">Treinamentos</span></NavLink></li>
+
+            <li className="menu-header"><span className="nav-text">comunicação</span></li>
+
+            <li><NavLink to="/admin/agendamentos"><FaCalendarAlt /> <span className="nav-text">Agendamentos</span></NavLink></li>
             <li><NavLink to="/admin/chamados"><FaHeadset /> <span className="nav-text">Suporte</span></NavLink></li>
           </ul>
         </nav>

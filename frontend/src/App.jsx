@@ -48,7 +48,7 @@ import GestaoRiscos from "./pages/PainelAdmin/GestaoRiscos/index.jsx";
 import GestaoTreinamentos from "./pages/PainelAdmin/GestaoTreinamentos/GestaoTreinamentos";
 import ListaChamadosAdmin from "./pages/PainelAdmin/GestaoChamados/ListaChamadosAdmin";
 import DetalheChamadoAdmin from "./pages/PainelAdmin/GestaoChamados/DetalheChamadoAdmin";
-
+import GestaoAgendamentos from "./pages/PainelAdmin/GestaoAgendamentos/GestaoAgendamentos";
 
 
 function App() {
@@ -109,6 +109,7 @@ function App() {
                 <Route path="treinamentos" element={<GestaoTreinamentos />} />
                 <Route path="chamados" element={<ListaChamadosAdmin />} />
                 <Route path="chamados/:id" element={<DetalheChamadoAdmin />} />
+                <Route path="agendamentos" element={<GestaoAgendamentos />} />
               </Route>
             </Routes>
           </main>

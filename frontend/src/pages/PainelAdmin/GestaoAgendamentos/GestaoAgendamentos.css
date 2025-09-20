@@ -1,0 +1,9 @@
+/* frontend/src/pages/PainelAdmin/GestaoAgendamentos/GestaoAgendamentos.css */
+
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}

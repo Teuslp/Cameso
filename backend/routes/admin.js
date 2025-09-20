@@ -1,23 +1,24 @@
-// backend/routes/admin.js (VERSÃO ATUALIZADA)
-
 import express from 'express';
 import { getClientes, getClienteById, createCliente, updateCliente, deleteCliente } from '../controllers/adminController.js';
 
-// 1. Importe as novas funções de admin do chamadoController
 import { 
     getAllChamadosAdmin, 
     getChamadoByIdAdmin, 
     updateChamadoStatus,
-    addResposta // A função de resposta agora também é usada pelo admin
+    addResposta, 
 } from '../controllers/chamadoController.js';
+
+import { 
+    getAllAgendamentosAdmin, 
+    updateAgendamentoAdmin 
+} from '../controllers/agendamentoController.js';
 
 import {authMiddleware} from '../middleware/authMiddleware.js';
 import { adminMiddleware } from '../middleware/adminMiddleware.js';
 
 const router = express.Router();
-router.use(authMiddleware, adminMiddleware); // Protege todas as rotas abaixo
+router.use(authMiddleware, adminMiddleware); 
 
-// Rotas de Cliente
 router.get('/clientes', getClientes);
 router.post('/clientes', createCliente);
 router.get('/clientes/:id', getClienteById);
@@ -30,6 +31,10 @@ router.get('/chamados', getAllChamadosAdmin); // Listar todos os chamados
 router.get('/chamados/:id', getChamadoByIdAdmin); // Ver um chamado específico
 router.put('/chamados/:id/status', updateChamadoStatus); // Mudar o status
 router.post('/chamados/:id/responder', addResposta); // Responder a um chamado
+
+// --- 2. NOVAS ROTAS PARA GESTÃO DE AGENDAMENTOS ---
+router.get('/agendamentos', getAllAgendamentosAdmin); // Listar todos os agendamentos
+router.put('/agendamentos/:id', updateAgendamentoAdmin); // Confirmar/Atualizar um agendamento
 
 
 export default router;

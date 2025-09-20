@@ -1,51 +1,66 @@
-// backend/controllers/agendamentoController.js (NOVO ARQUIVO)
+// backend/controllers/agendamentoController.js (VERSÃO ATUALIZADA)
 
 import Agendamento from '../models/Agendamento.js';
+import Notificacao from '../models/Notificacao.js'; // Importa o Model de Notificação
+
+// --- Funções do Cliente (já existentes) ---
+export const createAgendamento = async (req, res) => {
+    // ... (código existente)
+    // Opcional: Adicionar notificação para o admin aqui quando um cliente cria
+};
+export const getAgendamentos = async (req, res) => { /* ... (código existente) ... */ };
+
+
+// --- NOVAS FUNÇÕES EXCLUSIVAS DO ADMIN ---
 
 /**
- * Cria uma nova solicitação de agendamento.
+ * [ADMIN] Lista todos os agendamentos de todos os clientes.
  */
-export const createAgendamento = async (req, res) => {
-  try {
-    const { colaboradorId, tipoExame, dataSugerida, observacoes } = req.body;
-    const clienteId = req.user.id; // Vem do token de autenticação
-
-    if (!colaboradorId || !tipoExame || !dataSugerida) {
-      return res.status(400).json({ message: "Colaborador, tipo de exame e data sugerida são obrigatórios." });
+export const getAllAgendamentosAdmin = async (req, res) => {
+    try {
+        const agendamentos = await Agendamento.find({})
+            .populate('clienteId', 'razaoSocial nome')
+            .populate('colaboradorId', 'nomeCompleto')
+            .sort({ status: 1, dataSugerida: 1 }); // Ordena por status e data
+        res.status(200).json(agendamentos);
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao buscar agendamentos." });
     }
-
-    const novaSolicitacao = new Agendamento({
-      clienteId,
-      colaboradorId,
-      tipoExame,
-      dataSugerida,
-      observacoes,
-      // O status será 'Solicitado' por padrão, como definido no Model.
-    });
-
-    await novaSolicitacao.save();
-    res.status(201).json(novaSolicitacao);
-
-  } catch (error) {
-    console.error("Erro ao criar agendamento:", error);
-    res.status(500).json({ message: "Erro no servidor ao tentar criar agendamento." });
-  }
 };
 
 /**
- * Lista todos os agendamentos de um cliente.
+ * [ADMIN] Confirma ou atualiza um agendamento.
  */
-export const getAgendamentos = async (req, res) => {
-  try {
-    const clienteId = req.user.id;
+export const updateAgendamentoAdmin = async (req, res) => {
+    try {
+        const { id: agendamentoId } = req.params;
+        const { dataConfirmada, localConfirmado, instrucoes, status } = req.body;
 
-    const agendamentos = await Agendamento.find({ clienteId: clienteId })
-      .populate('colaboradorId', 'nomeCompleto') // Busca o nome do colaborador
-      .sort({ createdAt: -1 }); // Ordena pelas solicitações mais recentes primeiro
+        const agendamento = await Agendamento.findById(agendamentoId);
+        if (!agendamento) {
+            return res.status(404).json({ message: "Agendamento não encontrado." });
+        }
 
-    res.status(200).json(agendamentos);
-  } catch (error) {
-    console.error("Erro ao listar agendamentos:", error);
-    res.status(500).json({ message: "Erro no servidor ao tentar listar agendamentos." });
-  }
+        // Atualiza os campos
+        agendamento.dataConfirmada = dataConfirmada || agendamento.dataConfirmada;
+        agendamento.localConfirmado = localConfirmado || agendamento.localConfirmado;
+        agendamento.instrucoes = instrucoes || agendamento.instrucoes;
+        agendamento.status = status || agendamento.status;
+
+        const agendamentoAtualizado = await agendamento.save();
+
+        // Cria uma notificação para o cliente quando o agendamento é confirmado
+        if (status === 'Confirmado') {
+            await new Notificacao({
+                clienteId: agendamento.clienteId,
+                mensagem: `Seu agendamento para ${agendamento.tipoExame} foi confirmado para ${new Date(dataConfirmada).toLocaleDateString('pt-BR')}.`,
+                link: `/cliente/agenda`
+            }).save();
+        }
+
+        res.status(200).json(agendamentoAtualizado);
+
+    } catch (error) {
+        res.status(500).json({ message: "Erro ao atualizar agendamento." });
+    }
 };
