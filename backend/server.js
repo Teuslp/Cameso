@@ -1,3 +1,5 @@
+// backend/server.js (VERSÃO CORRIGIDA PARA DEPLOY)
+
 import express from "express";
 import nodemailer from "nodemailer";
 import cors from "cors";
@@ -27,9 +29,14 @@ import perfilRoutes from './routes/perfil.js';
 dotenv.config();
 
 const app = express();
+
+// --- CORREÇÃO APLICADA AQUI ---
 const corsOptions = {
-  origin: 'https://cameso.vercel.app' // <-- SUBSTITUA PELA URL QUE A VERCEL TE DEU
+  origin: 'https://cameso.vercel.app' // Sua URL do Vercel
 };
+app.use(cors(corsOptions)); // Ativando as regras de CORS
+// --- FIM DA CORREÇÃO ---
+
 app.use(express.json());
 
 // Torna a pasta 'uploads' publicamente acessível para downloads
