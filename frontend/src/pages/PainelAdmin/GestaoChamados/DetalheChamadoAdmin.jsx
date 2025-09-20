@@ -15,7 +15,7 @@ const DetalheChamadoAdmin = () => {
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: 'nearest' });
   };
 
   const fetchChamado = async () => {

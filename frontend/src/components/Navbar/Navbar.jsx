@@ -1,4 +1,4 @@
-// frontend/src/components/Navbar/Navbar.jsx (VERSÃO 100% COMPLETA E CORRIGIDA)
+// frontend/src/components/Navbar/Navbar.jsx (VERSÃO CORRIGIDA E SEGURA)
 
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ function Navbar() {
   const userMenuRef = useRef(null);
   const navigate = useNavigate();
 
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuth(); // Pega o usuário do contexto
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -29,10 +29,10 @@ function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    logout();
+    logout(); // Chama a função de logout do contexto
     setUserMenuOpen(false);
     setMenuOpen(false);
-    navigate("/");
+    navigate("/"); // Navega para a home
   };
 
   return (
@@ -48,7 +48,6 @@ function Navbar() {
           </Link>
         </div>
 
-        {/* --- GRUPO DE LINKS DE NAVEGAÇÃO --- */}
         <ul className="navbar-menu">
           <li><Link to="/">Início</Link></li>
           <li><Link to="/About">Sobre</Link></li>
@@ -68,7 +67,6 @@ function Navbar() {
           <li><Link to="/Contact">Contato</Link></li>
         </ul>
 
-        {/* --- NOVO GRUPO PARA AS AÇÕES DO USUÁRIO --- */}
         <div className="navbar-actions">
           {user ? (
             <>
@@ -76,11 +74,18 @@ function Navbar() {
               <div className="user-dropdown" ref={userMenuRef}>
                 <FaUserCircle size={22} className="user-icon" onClick={() => setUserMenuOpen((v) => !v)} />
                 <ul className={`user-menu ${userMenuOpen ? "show" : ""}`}>
-                  <li><Link to={user.role === "admin" ? "/admin" : "/cliente"} onClick={() => setUserMenuOpen(false)}>Meu Painel</Link></li>
-                  
-                  {/* --- LINK DE PERFIL ADICIONADO AQUI (DESKTOP) --- */}
-                  <li><Link to="/cliente/perfil" onClick={() => setUserMenuOpen(false)}>Configurações</Link></li>
-                  
+                  <li>
+                    {/* --- CORREÇÃO APLICADA AQUI --- */}
+                    <Link
+                      to={user?.role === "admin" ? "/admin" : "/cliente"}
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      Meu Painel
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/cliente/perfil" onClick={() => setUserMenuOpen(false)}>Meu Perfil</Link>
+                  </li>
                   <li><button onClick={handleLogout}>Sair</button></li>
                 </ul>
               </div>
@@ -91,39 +96,38 @@ function Navbar() {
         </div>
       </div>
 
-      {/* --- MENU MOBILE (com a alteração) --- */}
       <div className={`side-menu ${menuOpen ? "open" : ""}`}>
         <div className="side-menu-header">
           <FaTimes onClick={() => setMenuOpen(false)} className="close-icon" />
         </div>
         <ul>
-            {user && (
-                <li className="mobile-user-actions"><NotificationBell /></li>
+          {user && (
+            <li className="mobile-user-actions"><NotificationBell /></li>
+          )}
+          <li><Link to="/" onClick={() => setMenuOpen(false)}>Início</Link></li>
+          <li><Link to="/About" onClick={() => setMenuOpen(false)}>Sobre</Link></li>
+          <li><Link to="/Esocial" onClick={() => setMenuOpen(false)}>eSocial</Link></li>
+          <li className="mobile-dropdown">
+            <div onClick={() => setDropdownOpen((v) => !v)} className="dropdown-toggle">Serviços▾</div>
+            {dropdownOpen && (
+              <ul className="mobile-dropdown-menu">
+                {/* Seus links de serviço aqui */}
+              </ul>
             )}
-            <li><Link to="/" onClick={() => setMenuOpen(false)}>Início</Link></li>
-            <li><Link to="/About" onClick={() => setMenuOpen(false)}>Sobre</Link></li>
-            <li><Link to="/Esocial" onClick={() => setMenuOpen(false)}>eSocial</Link></li>
-            <li className="mobile-dropdown">
-                <div onClick={() => setDropdownOpen((v) => !v)} className="dropdown-toggle">Serviços▾</div>
-                {dropdownOpen && (
-                    <ul className="mobile-dropdown-menu">
-                        {/* Seus links de serviço aqui */}
-                    </ul>
-                )}
-            </li>
-            <li><Link to="/Contact" onClick={() => setMenuOpen(false)}>Contato</Link></li>
-            {user ? (
-                <>
-                    <li><Link to={user.role === "admin" ? "/admin" : "/cliente"} onClick={() => setMenuOpen(false)}>Meu Painel</Link></li>
-                    
-                    {/* --- LINK DE PERFIL ADICIONADO AQUI (MOBILE) --- */}
-                    <li><Link to="/cliente/perfil" onClick={() => setMenuOpen(false)}>Configurações</Link></li>
+          </li>
+          <li><Link to="/Contact" onClick={() => setMenuOpen(false)}>Contato</Link></li>
+          {user ? (
+            <>
+              <li><Link to={user.role === "admin" ? "/admin" : "/cliente"} onClick={() => setMenuOpen(false)}>Meu Painel</Link></li>
 
-                    <li><button onClick={handleLogout}>Sair</button></li>
-                </>
-            ) : (
-                <li><Link to="/Login" onClick={() => setMenuOpen(false)}>Entrar</Link></li>
-            )}
+              {/* --- LINK DE PERFIL ADICIONADO AQUI (MOBILE) --- */}
+              <li><Link to="/cliente/perfil" onClick={() => setMenuOpen(false)}>Configurações</Link></li>
+
+              <li><button onClick={handleLogout}>Sair</button></li>
+            </>
+          ) : (
+            <li><Link to="/Login" onClick={() => setMenuOpen(false)}>Entrar</Link></li>
+          )}
         </ul>
       </div>
 
