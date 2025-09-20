@@ -1,8 +1,8 @@
-// frontend/src/pages/Cliente/Chamados/Chamados.jsx (NOVO ARQUIVO)
+// frontend/src/pages/Cliente/Chamados/Chamados.jsx (VERSÃO CORRIGIDA)
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Importante para a navegação
-import FormAbrirChamado from './FormAbrirChamado'; // O formulário que criaremos a seguir
+import { Link } from 'react-router-dom'; 
+import FormAbrirChamado from './FormAbrirChamado'; 
 
 const Chamados = () => {
   const [chamados, setChamados] = useState([]);
@@ -30,10 +30,18 @@ const Chamados = () => {
   }, []);
 
   const handleChamadoAdicionado = () => {
-    fetchChamados(); // Simplesmente busca a lista atualizada
+    fetchChamados();
   };
 
-  const getStatusStyle = (status) => { /* ... (função de estilo do status) ... */ };
+  // Esta função agora será usada na tabela
+  const getStatusStyle = (status) => {
+    switch (status) {
+      case 'Aberto': return { backgroundColor: '#007bff', color: '#fff', padding: '4px 8px', borderRadius: '4px' };
+      case 'Em Andamento': return { backgroundColor: '#ffc107', color: '#000', padding: '4px 8px', borderRadius: '4px' };
+      case 'Fechado': return { backgroundColor: '#6c757d', color: '#fff', padding: '4px 8px', borderRadius: '4px' };
+      default: return {};
+    }
+  };
 
 
   if (loading) return <div>Carregando chamados...</div>;
@@ -59,7 +67,6 @@ const Chamados = () => {
             <th style={{ padding: '12px', border: '1px solid #ddd', textAlign: 'left' }}>Status</th>
             <th style={{ padding: '12px', border: '1px solid #ddd', textAlign: 'left' }}>Assunto</th>
             <th style={{ padding: '12px', border: '1px solid #ddd', textAlign: 'left' }}>Última Atualização</th>
-            {/* 1. ADICIONE A NOVA COLUNA DE AÇÕES */}
             <th style={{ padding: '12px', border: '1px solid #ddd', textAlign: 'left' }}>Ações</th>
           </tr>
         </thead>
@@ -67,16 +74,15 @@ const Chamados = () => {
           {chamados.map(chamado => (
             <tr key={chamado._id}>
               <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                {/* --- CORREÇÃO APLICADA AQUI --- */}
                 <span style={getStatusStyle(chamado.status)}>{chamado.status}</span>
               </td>
               <td style={{ padding: '12px', border: '1px solid #ddd' }}>
-                {/* 2. O ASSUNTO AGORA É APENAS TEXTO */}
                 {chamado.assunto}
               </td>
               <td style={{ padding: '12px', border: '1px solid #ddd' }}>
                 {new Date(chamado.updatedAt).toLocaleString('pt-BR')}
               </td>
-              {/* 3. ADICIONE A CÉLULA COM O BOTÃO DENTRO DO LINK */}
               <td style={{ padding: '12px', border: '1px solid #ddd' }}>
                 <Link to={`/cliente/chamados/${chamado._id}`}>
                   <button>Abrir conversa</button>
@@ -89,15 +95,5 @@ const Chamados = () => {
     </div>
   );
 };
-// Adicionando a função de estilo que removemos para resumir
-const getStatusStyle = (status) => {
-  switch (status) {
-    case 'Aberto': return { backgroundColor: '#007bff', color: '#fff', padding: '4px 8px', borderRadius: '4px' };
-    case 'Em Andamento': return { backgroundColor: '#ffc107', color: '#000', padding: '4px 8px', borderRadius: '4px' };
-    case 'Fechado': return { backgroundColor: '#6c757d', color: '#fff', padding: '4px 8px', borderRadius: '4px' };
-    default: return {};
-  }
-};
-
 
 export default Chamados;

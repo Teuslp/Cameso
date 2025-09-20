@@ -1,7 +1,8 @@
-// frontend/src/pages/Cliente/Agenda/Agenda.jsx (NOVO ARQUIVO)
+// frontend/src/pages/Cliente/Agenda/Agenda.jsx (VERSÃO CORRIGIDA)
 
 import React, { useState, useEffect } from 'react';
 import FormSolicitarAgendamento from './FormSolicitarAgendamento';
+import api from '../../../api/axios'; // Usando nossa instância axios configurada
 
 const Agenda = () => {
   const [agendamentos, setAgendamentos] = useState([]);
@@ -12,16 +13,18 @@ const Agenda = () => {
   useEffect(() => {
     const fetchAgendamentos = async () => {
       try {
-        const token = localStorage.getItem('userToken');
-        const response = await fetch('/api/agendamentos', {
-          headers: { 'Authorization': `Bearer ${token}` },
-        });
-        if (!response.ok) throw new Error('Falha ao buscar agendamentos.');
-        const data = await response.json();
-        setAgendamentos(data);
+        // --- CÓDIGO CORRIGIDO AQUI ---
+        // A chamada com 'api' (axios) é mais simples.
+        const response = await api.get('/api/agendamentos');
+        
+        // Os dados já estão em response.data, não é necessário usar .json()
+        setAgendamentos(response.data);
+
       } catch (err) {
-        setError(err.message);
+        // Axios trata erros de status (4xx, 5xx) automaticamente
+        setError(err.response?.data?.message || 'Falha ao buscar agendamentos.');
       } finally {
+        // Esta linha garante que o "loading" sempre terminará
         setLoading(false);
       }
     };
@@ -43,7 +46,7 @@ const Agenda = () => {
   };
 
   if (loading) return <div>Carregando agendamentos...</div>;
-  if (error) return <div style={{ color: 'red' }}>Erro: {error}</div>;
+  if (error) return <div style={{ color: 'red', padding: '20px' }}>Erro: {error}</div>;
 
   return (
     <div style={{ padding: '20px' }}>

@@ -1,36 +1,63 @@
-// backend/controllers/agendamentoController.js (VERSÃO ATUALIZADA)
+// backend/controllers/agendamentoController.js (VERSÃO CORRIGIDA E COMPLETA)
 
 import Agendamento from '../models/Agendamento.js';
-import Notificacao from '../models/Notificacao.js'; // Importa o Model de Notificação
+import Notificacao from '../models/Notificacao.js';
 
-// --- Funções do Cliente (já existentes) ---
+// --- Funções do Cliente ---
 export const createAgendamento = async (req, res) => {
-    // ... (código existente)
-    // Opcional: Adicionar notificação para o admin aqui quando um cliente cria
+  try {
+    const { colaboradorId, tipoExame, dataSugerida, observacoes } = req.body;
+    const clienteId = req.user.id;
+
+    if (!colaboradorId || !tipoExame || !dataSugerida) {
+      return res.status(400).json({ message: "Colaborador, tipo de exame e data sugerida são obrigatórios." });
+    }
+
+    const novaSolicitacao = new Agendamento({
+      clienteId,
+      colaboradorId,
+      tipoExame,
+      dataSugerida,
+      observacoes,
+    });
+
+    await novaSolicitacao.save();
+    res.status(201).json(novaSolicitacao);
+
+  } catch (error) {
+    console.error("Erro ao criar agendamento:", error);
+    res.status(500).json({ message: "Erro no servidor ao tentar criar agendamento." });
+  }
 };
-export const getAgendamentos = async (req, res) => { /* ... (código existente) ... */ };
+
+export const getAgendamentos = async (req, res) => {
+  try {
+    const clienteId = req.user.id;
+    const agendamentos = await Agendamento.find({ clienteId: clienteId })
+      .populate('colaboradorId', 'nomeCompleto')
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(agendamentos);
+  } catch (error) {
+    console.error("Erro ao listar agendamentos:", error);
+    res.status(500).json({ message: "Erro no servidor ao tentar listar agendamentos." });
+  }
+};
 
 
-// --- NOVAS FUNÇÕES EXCLUSIVAS DO ADMIN ---
-
-/**
- * [ADMIN] Lista todos os agendamentos de todos os clientes.
- */
+// --- Funções do Administrador ---
 export const getAllAgendamentosAdmin = async (req, res) => {
     try {
         const agendamentos = await Agendamento.find({})
             .populate('clienteId', 'razaoSocial nome')
             .populate('colaboradorId', 'nomeCompleto')
-            .sort({ status: 1, dataSugerida: 1 }); // Ordena por status e data
+            .sort({ status: 1, dataSugerida: 1 });
         res.status(200).json(agendamentos);
     } catch (error) {
         res.status(500).json({ message: "Erro ao buscar agendamentos." });
     }
 };
 
-/**
- * [ADMIN] Confirma ou atualiza um agendamento.
- */
 export const updateAgendamentoAdmin = async (req, res) => {
     try {
         const { id: agendamentoId } = req.params;
@@ -41,15 +68,13 @@ export const updateAgendamentoAdmin = async (req, res) => {
             return res.status(404).json({ message: "Agendamento não encontrado." });
         }
 
-        // Atualiza os campos
         agendamento.dataConfirmada = dataConfirmada || agendamento.dataConfirmada;
         agendamento.localConfirmado = localConfirmado || agendamento.localConfirmado;
         agendamento.instrucoes = instrucoes || agendamento.instrucoes;
         agendamento.status = status || agendamento.status;
 
         const agendamentoAtualizado = await agendamento.save();
-
-        // Cria uma notificação para o cliente quando o agendamento é confirmado
+        
         if (status === 'Confirmado') {
             await new Notificacao({
                 clienteId: agendamento.clienteId,
