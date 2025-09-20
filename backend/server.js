@@ -27,11 +27,13 @@ import perfilRoutes from './routes/perfil.js';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: 'https://cameso.vercel.app' // <-- SUBSTITUA PELA URL QUE A VERCEL TE DEU
+};
 app.use(express.json());
 
 // Torna a pasta 'uploads' publicamente acessível para downloads
-app.use('/uploads', express.static('uploads')); 
+app.use('/uploads', express.static('uploads'));
 
 // Rota de contato (funcionalidade original)
 app.post("/contact", async (req, res) => {
@@ -39,7 +41,7 @@ app.post("/contact", async (req, res) => {
 });
 
 // Rotas da aplicação do portal
-app.use("/api/auth", authRoutes); 
+app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/cliente", clienteRoutes);
 app.use('/api/colaboradores', colaboradorRoutes);
@@ -47,7 +49,7 @@ app.use('/api/documentos', documentoRoutes);
 app.use('/api/asos', asoRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/agendamentos', agendamentoRoutes);
-app.use('/api/treinamentos', treinamentoRoutes); 
+app.use('/api/treinamentos', treinamentoRoutes);
 app.use('/api/registros-treinamento', registroTreinamentoRoutes);
 app.use('/api/chamados', chamadoRoutes);
 app.use('/api/funcoes', funcaoRoutes);
