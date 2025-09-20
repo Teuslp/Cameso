@@ -4,7 +4,7 @@ import axios from 'axios';
 
 // Cria uma instância do axios
 const api = axios.create({
-  baseURL: '/', // A base da nossa URL da API
+  baseURL: process.env.REACT_APP_API_URL || '/', // A base da nossa URL da API
 });
 
 // Isso é um "interceptor". Ele "intercepta" toda requisição antes de ela ser enviada.
