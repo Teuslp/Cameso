@@ -39,6 +39,12 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
+// Middleware de Log de Requisições - ADICIONE ESTE BLOCO PARA DIAGNÓSTICO
+app.use((req, res, next) => {
+  console.log(`[LOG DE DIAGNÓSTICO] Requisição recebida: ${req.method} ${req.originalUrl}`);
+  next(); // Passa a requisição para as próximas rotas
+});
+
 // Torna a pasta 'uploads' publicamente acessível para downloads
 app.use('/uploads', express.static('uploads')); 
 
