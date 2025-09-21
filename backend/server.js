@@ -1,5 +1,3 @@
-// backend/server.js (VERSÃO FINAL PADRONIZADA)
-
 import express from "express";
 import nodemailer from "nodemailer";
 import cors from "cors";
@@ -31,7 +29,11 @@ const app = express();
 
 // --- CORS ---
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://cameso.vercel.app'] // ajuste para a URL do seu front-end
+  origin: [
+    'http://localhost:3000', // Para desenvolvimento local
+    'https://cameso.vercel.app', // Sua URL de produção principal
+    'https://cameso-f5l7a51d1-matheuss-projects-b5413000.vercel.app' // Adicione esta linha com a URL de preview do Vercel
+  ]
 };
 app.use(cors(corsOptions));
 
