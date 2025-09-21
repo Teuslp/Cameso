@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import './DetalhesCliente.css';
+import api from '../../../api/axios';
 
 const DetalhesCliente = () => {
   const { id } = useParams();

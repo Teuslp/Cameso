@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import api from '../../api/axios'; // <-- usamos a instância do axios configurada
+import api from '../../api/axios'; // instância do axios configurada
 import logo from '../../assets/logoc.png';
 import './Login.css';
 
@@ -24,6 +24,7 @@ const Login = () => {
 
     try {
       // Agora chamamos o backend usando axios
+      // baseURL já é http://localhost:3001/api (axios.js)
       const response = await api.post('/auth/login', { email, senha });
       const data = response.data;
 
@@ -38,7 +39,6 @@ const Login = () => {
     } catch (err) {
       console.error("Erro no login:", err);
 
-      // Captura erro do backend ou erro de rede
       const errorMessage =
         err.response?.data?.message ||
         'Falha no login. Verifique suas credenciais ou tente novamente.';

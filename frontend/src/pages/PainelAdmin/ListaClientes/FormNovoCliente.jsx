@@ -1,6 +1,5 @@
-// frontend/src/pages/PainelAdmin/FormNovoCliente.jsx (NOVO ARQUIVO)
-
 import React, { useState } from 'react';
+import api from '../../../api/axios';
 
 const FormNovoCliente = ({ onClose, onClienteAdicionado }) => {
   const [formData, setFormData] = useState({

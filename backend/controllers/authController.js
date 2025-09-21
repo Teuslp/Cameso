@@ -1,46 +1,58 @@
-// backend/controllers/authController.js
+// backend/controllers/authController.js (VERSÃO COM DIAGNÓSTICOS)
 
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
-import User from "../models/User.js";
+import User from '../models/User.js';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-const SECRET = "segredo_super_secreto"; // ⚠️ depois coloque no .env
+// A função 'register' que será usada pelo Painel do Admin no futuro
+export const register = async (req, res) => {
+  // ... (lógica de registro)
+};
 
+// --- FUNÇÃO DE LOGIN COM LOGS DETALHADOS ---
 export const login = async (req, res) => {
+  console.log("\n--- [NOVA TENTATIVA DE LOGIN] ---");
   try {
     const { email, senha } = req.body;
 
-    // Verifica se o usuário existe
+    // 1. Vamos ver se o backend está recebendo os dados corretamente
+    console.log(`1. Dados recebidos do frontend: Email [${email}], Senha [${senha}]`);
+
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: "Usuário não encontrado" });
+      console.log("2. Resultado: Usuário não encontrado no banco de dados com este email.");
+      return res.status(400).json({ message: "Credenciais inválidas" });
     }
 
-    // Valida a senha
-    const validPass = await bcrypt.compare(senha, user.senha);
-    if (!validPass) {
-      return res.status(401).json({ message: "Senha incorreta" });
+    // 2. Vamos ver o hash da senha que está no banco
+    console.log(`2. Usuário '${user.nome}' encontrado. Hash da senha no banco: ${user.senha.substring(0, 15)}...`);
+
+    // 3. Compara a senha enviada com o hash do banco
+    const isMatch = await bcrypt.compare(senha, user.senha);
+
+    // 4. Vamos ver o resultado da comparação
+    console.log(`4. Resultado da comparação da senha (bcrypt.compare): ${isMatch}`);
+
+    if (!isMatch) {
+      console.log("5. Conclusão: As senhas NÃO correspondem. Acesso negado.");
+      return res.status(400).json({ message: "Credenciais inválidas" });
     }
 
-    // Gera token JWT
-    const token = jwt.sign({ id: user._id, role: user.role }, SECRET, { expiresIn: "1h" });
+    console.log("5. Conclusão: As senhas correspondem! Gerando token...");
+    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
-    // Remove o campo "senha" antes de devolver o usuário
-    const { senha: _, ...userData } = user.toObject();
+    res.json({ token, user: { role: user.role, nome: user.nome, _id: user._id } });
 
-    res.json({
-      token,
-      user: userData, // agora o frontend pode acessar user.role, user.nome, etc.
-    });
   } catch (err) {
-    console.error("Erro no login:", err);
-    res.status(500).json({ message: "Erro no servidor" });
+    console.error("ERRO GERAL NO SERVIDOR:", err);
+    res.status(500).json({ message: "Erro no servidor", error: err.message });
   }
 };
 
-export const verifyToken = (req, res) => {
-  res.json({ message: "Token válido", user: req.user });
-};
+
+// Função de alterar senha
+
+
 
 export const changePassword = async (req, res) => {
   try {

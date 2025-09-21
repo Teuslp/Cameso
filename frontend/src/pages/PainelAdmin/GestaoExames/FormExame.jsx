@@ -1,6 +1,7 @@
-// frontend/src/pages/PainelAdmin/GestaoExames/FormExame.jsx (NOVO ARQUIVO)
+// frontend/src/pages/PainelAdmin/GestaoExames/FormExame.jsx (CORRIGIDO) ✅
 
 import React, { useState, useEffect } from 'react';
+import api from '../../../api/axios'; // O import já estava correto!
 
 const FormExame = ({ onClose, onSuccess, exameParaEditar }) => {
   const [formData, setFormData] = useState({ nome: '', descricao: '' });
@@ -29,31 +30,28 @@ const FormExame = ({ onClose, onSuccess, exameParaEditar }) => {
     setError('');
 
     try {
-      const token = localStorage.getItem('userToken');
-      const url = isEditMode ? `/api/exames/${exameParaEditar._id}` : '/api/exames';
-      const method = isEditMode ? 'PUT' : 'POST';
-
-      const response = await fetch(url, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.message || 'Erro ao salvar exame.');
+      let response;
+      if (isEditMode) {
+        // 1. USAR api.put para editar
+        response = await api.put(`/exames/${exameParaEditar._id}`, formData);
+      } else {
+        // 2. USAR api.post para criar
+        response = await api.post('/exames', formData);
+      }
       
-      onSuccess(data);
+      onSuccess(response.data); // Envia os dados da resposta para a função de sucesso
       onClose();
 
     } catch (err) {
-      setError(err.message);
+      // O erro do Axios geralmente tem uma mensagem mais útil em err.response.data.message
+      setError(err.response?.data?.message || err.message || 'Erro ao salvar exame.');
     } finally {
       setLoading(false);
     }
   };
+  
+  // O resto do seu código permanece igual...
+  // ...
 
   return (
     <div className="modal-backdrop">

@@ -7,7 +7,7 @@ export default function RiscoList({ onEdit }) {
 
   useEffect(() => {
     const fetchRiscos = async () => {
-      const res = await api.get("/api/riscos");
+      const res = await api.get("/riscos");
       setRiscos(res.data);
     };
     fetchRiscos();
@@ -15,7 +15,7 @@ export default function RiscoList({ onEdit }) {
 
   const deleteRisco = async (id) => {
     if (window.confirm("Deseja realmente excluir este risco?")) {
-      await api.delete(`/api/riscos/${id}`);
+      await api.delete(`/riscos/${id}`);
       setRiscos(riscos.filter(r => r._id !== id));
     }
   };

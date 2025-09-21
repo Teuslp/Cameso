@@ -21,7 +21,7 @@ const DetalheChamado = () => {
     useEffect(() => {
         const fetchChamado = async () => {
             try {
-                const response = await api.get(`/api/chamados/${id}`);
+                const response = await api.get(`/chamados/${id}`);
                 setChamado(response.data);
             } catch (err) { console.error(err); } 
             finally { setLoading(false); }
@@ -36,7 +36,7 @@ const DetalheChamado = () => {
     const handleResponder = async (e) => {
         e.preventDefault();
         try {
-            const response = await api.post(`/api/chamados/${id}/responder`, { conteudo: novaResposta });
+            const response = await api.post(`/chamados/${id}/responder`, { conteudo: novaResposta });
             setChamado(response.data);
             setNovaResposta('');
         } catch (err) { console.error(err); }

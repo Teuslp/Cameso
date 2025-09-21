@@ -1,8 +1,9 @@
-// frontend/src/pages/PainelAdmin/GestaoExames/GestaoExames.jsx (NOVO ARQUIVO)
+// frontend/src/pages/PainelAdmin/GestaoExames/GestaoExames.jsx (CORRIGIDO) ✅
 
 import React, { useState, useEffect } from 'react';
 import FormExame from './FormExame';
 import './GestaoExames.css';
+import api from '../../../api/axios'; // 1. IMPORTAR A INSTÂNCIA 'api'
 
 const GestaoExames = () => {
   const [exames, setExames] = useState([]);
@@ -12,12 +13,11 @@ const GestaoExames = () => {
   const [exameEmEdicao, setExameEmEdicao] = useState(null);
 
   const fetchExames = async () => {
+    setLoading(true);
     try {
-      const token = localStorage.getItem('userToken');
-      const response = await fetch('/api/exames', { headers: { 'Authorization': `Bearer ${token}` } });
-      if (!response.ok) throw new Error('Falha ao buscar exames.');
-      const data = await response.json();
-      setExames(data);
+      // 2. USAR api.get E O CAMINHO CORRETO
+      const response = await api.get('/exames');
+      setExames(response.data);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -39,27 +39,26 @@ const GestaoExames = () => {
     setIsModalOpen(true);
   };
 
-  const handleSuccess = (exameAtualizado) => {
-    if (exameEmEdicao) {
-      setExames(prev => prev.map(e => e._id === exameAtualizado._id ? exameAtualizado : e));
-    } else {
-      setExames(prev => [...prev, exameAtualizado]);
-    }
-    fetchExames(); // Garante a reordenação
+  const handleSuccess = () => {
+    // Apenas recarrega a lista para garantir a consistência
+    fetchExames();
   };
 
   const handleDelete = async (id) => {
     if (window.confirm("Tem certeza que deseja excluir este exame do catálogo?")) {
       try {
-        const token = localStorage.getItem('userToken');
-        await fetch(`/api/exames/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+        // 3. USAR api.delete
+        await api.delete(`/exames/${id}`);
         setExames(prev => prev.filter(e => e._id !== id));
       } catch (err) {
         setError("Falha ao excluir exame.");
       }
     }
   };
-
+  
+  // O resto do seu código permanece igual...
+  // ...
+  
   if (loading) return <div className="admin-container">Carregando...</div>;
   if (error) return <div className="admin-container error-message">Erro: {error}</div>;
 

@@ -1,10 +1,9 @@
-// frontend/src/pages/PainelAdmin/PainelAdmin.jsx
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FormNovoCliente from './FormNovoCliente';
 import FormEditCliente from './FormEditCliente';
 import './ListaClientes.css';
+import api from '../../../api/axios';
 
 const PainelAdmin = () => {
   const [clientes, setClientes] = useState([]);

@@ -31,7 +31,7 @@ const FormTreinamento = ({ onClose, onSuccess, treinamentoParaEditar }) => {
     setError('');
 
     try {
-      const url = isEditMode ? `/api/treinamentos/${treinamentoParaEditar._id}` : '/api/treinamentos';
+      const url = isEditMode ? `/treinamentos/${treinamentoParaEditar._id}` : '/api/treinamentos';
       const method = isEditMode ? 'put' : 'post';
 
       const response = await api[method](url, formData);

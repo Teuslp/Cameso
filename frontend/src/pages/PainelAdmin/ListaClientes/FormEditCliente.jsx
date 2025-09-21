@@ -1,6 +1,5 @@
-// frontend/src/pages/PainelAdmin/FormEditCliente.jsx (NOVO ARQUIVO)
-
 import React, { useState, useEffect } from 'react';
+import api from '../../../api/axios';
 
 const FormEditCliente = ({ onClose, onClienteAtualizado, clienteParaEditar }) => {
   const [formData, setFormData] = useState({

@@ -1,4 +1,4 @@
-// backend/server.js (VERSÃO FINAL E CORRIGIDA PARA DEPLOY)
+// backend/server.js (VERSÃO FINAL PADRONIZADA)
 
 import express from "express";
 import nodemailer from "nodemailer";
@@ -10,7 +10,7 @@ import cron from 'node-cron';
 // Rotas
 import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin.js";
-import clienteRoutes from "./routes/cliente.js";
+import clienteRoutes from './routes/cliente.js';
 import colaboradorRoutes from './routes/colaborador.js';
 import documentoRoutes from './routes/documento.js';
 import asoRoutes from './routes/aso.js';
@@ -29,38 +29,40 @@ import perfilRoutes from './routes/perfil.js';
 dotenv.config();
 const app = express();
 
-// --- CORREÇÃO APLICADA AQUI ---
+// --- CORS ---
 const corsOptions = {
-  origin: 'https://cameso.vercel.app' // A URL do seu front-end na Vercel
+  origin: ['http://localhost:3000', 'https://cameso.vercel.app'] // ajuste para a URL do seu front-end
 };
-app.use(cors(corsOptions)); // ATIVA AS REGRAS DE CORS
-// --- FIM DA CORREÇÃO ---
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
 // Torna a pasta 'uploads' publicamente acessível para downloads
 app.use('/uploads', express.static('uploads')); 
 
-// Rota de contato (código existente)
-app.post("/contact", async (req, res) => { /* seu código de email aqui */ });
+// Rota de contato (seu código de email aqui)
+app.post("/contact", async (req, res) => {
+  // exemplo simplificado
+  res.json({ message: "Rota de contato funcionando" });
+});
 
-// Rotas da aplicação do portal
+// --- Rotas padronizadas com /api ---
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
-app.use("/cliente", clienteRoutes);
-app.use('/api/colaboradores', colaboradorRoutes);
-app.use('/api/documentos', documentoRoutes);
-app.use('/api/asos', asoRoutes);
-app.use('/api/dashboard', dashboardRoutes);
-app.use('/api/agendamentos', agendamentoRoutes);
-app.use('/api/treinamentos', treinamentoRoutes); 
-app.use('/api/registros-treinamento', registroTreinamentoRoutes);
-app.use('/api/chamados', chamadoRoutes);
-app.use('/api/funcoes', funcaoRoutes);
-app.use('/api/riscos', riscoRoutes);
-app.use('/api/exames', exameRoutes);
-app.use('/api/notificacoes', notificacaoRoutes);
-app.use('/api/perfil', perfilRoutes);
+app.use("/api/cliente", clienteRoutes);
+app.use("/api/colaboradores", colaboradorRoutes);
+app.use("/api/documentos", documentoRoutes);
+app.use("/api/asos", asoRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/agendamentos", agendamentoRoutes);
+app.use("/api/treinamentos", treinamentoRoutes); 
+app.use("/api/registros-treinamento", registroTreinamentoRoutes);
+app.use("/api/chamados", chamadoRoutes);
+app.use("/api/funcoes", funcaoRoutes);
+app.use("/api/riscos", riscoRoutes);
+app.use("/api/exames", exameRoutes);
+app.use("/api/notificacoes", notificacaoRoutes);
+app.use("/api/perfil", perfilRoutes);
 
 // Conexão ao MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })

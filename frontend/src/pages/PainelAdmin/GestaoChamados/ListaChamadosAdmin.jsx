@@ -1,5 +1,3 @@
-// frontend/src/pages/PainelAdmin/GestaoChamados/ListaChamadosAdmin.jsx (NOVO ARQUIVO)
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../../api/axios';
@@ -13,7 +11,7 @@ const ListaChamadosAdmin = () => {
   useEffect(() => {
     const fetchChamados = async () => {
       try {
-        const response = await api.get('/api/admin/chamados');
+        const response = await api.get('/admin/chamados');
         setChamados(response.data);
       } catch (err) {
         setError('Falha ao buscar chamados de suporte.');

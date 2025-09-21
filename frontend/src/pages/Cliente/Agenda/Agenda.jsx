@@ -15,7 +15,7 @@ const Agenda = () => {
       try {
         // --- CÓDIGO CORRIGIDO AQUI ---
         // A chamada com 'api' (axios) é mais simples.
-        const response = await api.get('/api/agendamentos');
+        const response = await api.get('/agendamentos');
         
         // Os dados já estão em response.data, não é necessário usar .json()
         setAgendamentos(response.data);

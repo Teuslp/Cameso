@@ -17,7 +17,7 @@ const GestaoAgendamentos = () => {
   useEffect(() => {
     const fetchAgendamentos = async () => {
       try {
-        const response = await api.get('/api/admin/agendamentos');
+        const response = await api.get('/admin/agendamentos');
         setAgendamentos(response.data);
       } catch (err) {
         setError('Falha ao buscar agendamentos.');

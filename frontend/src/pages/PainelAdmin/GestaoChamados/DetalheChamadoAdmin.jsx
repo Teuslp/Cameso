@@ -20,7 +20,7 @@ const DetalheChamadoAdmin = () => {
 
   const fetchChamado = async () => {
     try {
-      const response = await api.get(`/api/admin/chamados/${id}`);
+      const response = await api.get(`/admin/chamados/${id}`);
       setChamado(response.data);
     } catch (err) {
       console.error(err);
@@ -40,7 +40,7 @@ const DetalheChamadoAdmin = () => {
   const handleResponder = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post(`/api/admin/chamados/${id}/responder`, { conteudo: novaResposta });
+      const response = await api.post(`/admin/chamados/${id}/responder`, { conteudo: novaResposta });
       setChamado(response.data);
       setNovaResposta('');
     } catch (err) {

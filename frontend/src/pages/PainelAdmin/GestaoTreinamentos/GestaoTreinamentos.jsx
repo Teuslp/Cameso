@@ -14,7 +14,7 @@ const GestaoTreinamentos = () => {
 
   const fetchTreinamentos = async () => {
     try {
-      const response = await api.get('/api/treinamentos');
+      const response = await api.get('/treinamentos');
       setTreinamentos(response.data);
     } catch (err) {
       setError('Falha ao buscar treinamentos.');
