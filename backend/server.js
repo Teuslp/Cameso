@@ -4,7 +4,10 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cron from 'node-cron';
+import path from 'path'; // 1. Importar o módulo 'path'
+import { fileURLToPath } from 'url'; // Importar para lidar com ES Modules
 
+// Rotas
 import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin.js";
 import clienteRoutes from './routes/cliente.js';
@@ -46,6 +49,13 @@ app.use((req, res, next) => {
   }
 });
 
+// --- CONFIGURAÇÃO PARA SERVIR FICHEIROS ESTÁTICOS ---
+// 2. Definir o caminho absoluto para a pasta 'uploads'
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// --------------------------------------------------
+
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/cliente", clienteRoutes);
@@ -77,3 +87,4 @@ cron.schedule('0 1 * * *', () => {
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`🚀 Servidor rodando em http://localhost:${PORT}`));
+

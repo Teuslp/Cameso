@@ -1,7 +1,6 @@
-// backend/controllers/chamadoController.js (VERSÃO 100% COMPLETA E CORRIGIDA)
-
 import Chamado from '../models/Chamado.js';
 import Notificacao from '../models/Notificacao.js';
+import path from 'path'; // 1. Importar o módulo 'path'
 
 // --- Funções do Cliente ---
 export const createChamado = async (req, res) => {
@@ -25,7 +24,6 @@ export const createChamado = async (req, res) => {
 
     await novoChamado.save();
 
-    // Cria uma notificação para os admins sobre o novo chamado
     await new Notificacao({
         clienteId: clienteId,
         paraAdmin: true,
@@ -89,6 +87,10 @@ export const addResposta = async (req, res) => {
         if (!chamado) {
             return res.status(404).json({ message: "Chamado não encontrado ou acesso não permitido." });
         }
+
+        if (chamado.status === 'Fechado') {
+            return res.status(403).json({ message: "Este chamado está encerrado e não pode receber novas respostas." });
+        }
         
         if (req.user.role === 'admin' && !chamado.participantes.includes(autorId)) {
             chamado.participantes.push(autorId);
@@ -98,7 +100,22 @@ export const addResposta = async (req, res) => {
             chamado.status = 'Em Andamento';
         }
 
-        chamado.mensagens.push({ autor: autorId, conteudo: conteudo });
+        const novaMensagem = { autor: autorId, conteudo: conteudo };
+
+        // 2. CORREÇÃO PARA GUARDAR O CAMINHO RELATIVO
+        if (req.file) {
+            novaMensagem.anexoNome = req.file.originalname;
+            // Extrai a parte do caminho a partir da pasta 'uploads'
+            const pathParts = req.file.path.split(path.sep);
+            const uploadsIndex = pathParts.lastIndexOf('uploads');
+            if (uploadsIndex !== -1) {
+                // Junta as partes do caminho com barras '/' para ser compatível com URLs
+                const relativePath = pathParts.slice(uploadsIndex).join('/');
+                novaMensagem.anexoPath = relativePath;
+            }
+        }
+
+        chamado.mensagens.push(novaMensagem);
         await chamado.save();
         
         if (req.user.role === 'admin') {
@@ -168,3 +185,4 @@ export const updateChamadoStatus = async (req, res) => {
     res.status(500).json({ message: "Erro ao atualizar status do chamado." });
   }
 };
+

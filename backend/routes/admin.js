@@ -13,8 +13,8 @@ import {
     updateAgendamentoAdmin 
 } from '../controllers/agendamentoController.js';
 
-// 1. IMPORTAR AS FUNÇÕES UNIFICADAS DO SEU CONTROLLER DE NOTIFICAÇÕES
 import { getNotificacoes, marcarTodasComoLidas } from '../controllers/notificacaoController.js';
+import upload from '../config/multer.js'; // 1. Importar o nosso middleware de upload
 
 import {authMiddleware} from '../middleware/authMiddleware.js';
 import { adminMiddleware } from '../middleware/adminMiddleware.js';
@@ -33,7 +33,9 @@ router.delete('/clientes/:id', deleteCliente);
 router.get('/chamados', getAllChamadosAdmin);
 router.get('/chamados/:id', getChamadoByIdAdmin);
 router.put('/chamados/:id/status', updateChamadoStatus);
-router.post('/chamados/:id/responder', addResposta);
+
+// 2. Adicionar o middleware de upload à rota de resposta do admin.
+router.post('/chamados/:id/responder', upload.single('anexo'), addResposta);
 
 // --- ROTAS PARA GESTÃO DE AGENDAMENTOS ---
 router.get('/agendamentos', getAllAgendamentosAdmin);
