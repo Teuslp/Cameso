@@ -1,30 +1,30 @@
-// frontend/src/pages/PainelAdmin/DetalhesCliente/DetalhesCliente.jsx (VERSÃO ATUALIZADA)
+// frontend/src/pages/PainelAdmin/DetalhesCliente/DetalhesCliente.jsx (VERSÃO CORRIGIDA)
 
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import './DetalhesCliente.css';
-import api from '../../../api/axios';
+import api from '../../../api/axios'; // Já estava importado corretamente
 
 const DetalhesCliente = () => {
   const { id } = useParams();
   const [detalhes, setDetalhes] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [secaoAtiva, setSecaoAtiva] = useState(null); // Controla qual seção está aberta
+  const [secaoAtiva, setSecaoAtiva] = useState(null);
 
   useEffect(() => {
     const fetchDetalhes = async () => {
       try {
-        const token = localStorage.getItem('userToken');
-        const response = await api.get(`/api/admin/clientes/${id}`, {
-          headers: { 'Authorization': `Bearer ${token}` },
-        });
-        if (!response.ok) throw new Error('Falha ao buscar detalhes do cliente.');
-        const data = await response.json();
-        setDetalhes(data);
+        // --- CORREÇÃO APLICADA AQUI ---
+        // 1. Usar a instância 'api' (Axios)
+        // 2. Remover a lógica manual do token
+        // 3. Corrigir a URL para não duplicar o '/api'
+        const response = await api.get(`/admin/clientes/${id}`);
+        setDetalhes(response.data);
+
       } catch (err) {
-        setError(err.message);
+        setError(err.response?.data?.message || 'Falha ao buscar detalhes do cliente.');
       } finally {
         setLoading(false);
       }
@@ -81,7 +81,7 @@ const DetalhesCliente = () => {
             <div className="details-content-padding">
                 {asos.length > 0 ? (
                     <ul style={{listStyle: 'none', padding: 0}}>
-                        {asos.map(a => <li key={a._id}>{a.colaboradorId.nomeCompleto} - Vence em {new Date(a.proximoExame).toLocaleDateString()}</li>)}
+                        {asos.map(a => <li key={a._id}>{(a.colaboradorId?.nomeCompleto || 'Colaborador Inválido')} - Vence em {new Date(a.proximoExame).toLocaleDateString()}</li>)}
                     </ul>
                 ) : <p>Nenhum ASO recente.</p>}
             </div>
