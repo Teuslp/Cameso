@@ -17,7 +17,7 @@ const DetalhesCliente = () => {
     const fetchDetalhes = async () => {
       try {
         const token = localStorage.getItem('userToken');
-        const response = await fetch(`/api/admin/clientes/${id}`, {
+        const response = await api.get(`/api/admin/clientes/${id}`, {
           headers: { 'Authorization': `Bearer ${token}` },
         });
         if (!response.ok) throw new Error('Falha ao buscar detalhes do cliente.');
