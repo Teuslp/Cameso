@@ -13,6 +13,9 @@ import {
     updateAgendamentoAdmin 
 } from '../controllers/agendamentoController.js';
 
+// 1. IMPORTAR AS FUNÇÕES UNIFICADAS DO SEU CONTROLLER DE NOTIFICAÇÕES
+import { getNotificacoes, marcarTodasComoLidas } from '../controllers/notificacaoController.js';
+
 import {authMiddleware} from '../middleware/authMiddleware.js';
 import { adminMiddleware } from '../middleware/adminMiddleware.js';
 
@@ -26,15 +29,19 @@ router.put('/clientes/:id', updateCliente);
 router.delete('/clientes/:id', deleteCliente);
 
 
-// --- 2. NOVAS ROTAS PARA GESTÃO DE CHAMADOS ---
-router.get('/chamados', getAllChamadosAdmin); // Listar todos os chamados
-router.get('/chamados/:id', getChamadoByIdAdmin); // Ver um chamado específico
-router.put('/chamados/:id/status', updateChamadoStatus); // Mudar o status
-router.post('/chamados/:id/responder', addResposta); // Responder a um chamado
+// --- ROTAS PARA GESTÃO DE CHAMADOS ---
+router.get('/chamados', getAllChamadosAdmin);
+router.get('/chamados/:id', getChamadoByIdAdmin);
+router.put('/chamados/:id/status', updateChamadoStatus);
+router.post('/chamados/:id/responder', addResposta);
 
-// --- 2. NOVAS ROTAS PARA GESTÃO DE AGENDAMENTOS ---
-router.get('/agendamentos', getAllAgendamentosAdmin); // Listar todos os agendamentos
-router.put('/agendamentos/:id', updateAgendamentoAdmin); // Confirmar/Atualizar um agendamento
+// --- ROTAS PARA GESTÃO DE AGENDAMENTOS ---
+router.get('/agendamentos', getAllAgendamentosAdmin);
+router.put('/agendamentos/:id', updateAgendamentoAdmin);
+
+// --- ROTAS PARA NOTIFICAÇÕES DO ADMIN ---
+router.get('/notificacoes', getNotificacoes);
+router.post('/notificacoes/marcar-todas-lidas', marcarTodasComoLidas);
 
 
 export default router;
