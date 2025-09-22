@@ -1,8 +1,7 @@
-// frontend/src/pages/Cliente/Colaboradores/Colaboradores.jsx (VERSÃO FINAL COMPLETA)
-
 import React, { useState, useEffect } from 'react';
 import FormAdicionarColaborador from './FormAdicionarColaborador';
 import { Link } from 'react-router-dom';
+import api from '../../../api/axios'; // 1. IMPORTAR A INSTÂNCIA 'api'
 
 const Colaboradores = () => {
   const [colaboradores, setColaboradores] = useState([]);
@@ -11,39 +10,40 @@ const Colaboradores = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [colaboradorEmEdicao, setColaboradorEmEdicao] = useState(null);
 
-  // Função para buscar os colaboradores da API
   const fetchColaboradores = async () => {
     try {
-      // Garante que o loading seja reativado em um refetch
       setLoading(true);
-      const token = localStorage.getItem('userToken');
-      if (!token) {
-        throw new Error('Acesso não autorizado. Faça login novamente.');
-      }
-
-      const response = await fetch('/api/colaboradores', {
-        headers: { 'Authorization': `Bearer ${token}` },
-      });
-
-      if (!response.ok) {
-        throw new Error('Falha ao buscar dados dos colaboradores.');
-      }
-
-      const data = await response.json();
-      setColaboradores(data);
+      // 2. SUBSTITUIR 'fetch' POR 'api.get'
+      const response = await api.get('/colaboradores');
+      setColaboradores(response.data);
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.message || 'Falha ao buscar dados dos colaboradores.');
     } finally {
       setLoading(false);
     }
   };
 
-  // useEffect para chamar a função de busca quando o componente é montado
   useEffect(() => {
     fetchColaboradores();
   }, []);
 
-  // Funções para controlar o modal
+  const handleDeleteColaborador = async (colaboradorId) => {
+    if (!window.confirm("Tem certeza que deseja desativar este colaborador?")) {
+      return;
+    }
+    try {
+      // 3. SUBSTITUIR 'fetch' POR 'api.delete'
+      await api.delete(`/colaboradores/${colaboradorId}`);
+      setColaboradores(prevColaboradores =>
+        prevColaboradores.filter(c => c._id !== colaboradorId)
+      );
+    } catch (err) {
+      alert(err.response?.data?.message || 'Falha ao desativar o colaborador.');
+    }
+  };
+  
+  // O resto do seu código (funções de modal, JSX, etc.) permanece o mesmo...
+
   const handleOpenModalAdicionar = () => {
     setColaboradorEmEdicao(null);
     setIsModalOpen(true);
@@ -59,7 +59,6 @@ const Colaboradores = () => {
     setColaboradorEmEdicao(null);
   };
 
-  // Funções de callback para atualizar a lista na tela sem recarregar
   const handleColaboradorAdicionado = (novoColaborador) => {
     setColaboradores(prev => [...prev, novoColaborador]);
   };
@@ -70,34 +69,6 @@ const Colaboradores = () => {
     );
   };
 
-  // --- FUNÇÃO PARA DELETAR/DESATIVAR ---
-  const handleDeleteColaborador = async (colaboradorId) => {
-    if (!window.confirm("Tem certeza que deseja desativar este colaborador? Ele será removido da lista de ativos.")) {
-      return;
-    }
-
-    try {
-      const token = localStorage.getItem('userToken');
-      const response = await fetch(`/api/colaboradores/${colaboradorId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Falha ao desativar o colaborador.');
-      }
-
-      setColaboradores(prevColaboradores =>
-        prevColaboradores.filter(c => c._id !== colaboradorId)
-      );
-    } catch (err) {
-      alert(err.message); // Exibe um alerta de erro simples
-    }
-  };
-
-  // Renderização condicional para estados de loading e erro
   if (loading) return <div>Carregando colaboradores...</div>;
   if (error) return <div style={{ color: 'red' }}>Erro: {error}</div>;
 
@@ -134,7 +105,6 @@ const Colaboradores = () => {
             colaboradores.map((colaborador) => (
               <tr key={colaborador._id}>
                 <td style={{ padding: '12px', border: '1px solid #ddd' }}>
-                  {/* --- ALTERAÇÃO APLICADA AQUI --- */}
                   <Link to={`/cliente/colaboradores/${colaborador._id}`} style={{ textDecoration: 'underline', color: '#007bff' }}>
                     {colaborador.nomeCompleto}
                   </Link>

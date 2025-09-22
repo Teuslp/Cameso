@@ -1,7 +1,6 @@
-// frontend/src/pages/Cliente/Treinamentos/Treinamentos.jsx (NOVO ARQUIVO)
-
 import React, { useState, useEffect } from 'react';
 import FormRegistrarTreinamento from './FormRegistrarTreinamento';
+import api from '../../../api/axios'; // 1. IMPORTAR A INSTÂNCIA 'api'
 
 const Treinamentos = () => {
   const [registros, setRegistros] = useState([]);
@@ -9,37 +8,31 @@ const Treinamentos = () => {
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Função para buscar os registros de treinamento da API
+  const fetchRegistros = async () => {
+    try {
+      setLoading(true);
+      // 2. SUBSTITUIR A CHAMADA 'fetch' PELA CHAMADA PADRÃO COM 'api'
+      // Isto usa a URL correta do backend e adiciona o token de autenticação automaticamente.
+      const response = await api.get('/registros-treinamento');
+      setRegistros(response.data);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Falha ao buscar registros de treinamento.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchRegistros = async () => {
-      try {
-        const token = localStorage.getItem('userToken');
-        const response = await fetch('/api/registros-treinamento', {
-          headers: { 'Authorization': `Bearer ${token}` },
-        });
-        if (!response.ok) throw new Error('Falha ao buscar registros de treinamento.');
-        const data = await response.json();
-        setRegistros(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchRegistros();
   }, []);
 
-  const handleRegistroAdicionado = (novoRegistro) => {
-    // Para garantir que os nomes apareçam, o ideal é buscar a lista novamente
-    const fetchRegistros = async () => {
-        const token = localStorage.getItem('userToken');
-        const response = await fetch('/api/registros-treinamento', { headers: { 'Authorization': `Bearer ${token}` } });
-        const data = await response.json();
-        if(response.ok) setRegistros(data);
-    };
-    fetchRegistros();
+  // Função para recarregar a lista após adicionar um novo registro
+  const handleRegistroAdicionado = () => {
+    fetchRegistros(); // Simplesmente chama a função de busca novamente para garantir os dados mais recentes
   };
 
-  if (loading) return <div>Carregando treinamentos...</div>;
+  if (loading) return <div>A carregar treinamentos...</div>;
   if (error) return <div style={{ color: 'red' }}>Erro: {error}</div>;
 
   return (
@@ -51,9 +44,9 @@ const Treinamentos = () => {
         />
       )}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h2>Registros de Treinamentos</h2>
+        <h2>Registos de Treinamentos</h2>
         <button onClick={() => setIsModalOpen(true)} style={{ padding: '10px 15px', cursor: 'pointer' }}>
-          + Registrar Treinamento
+          + Registar Treinamento
         </button>
       </div>
 
@@ -78,7 +71,7 @@ const Treinamentos = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="4" style={{ padding: '12px', textAlign: 'center' }}>Nenhum treinamento registrado.</td>
+              <td colSpan="4" style={{ padding: '12px', textAlign: 'center' }}>Nenhum treinamento registado.</td>
             </tr>
           )}
         </tbody>

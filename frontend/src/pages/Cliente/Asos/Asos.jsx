@@ -1,7 +1,6 @@
-// frontend/src/pages/Cliente/Asos/Asos.jsx (NOVO ARQUIVO)
-
 import React, { useState, useEffect } from 'react';
-import FormRegistrarAso from './FormRegistrarAso'; // O formulário que criaremos a seguir
+import FormRegistrarAso from './FormRegistrarAso';
+import api from '../../../api/axios'; 
 
 const Asos = () => {
   const [asos, setAsos] = useState([]);
@@ -12,15 +11,10 @@ const Asos = () => {
   const fetchAsos = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('userToken');
-      const response = await fetch('/api/asos', {
-        headers: { 'Authorization': `Bearer ${token}` },
-      });
-      if (!response.ok) throw new Error('Falha ao buscar ASOs.');
-      const data = await response.json();
-      setAsos(data);
+      const response = await api.get('/asos');
+      setAsos(response.data);
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.message || 'Falha ao buscar ASOs.');
     } finally {
       setLoading(false);
     }
@@ -31,13 +25,12 @@ const Asos = () => {
   }, []);
 
   const handleAsoAdicionado = (novoAso) => {
-    // Adiciona o novo ASO à lista e reordena
     const listaAtualizada = [...asos, novoAso];
     listaAtualizada.sort((a, b) => new Date(a.proximoExame) - new Date(b.proximoExame));
     setAsos(listaAtualizada);
-    // Também podemos chamar fetchAsos() para garantir consistência total
   };
 
+  // O resto do seu código JSX permanece exatamente o mesmo
   if (loading) return <div>Carregando ASOs...</div>;
   if (error) return <div style={{ color: 'red' }}>Erro: {error}</div>;
 

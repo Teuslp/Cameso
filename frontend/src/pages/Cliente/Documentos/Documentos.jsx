@@ -1,12 +1,12 @@
-// frontend/src/pages/Cliente/Documentos/Documentos.jsx (VERSÃO 2.0 COMPLETA)
-
 import React, { useState, useEffect } from 'react';
+import api from '../../../api/axios'; // 1. IMPORTAR A INSTÂNCIA 'api'
 
 const Documentos = () => {
   // --- ESTADOS GERAIS ---
   const [colaboradores, setColaboradores] = useState([]);
   const [documentos, setDocumentos] = useState([]);
   const [loadingDocs, setLoadingDocs] = useState(true);
+  const [error, setError] = useState(null);
 
   // --- ESTADO PARA OS FILTROS ---
   const [filtros, setFiltros] = useState({
@@ -23,41 +23,28 @@ const Documentos = () => {
 
   // --- BUSCA DE DADOS ---
 
-  // Busca a lista de colaboradores (para os dropdowns) uma única vez
   useEffect(() => {
     const fetchColaboradores = async () => {
       try {
-        const token = localStorage.getItem('userToken');
-        const response = await fetch('/api/colaboradores', { headers: { 'Authorization': `Bearer ${token}` } });
-        if (!response.ok) throw new Error('Falha ao buscar colaboradores.');
-        const data = await response.json();
-        setColaboradores(data);
+        // 2. SUBSTITUIR 'fetch' PELA CHAMADA PADRONIZADA COM 'api'
+        const response = await api.get('/colaboradores');
+        setColaboradores(response.data);
       } catch (err) {
-        // Lida com erro de busca de colaboradores
+        setError('Não foi possível carregar a lista de colaboradores.');
       }
     };
     fetchColaboradores();
   }, []);
 
-  // Busca a lista de documentos toda vez que os filtros mudam
   useEffect(() => {
     const fetchDocumentos = async () => {
       setLoadingDocs(true);
       try {
-        const token = localStorage.getItem('userToken');
-        const params = new URLSearchParams();
-        if (filtros.search) params.append('search', filtros.search);
-        if (filtros.tipo) params.append('tipo', filtros.tipo);
-        if (filtros.colaboradorId) params.append('colaboradorId', filtros.colaboradorId);
-        
-        const response = await fetch(`/api/documentos?${params.toString()}`, {
-          headers: { 'Authorization': `Bearer ${token}` },
-        });
-        if (!response.ok) throw new Error('Falha ao buscar documentos.');
-        const data = await response.json();
-        setDocumentos(data);
+        // 3. SUBSTITUIR 'fetch' PELA CHAMADA PADRONIZADA COM 'api'
+        const response = await api.get('/documentos', { params: filtros });
+        setDocumentos(response.data);
       } catch (err) {
-        // Lida com erro de busca de documentos
+        setError(err.response?.data?.message || 'Falha ao buscar documentos.');
       } finally {
         setLoadingDocs(false);
       }
@@ -96,28 +83,21 @@ const Documentos = () => {
     }
 
     try {
-      const token = localStorage.getItem('userToken');
-      const response = await fetch('/api/documentos/upload', {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` },
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Falha no upload do documento.');
-      }
+      // 4. SUBSTITUIR 'fetch' PELA CHAMADA PADRONIZADA COM 'api'
+      await api.post('/documentos/upload', formData);
       
       setStatusUpload({ loading: false, error: null, success: 'Documento enviado com sucesso!' });
       e.target.reset();
       setArquivo(null);
-      // Força a atualização da lista de documentos limpando os filtros (que dispara o useEffect)
       limparFiltros(); 
       
     } catch (err) {
-      setStatusUpload({ loading: false, error: err.message, success: null });
+      setStatusUpload({ loading: false, error: err.response?.data?.message || 'Falha no upload do documento.', success: null });
     }
   };
+  
+  // 5. URL BASE DINÂMICA PARA DOWNLOADS
+  const baseURL = api.defaults.baseURL;
 
   // --- RENDERIZAÇÃO DO COMPONENTE ---
   return (
@@ -171,6 +151,7 @@ const Documentos = () => {
         </div>
 
         {/* Tabela de Documentos */}
+        {error && <p style={{color: 'red'}}>Falha ao carregar: {error}</p>}
         {loadingDocs ? (<p>Carregando documentos...</p>) : (
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
@@ -190,7 +171,8 @@ const Documentos = () => {
                   <td style={{ padding: '12px', border: '1px solid #ddd' }}>{doc.colaboradorId ? doc.colaboradorId.nomeCompleto : 'Empresa'}</td>
                   <td style={{ padding: '12px', border: '1px solid #ddd' }}>{new Date(doc.createdAt).toLocaleDateString('pt-BR')}</td>
                   <td style={{ padding: '12px', border: '1px solid #ddd' }}>
-                    <a href={`http://localhost:3001/${doc.path.replace(/\\/g, '/')}`} target="_blank" rel="noopener noreferrer">Download</a>
+                    {/* 6. LINK DE DOWNLOAD CORRIGIDO E DINÂMICO */}
+                    <a href={`${baseURL}/${doc.path.replace(/\\/g, '/')}`} target="_blank" rel="noopener noreferrer">Download</a>
                   </td>
                 </tr>
               ))) : (

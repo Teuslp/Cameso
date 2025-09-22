@@ -1,20 +1,20 @@
-// frontend/src/pages/Cliente/Funcoes/ListaFuncoes.jsx (NOVO ARQUIVO)
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import api from '../../../api/axios'; // 1. IMPORTAR A INSTÂNCIA 'api'
 
 const ListaFuncoes = () => {
   const [funcoes, setFuncoes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // Adicionado estado de erro
 
   const fetchFuncoes = async () => {
     try {
-      const token = localStorage.getItem('userToken');
-      const response = await fetch('/api/funcoes', { headers: { 'Authorization': `Bearer ${token}` } });
-      const data = await response.json();
-      if(response.ok) setFuncoes(data);
-    } catch (error) {
-      console.error("Erro ao buscar funções", error);
+      setLoading(true);
+      // 2. SUBSTITUIR 'fetch' PELA CHAMADA PADRONIZADA COM 'api'
+      const response = await api.get('/funcoes');
+      setFuncoes(response.data);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Erro ao buscar funções');
     } finally {
       setLoading(false);
     }
@@ -27,19 +27,17 @@ const ListaFuncoes = () => {
   const handleDelete = async (id) => {
     if(window.confirm("Tem certeza que deseja excluir esta função?")) {
       try {
-        const token = localStorage.getItem('userToken');
-        await fetch(`/api/funcoes/${id}`, { 
-            method: 'DELETE',
-            headers: { 'Authorization': `Bearer ${token}` } 
-        });
+        // 3. SUBSTITUIR 'fetch' PELA CHAMADA PADRONIZADA COM 'api'
+        await api.delete(`/funcoes/${id}`);
         fetchFuncoes(); // Atualiza a lista
-      } catch (error) {
-        console.error("Erro ao deletar função", error);
+      } catch (err) {
+        alert(err.response?.data?.message || 'Erro ao deletar função');
       }
     }
   };
 
   if (loading) return <div>Carregando...</div>;
+  if (error) return <div style={{ color: 'red', padding: '20px' }}>Erro: {error}</div>;
 
   return (
     <div style={{ padding: '20px' }}>

@@ -1,25 +1,22 @@
-// frontend/src/pages/Cliente/Chamados/Chamados.jsx (VERSÃO CORRIGIDA)
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; 
-import FormAbrirChamado from './FormAbrirChamado'; 
+import FormAbrirChamado from './FormAbrirChamado';
+import api from '../../../api/axios'; // 1. IMPORTAR A INSTÂNCIA 'api'
 
 const Chamados = () => {
   const [chamados, setChamados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [error, setError] = useState(null); // Adicionado estado de erro
 
   const fetchChamados = async () => {
     try {
-      const token = localStorage.getItem('userToken');
-      const response = await fetch('/api/chamados', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (!response.ok) throw new Error('Falha ao buscar chamados.');
-      const data = await response.json();
-      setChamados(data);
+      setLoading(true);
+      // 2. SUBSTITUIR 'fetch' PELA CHAMADA PADRONIZADA COM 'api'
+      const response = await api.get('/chamados');
+      setChamados(response.data);
     } catch (err) {
-      console.error(err);
+      setError(err.response?.data?.message || 'Falha ao buscar chamados.');
     } finally {
       setLoading(false);
     }
@@ -30,10 +27,9 @@ const Chamados = () => {
   }, []);
 
   const handleChamadoAdicionado = () => {
-    fetchChamados();
+    fetchChamados(); // Recarrega a lista
   };
 
-  // Esta função agora será usada na tabela
   const getStatusStyle = (status) => {
     switch (status) {
       case 'Aberto': return { backgroundColor: '#007bff', color: '#fff', padding: '4px 8px', borderRadius: '4px' };
@@ -43,8 +39,8 @@ const Chamados = () => {
     }
   };
 
-
   if (loading) return <div>Carregando chamados...</div>;
+  if (error) return <div style={{ color: 'red', padding: '20px' }}>Erro: {error}</div>;
 
   return (
     <div style={{ padding: '20px' }}>
@@ -74,7 +70,6 @@ const Chamados = () => {
           {chamados.map(chamado => (
             <tr key={chamado._id}>
               <td style={{ padding: '12px', border: '1px solid #ddd' }}>
-                {/* --- CORREÇÃO APLICADA AQUI --- */}
                 <span style={getStatusStyle(chamado.status)}>{chamado.status}</span>
               </td>
               <td style={{ padding: '12px', border: '1px solid #ddd' }}>
