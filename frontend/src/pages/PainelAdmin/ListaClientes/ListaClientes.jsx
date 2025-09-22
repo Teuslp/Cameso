@@ -1,28 +1,26 @@
+// frontend/src/pages/PainelAdmin/ListaClientes/ListaClientes.jsx (VERSÃO CORRIGIDA)
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FormNovoCliente from './FormNovoCliente';
 import FormEditCliente from './FormEditCliente';
 import './ListaClientes.css';
-import api from '../../../api/axios';
+import api from '../../../api/axios'; // O import já estava correto
 
 const PainelAdmin = () => {
   const [clientes, setClientes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Modais
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [clienteEmEdicao, setClienteEmEdicao] = useState(null);
 
   const fetchClientes = async () => {
     try {
-      const token = localStorage.getItem('userToken');
-      const res = await fetch('/api/admin/clientes', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      const data = await res.json();
-      setClientes(data.sort((a, b) => a.razaoSocial.localeCompare(b.razaoSocial)));
+      // 1. SUBSTITUIR 'fetch' POR 'api.get'
+      const res = await api.get('/admin/clientes');
+      setClientes(res.data.sort((a, b) => a.razaoSocial.localeCompare(b.razaoSocial)));
     } catch (err) {
       setError("Erro ao carregar clientes.");
     } finally {
@@ -34,7 +32,6 @@ const PainelAdmin = () => {
     fetchClientes();
   }, []);
 
-  // Funções de controle
   const handleOpenEditModal = (cliente) => {
     setClienteEmEdicao(cliente);
     setIsEditModalOpen(true);
@@ -53,11 +50,8 @@ const PainelAdmin = () => {
   const handleClienteDeletado = async (clienteId) => {
     if (window.confirm("Tem certeza que deseja desativar este cliente? Esta ação não pode ser desfeita.")) {
       try {
-        const token = localStorage.getItem('userToken');
-        await fetch(`/api/admin/clientes/${clienteId}`, {
-          method: 'DELETE',
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+        // 2. SUBSTITUIR 'fetch' POR 'api.delete'
+        await api.delete(`/admin/clientes/${clienteId}`);
         setClientes(prev => prev.filter(c => c._id !== clienteId));
       } catch (err) {
         setError("Falha ao desativar cliente.");
@@ -65,13 +59,13 @@ const PainelAdmin = () => {
     }
   };
 
-  // Renderização condicional
+  // O resto do seu código JSX permanece igual
   if (loading) {
     return <div className="admin-container">Carregando clientes...</div>;
   }
 
   if (error) {
-    return <div className="admin-container error-message">Erro: {error}</div>;
+    return <div className="admin-container error-message">{error}</div>;
   }
 
   return (

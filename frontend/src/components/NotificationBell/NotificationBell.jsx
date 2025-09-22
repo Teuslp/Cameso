@@ -1,9 +1,10 @@
-// frontend/src/components/NotificationBell/NotificationBell.jsx (NOVO ARQUIVO)
+// frontend/src/components/NotificationBell/NotificationBell.jsx (VERSÃO CORRIGIDA)
 
 import React, { useState, useEffect } from 'react';
 import { FaBell } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import './NotificationBell.css'; // Criaremos este CSS a seguir
+import './NotificationBell.css';
+import api from '../../api/axios'; 
 
 const NotificationBell = () => {
   const [notifications, setNotifications] = useState([]);
@@ -11,45 +12,31 @@ const NotificationBell = () => {
 
   const unreadCount = notifications.filter(n => !n.lida).length;
 
-  // Função para buscar as notificações
   const fetchNotifications = async () => {
     try {
-      const token = localStorage.getItem('userToken');
-      if (!token) return;
-      const response = await fetch('/api/notificacoes', {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setNotifications(data);
-      }
+      const response = await api.get('/admin/notificacoes'); 
+      setNotifications(response.data);
     } catch (error) {
-      console.error("Erro ao buscar notificações:", error);
     }
   };
 
-  // Busca as notificações quando o componente é montado
   useEffect(() => {
     fetchNotifications();
-    // Opcional: Busca por novas notificações a cada 1 minuto
     const interval = setInterval(fetchNotifications, 60000);
-    // Limpa o intervalo quando o componente é desmontado
     return () => clearInterval(interval);
   }, []);
 
   const handleMarkAllAsRead = async () => {
     try {
-        const token = localStorage.getItem('userToken');
-        await fetch('/api/notificacoes/marcar-todas-lidas', {
-            method: 'POST',
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-        fetchNotifications(); // Atualiza a lista
+        // 3. USAR api.post E A ROTA CORRETA PARA ADMIN
+        await api.post('/admin/notificacoes/marcar-todas-lidas');
+        fetchNotifications();
     } catch (error) {
         console.error("Erro ao marcar todas como lidas:", error);
     }
   };
 
+  // O resto do seu código JSX permanece igual
   return (
     <div className="notification-bell-container">
       <button onClick={() => setIsOpen(!isOpen)} className="bell-button">
