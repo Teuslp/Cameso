@@ -1,31 +1,22 @@
-// frontend/src/pages/Cliente/Dashboard/Dashboard.jsx (VERSÃO COMPLETA E CORRIGIDA)
-
 import React, { useState, useEffect } from 'react';
 import { FaUsers, FaExclamationTriangle, FaCheckCircle, FaCertificate, FaHeartbeat, FaCalendarCheck } from 'react-icons/fa';
 import './Dashboard.css';
+import api from '../../../api/axios'; 
 
 const Dashboard = () => {
-  // Estados para os cards de resumo
   const [summary, setSummary] = useState(null);
   const [loadingSummary, setLoadingSummary] = useState(true);
   
-  // Estados para a lista de vencimentos
   const [vencimentos, setVencimentos] = useState([]);
   const [loadingVencimentos, setLoadingVencimentos] = useState(true);
 
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('userToken');
-    // Função para buscar os dados dos cards
     const fetchSummary = async () => {
       try {
-        const response = await fetch('/api/dashboard/summary', {
-          headers: { 'Authorization': `Bearer ${token}` },
-        });
-        if (!response.ok) throw new Error('Falha ao buscar resumo do dashboard.');
-        const data = await response.json();
-        setSummary(data);
+        const response = await api.get('/dashboard/summary');
+        setSummary(response.data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -33,15 +24,10 @@ const Dashboard = () => {
       }
     };
 
-    // Função para buscar a lista de próximos vencimentos
     const fetchVencimentos = async () => {
       try {
-        const response = await fetch('/api/dashboard/vencimentos', {
-          headers: { 'Authorization': `Bearer ${token}` },
-        });
-        if (!response.ok) throw new Error('Falha ao buscar vencimentos.');
-        const data = await response.json();
-        setVencimentos(data);
+        const response = await api.get('/dashboard/vencimentos');
+        setVencimentos(response.data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -49,11 +35,11 @@ const Dashboard = () => {
       }
     };
 
-    // Executa as duas buscas em paralelo
     fetchSummary();
     fetchVencimentos();
   }, []);
 
+  // O resto do seu componente JSX permanece igual
   if (loadingSummary || loadingVencimentos) {
     return <div>Carregando dashboard...</div>;
   }
@@ -66,7 +52,6 @@ const Dashboard = () => {
     <div>
       <h2>Visão Geral</h2>
       
-      {/* --- SEÇÃO DOS CARDS DE RESUMO --- */}
       <div className="dashboard-cards-container">
         <div className="dashboard-card">
           <FaUsers size={40} className="card-icon" />
@@ -98,7 +83,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* --- WIDGET DE PRÓXIMOS VENCIMENTOS --- */}
       <div className="widget-vencimentos">
         <h3>Próximos Vencimentos (30 dias)</h3>
         {vencimentos.length > 0 ? (

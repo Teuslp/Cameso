@@ -41,14 +41,13 @@ export const createAso = async (req, res) => {
 export const getAsos = async (req, res) => {
   try {
     const clienteId = req.user.id;
-
     const asos = await Aso.find({ clienteId: clienteId })
-      .populate('colaboradorId', 'nomeCompleto') // Busca o nome do colaborador
-      .sort({ proximoExame: 1 }); // Ordena pelos próximos a vencer
-
+      .populate('colaboradorId', 'nomeCompleto')
+      .sort({ proximoExame: 1 });
     res.status(200).json(asos);
   } catch (error) {
-    console.error("Erro ao listar ASOs:", error);
+    // LOG APRIMORADO
+    console.error("Erro detalhado ao listar ASOs:", error.stack); 
     res.status(500).json({ message: "Erro no servidor ao tentar listar ASOs." });
   }
 };

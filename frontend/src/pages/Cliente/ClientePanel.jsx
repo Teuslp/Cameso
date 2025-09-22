@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { FaFileAlt, FaCalendarAlt, FaDownload, FaUpload, FaEnvelope, FaUsers, FaTasks, FaHeartbeat, FaCertificate, FaHome, FaSignOutAlt, FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
+import { FaFileAlt, FaCalendarAlt, FaDownload, FaUpload, FaHeadset, FaUsers, FaTasks, FaHeartbeat, FaCertificate, FaHome, FaSignOutAlt, FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext"; // Importe o useAuth
 import "./ClientePanel.css";
 
@@ -41,7 +41,7 @@ function ClientePanel() {
 
             <li><NavLink to="/cliente/agenda"><FaCalendarAlt /> <span className="nav-text">Agenda</span></NavLink></li>
             {/* Corrigindo a rota de Suporte para a que implementamos */}
-            <li><NavLink to="/cliente/chamados"><FaEnvelope /> <span className="nav-text">Suporte</span></NavLink></li>
+            <li><NavLink to="/cliente/chamados"><FaHeadset /> <span className="nav-text">Suporte</span></NavLink></li>
           </ul>
         </nav>
 

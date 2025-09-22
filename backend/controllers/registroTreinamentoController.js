@@ -33,16 +33,14 @@ export const createRegistro = async (req, res) => {
 export const getRegistros = async (req, res) => {
   try {
     const clienteId = req.user.id;
-
     const registros = await RegistroTreinamento.find({ clienteId: clienteId })
-      // Fazemos dois 'populates' para buscar os nomes do colaborador e do treinamento
       .populate('colaboradorId', 'nomeCompleto')
       .populate('treinamentoId', 'nome')
-      .sort({ dataValidade: 1 }); // Ordena pelos próximos a vencer
-
+      .sort({ dataValidade: 1 });
     res.status(200).json(registros);
   } catch (error) {
-    console.error("Erro ao listar registros de treinamento:", error);
+    // LOG APRIMORADO
+    console.error("Erro detalhado ao listar registros de treinamento:", error.stack);
     res.status(500).json({ message: "Erro no servidor." });
   }
 };
