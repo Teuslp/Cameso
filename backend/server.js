@@ -5,7 +5,6 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cron from 'node-cron';
 
-// Rotas
 import authRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin.js";
 import clienteRoutes from './routes/cliente.js';
@@ -27,34 +26,26 @@ import perfilRoutes from './routes/perfil.js';
 dotenv.config();
 const app = express();
 
-// --- CORS ---
 const corsOptions = {
   origin: [
-    'http://localhost:3000', // Para desenvolvimento local
-    'https://cameso.vercel.app', // Sua URL de produção principal
-    'https://cameso-f5l7a51d1-matheuss-projects-b5413000.vercel.app' // Adicione esta linha com a URL de preview do Vercel
+    'http://localhost:3000',
+    'https://cameso.vercel.app',
+    'https://cameso-f5l7a51d1-matheuss-projects-b5413000.vercel.app'
   ]
 };
 app.use(cors(corsOptions));
 
 app.use(express.json());
 
-// Middleware de Log de Requisições - ADICIONE ESTE BLOCO PARA DIAGNÓSTICO
 app.use((req, res, next) => {
-  console.log(`[LOG DE DIAGNÓSTICO] Requisição recebida: ${req.method} ${req.originalUrl}`);
-  next(); // Passa a requisição para as próximas rotas
+  if (req.path.endsWith('/') && req.path.length > 1) {
+    const query = req.url.slice(req.path.length);
+    res.redirect(301, req.path.slice(0, -1) + query);
+  } else {
+    next();
+  }
 });
 
-// Torna a pasta 'uploads' publicamente acessível para downloads
-app.use('/uploads', express.static('uploads')); 
-
-// Rota de contato (seu código de email aqui)
-app.post("/contact", async (req, res) => {
-  // exemplo simplificado
-  res.json({ message: "Rota de contato funcionando" });
-});
-
-// --- Rotas padronizadas com /api ---
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/cliente", clienteRoutes);
@@ -72,12 +63,10 @@ app.use("/api/exames", exameRoutes);
 app.use("/api/notificacoes", notificacaoRoutes);
 app.use("/api/perfil", perfilRoutes);
 
-// Conexão ao MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("✅ MongoDB conectado"))
   .catch(err => console.error("❌ Erro ao conectar MongoDB:", err));
 
-// Tarefa agendada de notificações
 cron.schedule('0 1 * * *', () => {
   console.log('Executando a tarefa agendada de verificação de vencimentos...');
   gerarNotificacoesDeVencimento();
@@ -86,6 +75,5 @@ cron.schedule('0 1 * * *', () => {
   timezone: "America/Sao_Paulo"
 });
 
-// Start do servidor
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`🚀 Servidor rodando em http://localhost:${PORT}`));
