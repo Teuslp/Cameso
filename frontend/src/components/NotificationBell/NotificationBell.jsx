@@ -1,42 +1,50 @@
-// frontend/src/components/NotificationBell/NotificationBell.jsx (VERSÃO CORRIGIDA)
-
 import React, { useState, useEffect } from 'react';
 import { FaBell } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './NotificationBell.css';
-import api from '../../api/axios'; 
+import api from '../../api/axios';
+import { useAuth } from '../../context/AuthContext'; // 1. Importar o useAuth
 
 const NotificationBell = () => {
   const [notifications, setNotifications] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useAuth(); // 2. Obter o utilizador logado do contexto
 
   const unreadCount = notifications.filter(n => !n.lida).length;
 
-  const fetchNotifications = async () => {
-    try {
-      const response = await api.get('/admin/notificacoes'); 
-      setNotifications(response.data);
-    } catch (error) {
-    }
-  };
-
+  // 3. Tornar a função de busca dinâmica
   useEffect(() => {
+    // Não faz nada se o utilizador não estiver carregado
+    if (!user) return;
+
+    // Decide qual URL usar com base no papel do utilizador
+    const notificationsUrl = user.role === 'admin' ? '/admin/notificacoes' : '/notificacoes';
+
+    const fetchNotifications = async () => {
+      try {
+        const response = await api.get(notificationsUrl);
+        setNotifications(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar notificações:", error);
+      }
+    };
+
     fetchNotifications();
     const interval = setInterval(fetchNotifications, 60000);
     return () => clearInterval(interval);
-  }, []);
+  }, [user]); // 4. Executa novamente se o utilizador mudar (ex: login/logout)
 
   const handleMarkAllAsRead = async () => {
+    if (!user) return;
+    const markAsReadUrl = user.role === 'admin' ? '/admin/notificacoes/marcar-todas-lidas' : '/notificacoes/marcar-todas-lidas';
     try {
-        // 3. USAR api.post E A ROTA CORRETA PARA ADMIN
-        await api.post('/admin/notificacoes/marcar-todas-lidas');
-        fetchNotifications();
+        await api.post(markAsReadUrl);
+        setNotifications(prev => prev.map(n => ({ ...n, lida: true })));
     } catch (error) {
         console.error("Erro ao marcar todas como lidas:", error);
     }
   };
 
-  // O resto do seu código JSX permanece igual
   return (
     <div className="notification-bell-container">
       <button onClick={() => setIsOpen(!isOpen)} className="bell-button">
@@ -48,7 +56,9 @@ const NotificationBell = () => {
         <div className="notification-dropdown">
           <div className="dropdown-header">
             <h3>Notificações</h3>
-            <button onClick={handleMarkAllAsRead} className="mark-all-read-btn">Marcar todas como lidas</button>
+            {unreadCount > 0 && (
+                 <button onClick={handleMarkAllAsRead} className="mark-all-read-btn">Marcar todas como lidas</button>
+            )}
           </div>
           <ul className="notification-list">
             {notifications.length > 0 ? (
@@ -61,7 +71,7 @@ const NotificationBell = () => {
                 </li>
               ))
             ) : (
-              <li className="no-notifications">Nenhuma notificação encontrada.</li>
+              <li className="no-notifications">Nenhuma notificação nova.</li>
             )}
           </ul>
         </div>
