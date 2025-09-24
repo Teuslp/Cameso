@@ -1,5 +1,6 @@
 // frontend/src/pages/Cliente/Chamados/FormAbrirChamado.jsx (NOVO ARQUIVO)
 import React, { useState } from 'react';
+import api from '../../../api/axios';
 
 const FormAbrirChamado = ({ onClose, onChamadoAdicionado }) => {
     const [assunto, setAssunto] = useState('');
@@ -13,7 +14,7 @@ const FormAbrirChamado = ({ onClose, onChamadoAdicionado }) => {
         setError('');
         try {
             const token = localStorage.getItem('userToken');
-            const response = await fetch('/api/chamados', {
+            const response = await api.get('/api/chamados', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ assunto, conteudo })
