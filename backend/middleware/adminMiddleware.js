@@ -1,12 +1,15 @@
-// backend/middleware/adminMiddleware.js (NOVO ARQUIVO)
+// backend/middleware/adminMiddleware.js
 
 export const adminMiddleware = (req, res, next) => {
   // Este middleware deve rodar DEPOIS do authMiddleware,
-  // então já teremos acesso a req.user
-  if (req.user && req.user.role === 'admin') {
-    next(); // Se for admin, pode prosseguir
+  // que já nos deu o objeto 'req.user' completo do banco de dados.
+  
+  // Verificamos se o 'tipoConta' do utilizador existe e se começa com 'admin'
+  if (req.user && req.user.tipoConta?.startsWith('admin')) {
+    // Se for 'admin_master' ou 'admin_departamento', permite prosseguir
+    next(); 
   } else {
-    // Se não for admin, retorna um erro de acesso proibido
+    // Se não for um admin, retorna um erro de acesso proibido
     res.status(403).json({ message: "Acesso negado. Requer privilégios de administrador." });
   }
 };

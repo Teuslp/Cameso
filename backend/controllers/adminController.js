@@ -9,14 +9,15 @@ import Chamado from '../models/Chamado.js';
 
 
 /**
- * Lista todos os usuários que são clientes.
+ * Lista todos os usuários que são contas principais de cliente.
  */
 export const getClientes = async (req, res) => {
   try {
-    // Busca todos os usuários onde o papel (role) é 'cliente'
-    const clientes = await User.find({ role: 'cliente' })
-      .select('-senha') // Exclui o campo de senha da resposta por segurança
-      .sort({ razaoSocial: 1 }); // Ordena por ordem alfabética
+    // --- CORREÇÃO APLICADA AQUI ---
+    // Agora procuramos por utilizadores cujo tipoConta é 'cliente_master'.
+    const clientes = await User.find({ tipoConta: 'cliente_master' })
+      .select('-senha')
+      .sort({ razaoSocial: 1 });
 
     res.status(200).json(clientes);
   } catch (error) {
@@ -32,7 +33,6 @@ export const getClienteById = async (req, res) => {
   try {
     const { id: clienteId } = req.params;
 
-    // Usamos Promise.all para buscar tudo em paralelo e otimizar o tempo
     const [
       cliente,
       colaboradores,
@@ -55,7 +55,6 @@ export const getClienteById = async (req, res) => {
       return res.status(404).json({ message: "Cliente não encontrado." });
     }
 
-    // Retorna um grande objeto com todos os dados do cliente
     res.status(200).json({
       cliente,
       colaboradores,
@@ -83,13 +82,11 @@ export const createCliente = async (req, res) => {
         return res.status(400).json({ message: "Nome, email, senha e razão social são obrigatórios." });
     }
 
-    // Verifica se o email já está em uso
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Este email já está cadastrado." });
     }
 
-    // Criptografa a senha inicial
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(senha, salt);
 
@@ -99,12 +96,13 @@ export const createCliente = async (req, res) => {
       senha: hashedPassword,
       razaoSocial,
       cnpj,
-      role: 'cliente', // Define o papel como 'cliente'
+      // --- CORREÇÃO APLICADA AQUI ---
+      // Agora, ao criar um cliente, definimos o tipoConta como 'cliente_master'.
+      tipoConta: 'cliente_master',
     });
 
     await novoCliente.save();
 
-    // Retorna o novo cliente criado (sem a senha)
     const clienteCriado = await User.findById(novoCliente._id).select('-senha');
     res.status(201).json(clienteCriado);
 

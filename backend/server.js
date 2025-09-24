@@ -4,8 +4,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cron from 'node-cron';
-import path from 'path'; // 1. Importar o módulo 'path'
-import { fileURLToPath } from 'url'; // Importar para lidar com ES Modules
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Rotas
 import authRoutes from "./routes/auth.js";
@@ -25,6 +25,8 @@ import exameRoutes from './routes/exame.js';
 import gerarNotificacoesDeVencimento from './workers/notificationWorker.js';
 import notificacaoRoutes from './routes/notificacao.js';
 import perfilRoutes from './routes/perfil.js';
+// 1. IMPORTAR O NOVO FICHEIRO DE ROTAS
+import userManagementRoutes from './routes/userManagement.js';
 
 dotenv.config();
 const app = express();
@@ -49,13 +51,11 @@ app.use((req, res, next) => {
   }
 });
 
-// --- CONFIGURAÇÃO PARA SERVIR FICHEIROS ESTÁTICOS ---
-// 2. Definir o caminho absoluto para a pasta 'uploads'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-// --------------------------------------------------
 
+// --- Rotas da API ---
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/cliente", clienteRoutes);
@@ -72,6 +72,8 @@ app.use("/api/riscos", riscoRoutes);
 app.use("/api/exames", exameRoutes);
 app.use("/api/notificacoes", notificacaoRoutes);
 app.use("/api/perfil", perfilRoutes);
+// 2. ADICIONAR ESTA LINHA PARA ATIVAR AS NOVAS ROTAS
+app.use("/api/management", userManagementRoutes);
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("✅ MongoDB conectado"))

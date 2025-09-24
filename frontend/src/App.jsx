@@ -1,10 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from "react-router-dom";
-
-// --- CONTEXTO DE AUTENTICAÇÃO ---
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 
-// --- COMPONENTES DE LAYOUT E UTILITÁRIOS ---
+// --- COMPONENTES ---
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/ScrollToTop";
@@ -34,29 +32,29 @@ import Asos from "./pages/Cliente/Asos/Asos";
 import ListaFuncoes from "./pages/Cliente/Funcoes/ListaFuncoes";
 import FormFuncao from "./pages/Cliente/Funcoes/FormFuncao";
 import Agenda from "./pages/Cliente/Agenda/Agenda";
-import TreinamentosCliente from "./pages/Cliente/Treinamentos/Treinamentos"; // Renomeado para evitar conflito
+import TreinamentosCliente from "./pages/Cliente/Treinamentos/Treinamentos";
 import Chamados from "./pages/Cliente/Chamados/Chamados";
 import DetalheChamado from "./pages/Cliente/Chamados/DetalheChamado";
 import Perfil from "./pages/Cliente/Perfil/Perfil";
+import GestaoUtilizadores from "./pages/Cliente/GestaoUtilizadores/GestaoUtilizadores";
 
 // --- PÁGINAS DO PAINEL DO ADMIN ---
+import AdminLayout from "./pages/PainelAdmin/AdminLayout";
 import ListaClientes from "./pages/PainelAdmin/ListaClientes/ListaClientes";
 import DetalhesCliente from "./pages/PainelAdmin/DetalhesCliente/DetalhesCliente";
-import AdminLayout from "./pages/PainelAdmin/AdminLayout";
 import GestaoExames from "./pages/PainelAdmin/GestaoExames/GestaoExames";
 import GestaoRiscos from "./pages/PainelAdmin/GestaoRiscos/index.jsx";
 import GestaoTreinamentos from "./pages/PainelAdmin/GestaoTreinamentos/GestaoTreinamentos";
 import ListaChamadosAdmin from "./pages/PainelAdmin/GestaoChamados/ListaChamadosAdmin";
 import DetalheChamadoAdmin from "./pages/PainelAdmin/GestaoChamados/DetalheChamadoAdmin";
 import GestaoAgendamentos from "./pages/PainelAdmin/GestaoAgendamentos/GestaoAgendamentos";
-
+import GestaoEquipa from "./pages/PainelAdmin/GestaoEquipe/GestaoEquipe.jsx";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <ScrollToTop />
-        {/* Nova estrutura de container para o layout "sticky footer" */}
         <div className="app-container">
           <Navbar />
           <main className="app-content">
@@ -78,7 +76,6 @@ function App() {
               {/* --- ROTAS PROTEGIDAS DO CLIENTE --- */}
               <Route path="/cliente" element={<PrivateRoute role="cliente"><ClientePanel /></PrivateRoute>}>
                 <Route index element={<Dashboard />} />
-                <Route path="dashboard" element={<Dashboard />} />
                 <Route path="documentos" element={<Documentos />} />
                 <Route path="colaboradores" element={<Colaboradores />} />
                 <Route path="colaboradores/:id" element={<PerfilColaborador />} />
@@ -91,17 +88,11 @@ function App() {
                 <Route path="chamados" element={<Chamados />} />
                 <Route path="chamados/:id" element={<DetalheChamado />} />
                 <Route path="perfil" element={<Perfil />} />
+                <Route path="utilizadores" element={<GestaoUtilizadores />} />
               </Route>
 
               {/* --- ROTAS PROTEGIDAS DO ADMIN --- */}
-              <Route
-                path="/admin"
-                element={
-                  <PrivateRoute role="admin">
-                    <AdminLayout /> {/* O Layout agora é o elemento principal */}
-                  </PrivateRoute>
-                }
-              >
+              <Route path="/admin" element={<PrivateRoute role="admin"><AdminLayout /></PrivateRoute>}>
                 <Route index element={<ListaClientes />} />
                 <Route path="clientes/:id" element={<DetalhesCliente />} />
                 <Route path="exames" element={<GestaoExames />} />
@@ -110,6 +101,8 @@ function App() {
                 <Route path="chamados" element={<ListaChamadosAdmin />} />
                 <Route path="chamados/:id" element={<DetalheChamadoAdmin />} />
                 <Route path="agendamentos" element={<GestaoAgendamentos />} />
+                {/* 2. ADICIONAR A NOVA ROTA DE GESTÃO DA EQUIPA */}
+                <Route path="equipa" element={<GestaoEquipa />} />
               </Route>
             </Routes>
           </main>

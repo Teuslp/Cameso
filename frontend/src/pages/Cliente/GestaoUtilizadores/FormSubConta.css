@@ -1,0 +1,22 @@
+.permissions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.permission-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.permission-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+/* Reutilize os estilos de modal que já tem, como .modal-backdrop, .form-group, etc. */

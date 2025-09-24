@@ -1,9 +1,7 @@
-// frontend/src/pages/Login/Login.jsx
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import api from '../../api/axios'; // instância do axios configurada
+import api from '../../api/axios';
 import logo from '../../assets/logoc.png';
 import './Login.css';
 
@@ -23,8 +21,6 @@ const Login = () => {
     setError('');
 
     try {
-      // Agora chamamos o backend usando axios
-      // baseURL já é http://localhost:3001/api (axios.js)
       const response = await api.post('/auth/login', { email, senha });
       const data = response.data;
 
@@ -33,16 +29,22 @@ const Login = () => {
 
       setTimeout(() => {
         login(data.user, data.token);
-        navigate(data.user.role === 'admin' ? '/admin' : '/cliente');
+        
+        // --- CORREÇÃO APLICADA AQUI ---
+        // Agora verificamos se 'tipoConta' começa com 'admin' ou 'cliente'
+        if (data.user.tipoConta.startsWith('admin')) {
+            navigate('/admin');
+        } else if (data.user.tipoConta.startsWith('cliente')) {
+            navigate('/cliente');
+        } else {
+            navigate('/'); // Fallback para a página inicial
+        }
+        
       }, 1500);
 
     } catch (err) {
       console.error("Erro no login:", err);
-
-      const errorMessage =
-        err.response?.data?.message ||
-        'Falha no login. Verifique suas credenciais ou tente novamente.';
-
+      const errorMessage = err.response?.data?.message || 'Falha no login. Verifique as suas credenciais.';
       setError(errorMessage);
       setLoading(false);
     }
@@ -51,13 +53,11 @@ const Login = () => {
   return (
     <div className="login-page">
       <div className="login-container">
-        
         <div className="login-branding">
           <img src={logo} alt="Cameso Logo" />
           <h1>Bem-vindo ao Portal do Cliente</h1>
           <p>Sua plataforma completa para gestão de Saúde e Segurança do Trabalho.</p>
         </div>
-
         <div className="login-form-wrapper">
           <h2>Acesse sua conta</h2>
           <form onSubmit={handleSubmit}>
@@ -82,7 +82,6 @@ const Login = () => {
               />
             </div>
             {error && <p className="error-message">{error}</p>}
-            
             <button 
               type="submit" 
               className={`login-btn ${loginSuccess ? 'success' : ''}`} 
@@ -90,13 +89,11 @@ const Login = () => {
             >
               {loading ? 'Entrando...' : (loginSuccess ? 'Bem-vindo!' : 'Entrar')}
             </button>
-            
             <div className="login-links">
               <Link to="/esqueci-senha">Esqueceu sua senha?</Link>
             </div>
           </form>
         </div>
-
       </div>
     </div>
   );

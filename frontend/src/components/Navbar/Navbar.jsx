@@ -1,5 +1,3 @@
-// frontend/src/components/Navbar/Navbar.jsx (VERSÃO CORRIGIDA E SEGURA)
-
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
@@ -16,7 +14,7 @@ function Navbar() {
   const userMenuRef = useRef(null);
   const navigate = useNavigate();
 
-  const { user, logout } = useAuth(); // Pega o usuário do contexto
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -29,11 +27,30 @@ function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    logout(); // Chama a função de logout do contexto
+    logout();
     setUserMenuOpen(false);
     setMenuOpen(false);
-    navigate("/"); // Navega para a home
+    navigate("/");
   };
+
+  // --- LÓGICA DE REDIRECIONAMENTO ATUALIZADA ---
+  // Verifica se o tipoConta começa com 'admin' ou 'cliente'
+  const getDashboardLink = () => {
+    if (user?.tipoConta?.startsWith('admin')) {
+      return '/admin';
+    }
+    if (user?.tipoConta?.startsWith('cliente')) {
+      return '/cliente';
+    }
+    // Fallback para o caso de o utilizador não estar carregado
+    return '/login';
+  };
+
+  const getProfileLink = () => {
+    // No futuro, podemos criar um perfil de admin, mas por agora, ambos vão para o perfil de cliente
+    // ou podemos desativar para o admin se não existir.
+    return '/cliente/perfil';
+  }
 
   return (
     <header className="navbar">
@@ -76,15 +93,12 @@ function Navbar() {
                 <ul className={`user-menu ${userMenuOpen ? "show" : ""}`}>
                   <li>
                     {/* --- CORREÇÃO APLICADA AQUI --- */}
-                    <Link
-                      to={user?.role === "admin" ? "/admin" : "/cliente"}
-                      onClick={() => setUserMenuOpen(false)}
-                    >
+                    <Link to={getDashboardLink()} onClick={() => setUserMenuOpen(false)}>
                       Meu Painel
                     </Link>
                   </li>
                   <li>
-                    <Link to="/cliente/perfil" onClick={() => setUserMenuOpen(false)}>Meu Perfil</Link>
+                    <Link to={getProfileLink()} onClick={() => setUserMenuOpen(false)}>Meu Perfil</Link>
                   </li>
                   <li><button onClick={handleLogout}>Sair</button></li>
                 </ul>

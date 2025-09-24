@@ -4,13 +4,11 @@ const MensagemSchema = new mongoose.Schema({
   autor: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   conteudo: { type: String, required: true },
   timestamp: { type: Date, default: Date.now },
-  
-  // --- CAMPOS ADICIONADOS PARA ANEXOS ---
-  anexoNome: { // Para guardar o nome original do ficheiro (ex: "comprovativo.pdf")
+  anexoNome: {
     type: String,
-    required: false // O anexo é opcional
+    required: false
   },
-  anexoPath: { // Para guardar o caminho do ficheiro no servidor (ex: "uploads/chamados/ficheiro-123.pdf")
+  anexoPath: {
     type: String,
     required: false
   }
@@ -31,6 +29,13 @@ const ChamadoSchema = new mongoose.Schema({
     enum: ['Baixa', 'Normal', 'Alta'],
     default: 'Normal',
   },
+  // --- CAMPO NOVO ADICIONADO CONFORME O PLANO ---
+  // Para qual departamento o chamado foi direcionado
+  departamento: {
+    type: String,
+    required: false // É opcional, pois um chamado inicial pode não ter departamento
+  },
+  // ---------------------------------------------
   clienteId: { 
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -42,3 +47,4 @@ const ChamadoSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export default mongoose.model("Chamado", ChamadoSchema);
+
